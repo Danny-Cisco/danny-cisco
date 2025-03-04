@@ -2,7 +2,7 @@
 	import '../app.css';
 </script>
 
-<div class="w-full">
+<div class="h-full w-full">
 	<!-- Header/Navigation -->
 	<header class="sticky top-0 z-10 bg-white shadow-sm">
 		<div class="container mx-auto px-4 py-4">
@@ -39,8 +39,9 @@
 			</nav>
 		</div>
 	</header>
-
-	<slot />
+	<div class="h-full">
+		<slot />
+	</div>
 
 	<!-- Footer -->
 	<footer class="absolute bottom-0 left-0 right-0 bg-gray-800 py-8 text-white">
