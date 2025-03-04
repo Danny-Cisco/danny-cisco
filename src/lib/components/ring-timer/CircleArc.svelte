@@ -9,14 +9,16 @@
 	let circum = 2 * radius * 3.14;
 </script>
 
-<circle
-	cx={width / 2}
-	cy={height / 2}
-	r={radius}
-	fill="none"
-	stroke={color}
-	stroke-width={stroke}
-	stroke-linecap="round"
-	stroke-dasharray="{arc * circum} {circum}"
-	transform="rotate(-90, {width / 2}, {height / 2})"
-/>
+{#if arc}
+	<circle
+		cx={width / 2}
+		cy={height / 2}
+		r={radius}
+		fill="none"
+		stroke={color}
+		stroke-width={stroke}
+		stroke-linecap="round"
+		stroke-dasharray="{arc * circum} {circum}"
+		transform="rotate(-90, {width / 2}, {height / 2})"
+	/>
+{/if}
