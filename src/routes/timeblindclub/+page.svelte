@@ -27,6 +27,10 @@
 		nowMs = new Date().getTime();
 
 		timerDuration = Math.trunc((timeMs - nowMs) / 1000 / 60);
+		// If timerDuration is negative, add 24 hours (1440 minutes)
+		if (timerDuration < 0) {
+			timerDuration += 1440;
+		}
 	}
 
 	$: console.log('🚀 ~ nowMs:', nowMs);
@@ -130,15 +134,37 @@
 		>
 		<div class="flex items-center gap-2">
 			<button
-				class="text-2xl text-white"
+				class="text-2xl font-bold transition-all"
+				style="background-color: {isRunning ? runningBg : 'transparent'}; color: {isRunning
+					? midGrayText
+					: 'white'};"
 				on:click={() => {
 					isEndTime = !isEndTime;
-				}}>{endTimeButtonLabel}</button
+				}}
 			>
-			{#if !isEndTime}
-				<input type="number" id="duration" class="w-36 rounded-full" bind:value={timerDuration} />
+				{isEndTime ? 'Set Duration' : 'Set End Time'}
+			</button>
+
+			{#if isEndTime}
+				<input
+					type="number"
+					id="duration"
+					class="w-36 rounded-full p-2 transition-all"
+					style="background-color: {isRunning ? runningBg : 'white'}; color: {isRunning
+						? midGrayText
+						: 'black'};"
+					bind:value={timerDuration}
+				/>
 			{:else}
-				<input type="time" id="endTime" class="w-36 rounded-full" bind:value={timerEndTime} />
+				<input
+					type="time"
+					id="endTime"
+					class="w-36 rounded-full p-2 transition-all"
+					style="background-color: {isRunning ? runningBg : 'white'}; color: {isRunning
+						? midGrayText
+						: 'black'};"
+					bind:value={timerEndTime}
+				/>
 			{/if}
 		</div>
 	</div>
