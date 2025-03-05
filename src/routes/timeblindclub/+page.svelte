@@ -5,12 +5,13 @@
 	let interval;
 	let seconds = 0;
 
-	let timerDuration = 67;
+	let timerDuration = 90;
 	let nowMins = 90;
 
 	let hoursArray = [];
 
 	let numberOfDiscs = 0;
+	let currentDisc = 0;
 	$: numberOfDiscs = Math.trunc(timerDuration / 60); // removes decimal places
 
 	$: if (timerDuration % 60) {
@@ -19,11 +20,16 @@
 
 	$: if (timerDuration) hoursArray = []; // clear the hoursArray if user sets new the duration
 
+	$: currentDisc = Math.trunc(nowMins / 60);
+	$: console.log('🚀 ~ currentDisc:', currentDisc);
+
 	$: for (let i = 0; i < numberOfDiscs; i++) {
-		if (i !== numberOfDiscs - 1) {
+		if (i < currentDisc) {
 			hoursArray[i] = 60; // make all the discs 60
-		} else {
-			hoursArray[i] = Math.round(timerDuration % 60) || 60; // make the last disc the remainder or 60 if no remainder
+		} else if (i > currentDisc) {
+			hoursArray[i] = 0;
+		} else if (i == currentDisc) {
+			hoursArray[i] = Math.round(nowMins % 60); // make the last disc the remainder or 60 if no remainder
 		}
 	}
 
