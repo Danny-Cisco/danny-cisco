@@ -134,36 +134,36 @@
 		>
 		<div class="flex items-center gap-2">
 			<button
-				class="text-2xl font-bold transition-all"
-				style="background-color: {isRunning ? runningBg : 'transparent'}; color: {isRunning
+				class="text-2xl font-light transition-all"
+				style="background-color: {isRunning ? 'transparent' : 'transparent'}; color: {isRunning
 					? midGrayText
 					: 'white'};"
 				on:click={() => {
 					isEndTime = !isEndTime;
 				}}
 			>
-				{isEndTime ? 'Set Duration' : 'Set End Time'}
+				{isEndTime ? 'Set End Time' : 'Set Duration'}
 			</button>
 
 			{#if isEndTime}
 				<input
-					type="number"
-					id="duration"
-					class="w-36 rounded-full p-2 transition-all"
-					style="background-color: {isRunning ? runningBg : 'white'}; color: {isRunning
-						? midGrayText
-						: 'black'};"
-					bind:value={timerDuration}
-				/>
-			{:else}
-				<input
 					type="time"
 					id="endTime"
-					class="w-36 rounded-full p-2 transition-all"
+					class=" w-36 rounded-full p-2 px-5 text-xl transition-all"
 					style="background-color: {isRunning ? runningBg : 'white'}; color: {isRunning
 						? midGrayText
 						: 'black'};"
 					bind:value={timerEndTime}
+				/>
+			{:else}
+				<input
+					type="number"
+					id="duration"
+					class="w-36 rounded-full p-2 px-4 text-xl transition-all"
+					style="background-color: {isRunning ? runningBg : 'white'}; color: {isRunning
+						? midGrayText
+						: 'black'};"
+					bind:value={timerDuration}
 				/>
 			{/if}
 		</div>
