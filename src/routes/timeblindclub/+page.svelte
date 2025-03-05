@@ -73,14 +73,16 @@
 	<div class="relative w-full text-center">
 		{#key seconds}
 			<div
-				class="absolute inset-0 p-8 font-mono text-[30px] text-white"
+				class=" absolute inset-0 p-8 font-mono text-[30px]"
 				class:hidden={seconds % 2 !== 0}
+				style="color: hsl(200, 50%, 80%);"
 			>
 				{nowMins} mins
 			</div>
 			<div
-				class="absolute inset-0 p-8 font-mono text-[30px] text-gray-500"
+				class="absolute inset-0 p-8 font-mono text-[30px]"
 				class:hidden={seconds % 2 === 0}
+				style="color:hsl(200, 0%, 25%)"
 			>
 				{nowMins} mins
 			</div>
