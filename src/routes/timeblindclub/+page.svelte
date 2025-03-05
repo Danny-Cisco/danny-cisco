@@ -12,7 +12,6 @@
 	$: if (timerDuration % 60) {
 		numberOfDiscs += 1; // add a disc if there is a partial disc left
 	}
-	$: console.log('🚀 ~ numberOfDiscs:', numberOfDiscs);
 
 	$: if (timerDuration) hoursArray = [];
 
