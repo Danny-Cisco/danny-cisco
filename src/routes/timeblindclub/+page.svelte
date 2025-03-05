@@ -14,10 +14,6 @@
 	}
 	$: console.log('🚀 ~ numberOfDiscs:', numberOfDiscs);
 
-	// Function to generate an array of hours and remaining minutes
-	// $: hoursArray = Array(Math.floor(nowMins / 60)).fill(60);
-	$: console.log('🚀 ~ hoursArray:', hoursArray);
-
 	$: if (timerDuration) hoursArray = [];
 
 	$: for (let i = 0; i < numberOfDiscs; i++) {
