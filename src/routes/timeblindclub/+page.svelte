@@ -69,37 +69,35 @@
 	});
 </script>
 
-<div class="flex h-full w-full flex-col items-center justify-center bg-black pt-10">
-	<div class="relative w-full text-center">
-		{#key seconds}
-			<div
-				class=" absolute inset-0 p-8 font-mono text-[30px]"
-				class:hidden={seconds % 2 !== 0}
-				style="color: hsl(200, 50%, 80%);"
-			>
-				{nowMins} mins
-			</div>
-			<div
-				class="absolute inset-0 p-8 font-mono text-[30px]"
-				class:hidden={seconds % 2 === 0}
-				style="color:hsl(200, 0%, 25%)"
-			>
-				{nowMins} mins
-			</div>
-		{/key}
-	</div>
-	<div class="h-20"></div>
-	<div class="z-1 flex w-full items-center justify-center gap-20">
-		<div class="flex items-center gap-2">
-			<label class="text-4xl text-white" for="duration">DURATION</label>
-			<input type="number" id="duration" class="rounded-full" bind:value={timerDuration} />
+<div class="relative w-full text-center">
+	{#key seconds}
+		<div
+			class=" absolute inset-0 p-1 font-mono text-[60px]"
+			class:hidden={seconds % 2 !== 0}
+			style="color: hsl(200, 50%, 80%);"
+		>
+			{nowMins} mins
 		</div>
-
+		<div
+			class="absolute inset-0 p-1 font-mono text-[60px]"
+			class:hidden={seconds % 2 === 0}
+			style="color:hsl(200, 50%, 12%)"
+		>
+			{nowMins} mins
+		</div>
+	{/key}
+</div>
+<div class="flex h-full w-full flex-col items-center justify-center bg-black pt-40">
+	<div class="z-1 flex w-full items-center justify-center gap-20">
 		<button
 			on:click={handleStartStop}
 			class="w-[200px] rounded-full bg-white p-4 text-xl font-bold hover:bg-gray-500 hover:text-white"
 			>{buttonLabel}</button
 		>
+		<div class="flex items-center gap-2">
+			<label class="text-4xl text-white" for="duration">DURATION</label>
+			<input type="number" id="duration" class="rounded-full" bind:value={timerDuration} />
+		</div>
 	</div>
 	<div class="h-20"></div>
 	<div class="flex flex-wrap items-center justify-center">

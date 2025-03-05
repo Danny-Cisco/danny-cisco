@@ -34,7 +34,7 @@
 
 <svg {height} {width} class="" transition:fade>
 	{#each ringsRadius as radius, index}
-		<CircleArc {height} {width} {stroke} color="hsl(200, 50%, 10%)" arc="1" {radius} />
+		<CircleArc {height} {width} {stroke} color="hsl(200, 50%, 12%)" arc="1" {radius} />
 
 		<CircleArc {height} {width} {stroke} color="hsl(200, 50%, 80%)" {radius} arc={timers[index]} />
 	{/each}
