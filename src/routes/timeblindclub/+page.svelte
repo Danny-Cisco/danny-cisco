@@ -2,7 +2,9 @@
 	import FullCircle from '$lib/components/ring-timer/FullCircle.svelte';
 
 	import { onMount } from 'svelte';
-	let interval;
+	let interval60;
+	let interval1;
+	let minutes = 0;
 	let seconds = 0;
 
 	let timerDuration = 90;
@@ -22,7 +24,7 @@
 
 	$: if (timerDuration) {
 		hoursArray = []; // clear the hoursArray if user sets new the duration
-		seconds = 0;
+		minutes = 0;
 	}
 
 	$: currentDisc = Math.trunc(nowMins / 60);
@@ -40,7 +42,7 @@
 		}
 	}
 
-	$: if (nowMins) nowMins = timerDuration - seconds;
+	$: if (nowMins) nowMins = timerDuration - minutes;
 
 	let buttonLabel = 'START';
 
@@ -52,11 +54,18 @@
 	}
 
 	onMount(() => {
-		interval = setInterval(() => {
-			if (isRunning) seconds += 1;
+		interval60 = setInterval(() => {
+			if (isRunning) minutes += 1;
 		}, 1000 * 60);
 
-		return () => clearInterval(interval);
+		interval1 = setInterval(() => {
+			if (isRunning) seconds += 1;
+		}, 1000);
+
+		return () => {
+			clearInterval(interval60);
+			clearInterval(interval1);
+		};
 	});
 </script>
 
@@ -73,12 +82,18 @@
 			>{buttonLabel}</button
 		>
 	</div>
+	{#key seconds}
+		<div class="absolute p-8 font-mono text-[30px] text-white" class:hidden={seconds % 2 !== 0}>
+			{nowMins} mins
+		</div>
+		<div class="absolute p-8 font-mono text-[30px] text-gray-500" class:hidden={seconds % 2 === 0}>
+			{nowMins} mins
+		</div>
+	{/key}
 
 	<div class="flex flex-wrap items-center justify-center">
-		{#key hoursArray}
-			{#each hoursArray as mins, index}
-				<FullCircle nowMins={mins} />
-			{/each}
-		{/key}
+		{#each hoursArray as mins, index}
+			<FullCircle nowMins={mins} />
+		{/each}
 	</div>
 </div>
