@@ -14,12 +14,15 @@
 	let ringsRadius = [];
 
 	let timers = [1, 1, 1, 1, 1, 1];
+	let timersReverse = [];
 
-	for (let i = 0; i < 6; i++) {
+	$: timersReverse = [...timers].reverse();
+
+	for (let i = 5; i >= 0; i--) {
 		ringsRadius[i] = innerRadius + i * stroke + i * gap; // calculate all 6 ring sizes
 	}
 
-	$: for (let i = 5; i >= 0; i--) {
+	$: for (let i = 0; i < 6; i++) {
 		// prettier-ignore
 		if ((nowMins > (i * 10)-1) && (nowMins <= (((i + 1) * 10)))) {
 			timers[i] = (nowMins - (i * 10)) / 10;
@@ -33,6 +36,6 @@
 	{#each ringsRadius as radius, index}
 		<CircleArc {height} {width} color="#555555" arc="1" {radius} />
 
-		<CircleArc {height} {width} {radius} arc={timers[index]} />
+		<CircleArc {height} {width} {radius} arc={timersReverse[index]} />
 	{/each}
 </svg>
