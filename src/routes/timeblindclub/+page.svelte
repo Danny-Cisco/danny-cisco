@@ -69,8 +69,25 @@
 	});
 </script>
 
-<div class="flex h-full w-full flex-col items-center bg-black pt-10">
-	<div class="z-1 flex w-full items-center justify-around">
+<div class="flex h-full w-full flex-col items-center justify-center bg-black pt-10">
+	<div class="relative w-full text-center">
+		{#key seconds}
+			<div
+				class="absolute inset-0 p-8 font-mono text-[30px] text-white"
+				class:hidden={seconds % 2 !== 0}
+			>
+				{nowMins} mins
+			</div>
+			<div
+				class="absolute inset-0 p-8 font-mono text-[30px] text-gray-500"
+				class:hidden={seconds % 2 === 0}
+			>
+				{nowMins} mins
+			</div>
+		{/key}
+	</div>
+	<div class="h-20"></div>
+	<div class="z-1 flex w-full items-center justify-center gap-20">
 		<div class="flex items-center gap-2">
 			<label class="text-4xl text-white" for="duration">DURATION</label>
 			<input type="number" id="duration" class="rounded-full" bind:value={timerDuration} />
@@ -82,15 +99,7 @@
 			>{buttonLabel}</button
 		>
 	</div>
-	{#key seconds}
-		<div class="absolute p-12 font-mono text-[30px] text-white" class:hidden={seconds % 2 !== 0}>
-			{nowMins} mins
-		</div>
-		<div class="absolute p-12 font-mono text-[30px] text-gray-500" class:hidden={seconds % 2 === 0}>
-			{nowMins} mins
-		</div>
-	{/key}
-
+	<div class="h-20"></div>
 	<div class="flex flex-wrap items-center justify-center">
 		{#each hoursArray as mins, index}
 			<FullCircle nowMins={mins} />

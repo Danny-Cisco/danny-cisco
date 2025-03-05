@@ -5,7 +5,7 @@
 	import { fade } from 'svelte/transition';
 
 	let padding = 10;
-	let stroke = 20;
+	let stroke = 10;
 	let gap = 5;
 	let innerRadius = 50;
 	let height = 12 * stroke + 10 * gap + 2 * innerRadius + padding;
@@ -34,8 +34,8 @@
 
 <svg {height} {width} class="" transition:fade>
 	{#each ringsRadius as radius, index}
-		<CircleArc {height} {width} color="#555555" arc="1" {radius} />
+		<CircleArc {height} {width} {stroke} color="hsl(200, 50%, 10%)" arc="1" {radius} />
 
-		<CircleArc {height} {width} {radius} arc={timersReverse[index]} />
+		<CircleArc {height} {width} {stroke} color="hsl(200, 50%, 80%)" {radius} arc={timers[index]} />
 	{/each}
 </svg>
