@@ -8,7 +8,37 @@
 	let seconds = 0;
 
 	let timerDuration = 120;
+	let timerEndTime;
+	$: console.log('🚀 ~ timerEndTIme:', timerEndTime);
 	let nowMins = 120;
+	let timeMs = null;
+	let nowMs;
+
+	$: if (timerEndTime) {
+		// Get today's date in YYYY-MM-DD format
+		let today = new Date().toISOString().split('T')[0];
+
+		// Combine today's date with the selected time
+		let fullDateTime = `${today}T${timerEndTime}`;
+
+		// Convert to milliseconds
+		timeMs = new Date(fullDateTime).getTime();
+
+		nowMs = new Date().getTime();
+
+		timerDuration = Math.trunc((timeMs - nowMs) / 1000 / 60);
+	}
+
+	$: console.log('🚀 ~ nowMs:', nowMs);
+
+	$: console.log('🚀 ~ Time in ms:', timeMs);
+
+	let isEndTime = true;
+
+	let endTimeButtonLabel = 'DURATION';
+
+	$: if (isEndTime) endTimeButtonLabel = 'END TIME';
+	else endTimeButtonLabel = 'DURATION';
 
 	let isRunning = false;
 
@@ -87,16 +117,25 @@
 		</div>
 	{/key}
 </div>
-<div class="flex h-full w-full flex-col items-center justify-center bg-black pt-40">
-	<div class="z-1 flex w-full items-center justify-center gap-20">
+<div class="flex h-full w-full flex-col items-center justify-start bg-black pt-40">
+	<div class="z-1 flex w-full flex-col items-center justify-center gap-20">
 		<button
 			on:click={handleStartStop}
 			class="w-[200px] rounded-full bg-white p-4 text-xl font-bold hover:bg-gray-500 hover:text-white"
 			>{buttonLabel}</button
 		>
 		<div class="flex items-center gap-2">
-			<label class="text-4xl text-white" for="duration">DURATION</label>
-			<input type="number" id="duration" class="rounded-full" bind:value={timerDuration} />
+			<button
+				class="text-2xl text-white"
+				on:click={() => {
+					isEndTime = !isEndTime;
+				}}>{endTimeButtonLabel}</button
+			>
+			{#if !isEndTime}
+				<input type="number" id="duration" class="w-36 rounded-full" bind:value={timerDuration} />
+			{:else}
+				<input type="time" id="endTime" class="w-36 rounded-full" bind:value={timerEndTime} />
+			{/if}
 		</div>
 	</div>
 	<div class="h-20"></div>
