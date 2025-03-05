@@ -7,8 +7,8 @@
 	let minutes = 0;
 	let seconds = 0;
 
-	let timerDuration = 90;
-	let nowMins = 90;
+	let timerDuration = 120;
+	let nowMins = 120;
 
 	let isRunning = false;
 
@@ -70,7 +70,7 @@
 </script>
 
 <div class="flex h-full w-full flex-col items-center bg-black pt-10">
-	<div class="flex w-full items-center justify-around">
+	<div class="z-1 flex w-full items-center justify-around">
 		<div class="flex items-center gap-2">
 			<label class="text-4xl text-white" for="duration">DURATION</label>
 			<input type="number" id="duration" class="rounded-full" bind:value={timerDuration} />
@@ -83,10 +83,10 @@
 		>
 	</div>
 	{#key seconds}
-		<div class="absolute p-8 font-mono text-[30px] text-white" class:hidden={seconds % 2 !== 0}>
+		<div class="absolute p-12 font-mono text-[30px] text-white" class:hidden={seconds % 2 !== 0}>
 			{nowMins} mins
 		</div>
-		<div class="absolute p-8 font-mono text-[30px] text-gray-500" class:hidden={seconds % 2 === 0}>
+		<div class="absolute p-12 font-mono text-[30px] text-gray-500" class:hidden={seconds % 2 === 0}>
 			{nowMins} mins
 		</div>
 	{/key}
