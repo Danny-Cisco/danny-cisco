@@ -149,7 +149,7 @@
 				<input
 					type="time"
 					id="endTime"
-					class=" w-36 rounded-full p-2 px-5 text-xl transition-all"
+					class="w-44 rounded-full p-2 px-5 text-xl transition-all"
 					style="background-color: {isRunning ? runningBg : 'white'}; color: {isRunning
 						? midGrayText
 						: 'black'};"
@@ -159,7 +159,7 @@
 				<input
 					type="number"
 					id="duration"
-					class="w-36 rounded-full p-2 px-4 text-xl transition-all"
+					class="w-44 rounded-full p-2 px-5 text-xl transition-all"
 					style="background-color: {isRunning ? runningBg : 'white'}; color: {isRunning
 						? midGrayText
 						: 'black'};"
