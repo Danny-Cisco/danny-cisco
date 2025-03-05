@@ -13,24 +13,23 @@
 		numberOfDiscs += 1; // add a disc if there is a partial disc left
 	}
 
-	$: if (timerDuration) hoursArray = [];
+	$: if (timerDuration) hoursArray = []; // clear the hoursArray if user sets new the duration
 
 	$: for (let i = 0; i < numberOfDiscs; i++) {
-		if (i === numberOfDiscs - 1) {
-			hoursArray[i] = Math.round(timerDuration % 60);
+		if (i !== numberOfDiscs - 1) {
+			hoursArray[i] = 60; // make all the discs 60
 		} else {
-			hoursArray[i] = 60;
+			hoursArray[i] = Math.round(timerDuration % 60) || 60; // make the last disc the remainder or 60 if no remainder
 		}
 	}
 </script>
 
 <div class="flex h-full w-full flex-col items-center bg-black pt-10">
 	<input type="number" bind:value={timerDuration} />
-	{#key hoursArray}
-		<div class="flex flex-wrap items-center justify-center">
-			{#each hoursArray as mins, index}
-				<FullCircle nowMins={mins} />
-			{/each}
-		</div>
-	{/key}
+
+	<div class="flex flex-wrap items-center justify-center">
+		{#each hoursArray as mins, index}
+			<FullCircle nowMins={mins} />
+		{/each}
+	</div>
 </div>

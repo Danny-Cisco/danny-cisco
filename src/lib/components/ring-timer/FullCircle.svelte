@@ -2,6 +2,8 @@
 	import CircleArc from '$lib/components/ring-timer/CircleArc.svelte';
 	export let nowMins = 39;
 
+	import { fade } from 'svelte/transition';
+
 	let padding = 10;
 	let stroke = 20;
 	let gap = 5;
@@ -14,10 +16,10 @@
 	let timers = [1, 1, 1, 1, 1, 1];
 
 	for (let i = 0; i < 6; i++) {
-		ringsRadius[i] = innerRadius + i * stroke + i * gap;
+		ringsRadius[i] = innerRadius + i * stroke + i * gap; // calculate all 6 ring sizes
 	}
 
-	for (let i = 5; i >= 0; i--) {
+	$: for (let i = 5; i >= 0; i--) {
 		// prettier-ignore
 		if ((nowMins > (i * 10)-1) && (nowMins <= (((i + 1) * 10)))) {
 			timers[i] = (nowMins - (i * 10)) / 10;
@@ -27,9 +29,10 @@
 	}
 </script>
 
-<svg {height} {width} class="">
+<svg {height} {width} class="" transition:fade>
 	{#each ringsRadius as radius, index}
 		<CircleArc {height} {width} color="#555555" arc="1" {radius} />
+
 		<CircleArc {height} {width} {radius} arc={timers[index]} />
 	{/each}
 </svg>
