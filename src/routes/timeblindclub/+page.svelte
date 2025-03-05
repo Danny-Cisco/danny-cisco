@@ -82,6 +82,8 @@
 	function handleStartStop() {
 		isRunning = !isRunning;
 	}
+	let runningBg = 'hsl(200, 50%, 12%)'; // Background when running
+	let midGrayText = 'hsl(200, 50%, 30%)'; // Mid-gray text color
 
 	onMount(() => {
 		interval60 = setInterval(() => {
@@ -121,8 +123,10 @@
 	<div class="z-1 flex w-full flex-col items-center justify-center gap-20">
 		<button
 			on:click={handleStartStop}
-			class="w-[200px] rounded-full bg-white p-4 text-xl font-bold hover:bg-gray-500 hover:text-white"
-			>{buttonLabel}</button
+			class="w-[200px] rounded-full p-4 text-xl font-bold hover:bg-gray-500 hover:text-white"
+			style="background-color: {isRunning ? runningBg : 'hsl(200, 50%, 80%)'}; color: {isRunning
+				? 'black'
+				: 'black'};">{buttonLabel}</button
 		>
 		<div class="flex items-center gap-2">
 			<button
