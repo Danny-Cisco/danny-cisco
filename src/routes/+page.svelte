@@ -53,9 +53,7 @@
 				</div> -->
 				<div class="p-6">
 					<h3 class="mb-2 text-xl font-bold">Time Blind Club</h3>
-					<p class="mb-4 text-gray-600">
-						A community and set of tools for people who experience time blindness.
-					</p>
+					<p class="mb-4 text-gray-600">A set of tools for people who experience time blindness.</p>
 					<a href="/time-blind-club" class="font-medium text-blue-600 hover:text-blue-800">
 						Try Time Blind Club →
 					</a>
