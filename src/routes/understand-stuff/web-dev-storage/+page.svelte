@@ -134,6 +134,27 @@
 		}
 	}
 
+	function clearLocalStorage() {
+		if (isBrowser()) {
+			localStorage.removeItem('exampleData');
+			storageResults = 'localStorage cleared';
+		}
+	}
+
+	function clearSessionStorage() {
+		if (isBrowser()) {
+			sessionStorage.removeItem('exampleData');
+			storageResults = 'sessionStorage cleared';
+		}
+	}
+
+	function clearCookies() {
+		if (isBrowser()) {
+			document.cookie = 'exampleData=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+			storageResults = 'Cookies cleared';
+		}
+	}
+
 	function clearAll() {
 		if (isBrowser()) {
 			localStorage.removeItem('exampleData');
@@ -146,7 +167,7 @@
 
 <div class={$darkMode ? 'dark-mode' : 'light-mode'}>
 	<div class="container">
-		<h1>Web Storage Guide</h1>
+		<h1 class="text-4xl font-bold underline">Guide to Web Dev Storage</h1>
 		<div class="theme-toggle">
 			<label>
 				<input type="checkbox" bind:checked={$darkMode} /> Dark Mode
@@ -194,32 +215,40 @@
 		</div>
 
 		<div class="demo-section">
-			<h2>Try it Out</h2>
+			<h2 class="mb-4 text-center text-xl font-bold underline">Try it Out</h2>
 			<div class="button-group">
 				<div>
 					<h3>LocalStorage</h3>
 					<button on:click={setLocalStorage}>Set</button>
 					<button on:click={getLocalStorage}>Get</button>
+					<button on:click={clearLocalStorage} class="clear-button">Clear</button>
 				</div>
 				<div>
 					<h3>SessionStorage</h3>
 					<button on:click={setSessionStorage}>Set</button>
 					<button on:click={getSessionStorage}>Get</button>
+					<button on:click={clearSessionStorage} class="clear-button">Clear</button>
 				</div>
 				<div>
 					<h3>Cookies</h3>
 					<button on:click={setCookie}>Set</button>
 					<button on:click={getCookie}>Get</button>
+					<button on:click={clearCookies} class="clear-button">Clear</button>
 				</div>
 			</div>
-			<button class="clear-button" on:click={clearAll}>Clear All Storage</button>
 
 			{#if storageResults}
-				<div class="results">
+				<div class="results h-20">
 					<h3>Results:</h3>
 					<pre>{storageResults}</pre>
 				</div>
+			{:else}
+				<div class="h-20"></div>
 			{/if}
+
+			<div class="w-full text-center">
+				<button class="clear-button w-sm" on:click={clearAll}>Clear All Storage</button>
+			</div>
 		</div>
 	</div>
 </div>
