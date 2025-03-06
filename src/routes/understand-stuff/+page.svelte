@@ -9,6 +9,11 @@
 			title: 'FP4 Mantissa',
 			path: '/understand-stuff/fp4-mantissa',
 			description: 'Details about FP4 mantissa format'
+		},
+		{
+			title: 'Naming Conventions',
+			path: '/understand-stuff/naming-conventions',
+			description: 'When to use snake_case, camelCase etc'
 		}
 	];
 </script>
