@@ -22,15 +22,15 @@
 	<title>Understand Stuff</title>
 </svelte:head>
 
-<main>
-	<h1>Understand Stuff</h1>
-	<p>A collection of resources to help understand various technical concepts.</p>
+<main class="mx-auto flex max-w-md flex-col gap-4 py-4">
+	<p>Various AI generated pages I have collected in order to...</p>
+	<h1 class="text-center text-4xl font-bold underline">Understand Stuff 🤔</h1>
 
 	<ul class="links-list">
 		{#each links as link}
 			<li>
 				<a href={link.path}>
-					<h2>{link.title}</h2>
+					<h2 class="font-bold">{link.title}</h2>
 					<p>{link.description}</p>
 				</a>
 			</li>
