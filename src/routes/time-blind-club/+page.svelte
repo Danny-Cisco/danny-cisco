@@ -22,10 +22,16 @@
 		// Combine today's date with the selected time
 		let fullDateTime = `${today}T${timerEndTime}`;
 
+		console.log('🚀 ~ fulldateTime = `${today}T${timerEndTime}`:', `${today}T${timerEndTime}`);
 		// Convert to milliseconds
 		timeMs = new Date(fullDateTime).getTime();
+		console.log(
+			'🚀 ~ timeMs = new Date(fullDateTime).getTime();:',
+			new Date(fullDateTime).getTime()
+		);
 
 		nowMs = new Date().getTime();
+		console.log('🚀 ~ nowMs = new Date().getTime();:', new Date().getTime());
 
 		timerDuration = Math.trunc((timeMs - nowMs) / 1000 / 60);
 		// If timerDuration is negative, add 24 hours (1440 minutes)
@@ -111,6 +117,10 @@
 
 	onMount(() => {
 		today = new Date().toISOString().split('T')[0];
+		console.log(
+			"🚀 ~ onMount ~ today = new Date().toISOString().split('T')[0]:",
+			new Date().toISOString().split('T')[0]
+		);
 
 		interval60 = setInterval(() => {
 			if (isRunning) minutes += 1;
