@@ -105,51 +105,43 @@
 	});
 </script>
 
-<div class="relative w-full text-center">
-	{#key seconds}
-		<div
-			class=" absolute inset-0 p-1 font-mono text-[60px]"
-			class:hidden={seconds % 2 !== 0}
-			style="color: hsl(200, 50%, 80%);"
-		>
-			{nowMins} mins
-		</div>
-		<div
-			class="absolute inset-0 p-1 font-mono text-[60px]"
-			class:hidden={seconds % 2 === 0}
-			style="color:hsl(200, 50%, 12%)"
-		>
-			{nowMins} mins
-		</div>
-	{/key}
-</div>
-<div class="flex h-full w-full flex-col items-center justify-start bg-black pt-40">
-	<div class="z-1 flex w-full flex-col items-center justify-center gap-20">
+<!-- rear curtain of black -->
+<div class="fixed inset-0 z-[-1] bg-black"></div>
+<div class="block flex flex-col items-center justify-start">
+	<div class="relative w-full text-center">
+		{#key seconds}
+			<div
+				class=" absolute inset-0 p-1 font-mono text-xl"
+				class:hidden={seconds % 2 !== 0}
+				style="color: hsl(200, 50%, 80%);"
+			>
+				{nowMins} mins
+			</div>
+			<div
+				class="absolute inset-0 p-1 font-mono text-xl"
+				class:hidden={seconds % 2 === 0}
+				style="color:hsl(200, 50%, 27%)"
+			>
+				{nowMins} mins
+			</div>
+		{/key}
+	</div>
+	<div class="h-10"></div>
+
+	<div class="z-1 flex w-full flex-col items-center justify-center gap-2">
 		<button
 			on:click={handleStartStop}
-			class="w-[200px] rounded-full p-4 text-xl font-bold hover:bg-gray-500 hover:text-white"
+			class="fixed bottom-4 w-[200px] rounded-full p-4 text-xl font-bold shadow hover:bg-gray-500 hover:text-white"
 			style="background-color: {isRunning ? runningBg : 'hsl(200, 50%, 80%)'}; color: {isRunning
 				? 'black'
 				: 'black'};">{buttonLabel}</button
 		>
-		<div class="flex items-center gap-2">
-			<button
-				class="text-2xl font-light transition-all"
-				style="background-color: {isRunning ? 'transparent' : 'transparent'}; color: {isRunning
-					? midGrayText
-					: 'white'};"
-				on:click={() => {
-					isEndTime = !isEndTime;
-				}}
-			>
-				{isEndTime ? 'Set End Time' : 'Set Duration'}
-			</button>
-
+		<div class="flex flex-col items-center gap-2">
 			{#if isEndTime}
 				<input
 					type="time"
 					id="endTime"
-					class="w-44 rounded-full p-2 px-5 text-xl transition-all"
+					class="w-50 rounded-full p-2 px-5 text-xl transition-all"
 					style="background-color: {isRunning ? runningBg : 'white'}; color: {isRunning
 						? midGrayText
 						: 'black'};"
@@ -159,16 +151,25 @@
 				<input
 					type="number"
 					id="duration"
-					class="w-44 rounded-full p-2 px-5 text-xl transition-all"
+					class="w-50 rounded-full p-2 px-5 text-xl transition-all"
 					style="background-color: {isRunning ? runningBg : 'white'}; color: {isRunning
 						? midGrayText
 						: 'black'};"
 					bind:value={timerDuration}
 				/>
-			{/if}
+			{/if}<button
+				class="text-sm font-light transition-all"
+				style="background-color: {isRunning ? 'transparent' : 'transparent'}; color: {isRunning
+					? midGrayText
+					: 'white'};"
+				on:click={() => {
+					isEndTime = !isEndTime;
+				}}
+			>
+				{isEndTime ? 'Set End Time' : 'Set Duration'}
+			</button>
 		</div>
 	</div>
-	<div class="h-20"></div>
 	<div class="flex flex-wrap items-center justify-center">
 		{#each hoursArray as mins, index}
 			<FullCircle nowMins={mins} />
