@@ -5,12 +5,12 @@
 <!-- Hero Section -->
 <section class="py-16 text-center md:py-24">
 	<div class="container mx-auto px-4">
-		<h1 class="mb-4 text-4xl font-bold md:text-5xl">Welcome to My Digital Space</h1>
+		<h1 class="mb-4 text-4xl font-bold md:text-5xl">DannyCisco.com</h1>
 		<p class="mx-auto mb-1 max-w-2xl text-xl text-gray-600">Web developer, creator, and founder.</p>
 		<p class="mx-auto mb-8 max-w-2xl text-xl text-gray-600">Building useful stuff everyday.</p>
 		<a
 			href="/contact"
-			class="rounded-md bg-blue-600 px-6 py-2 font-medium text-white transition duration-300 hover:bg-blue-700"
+			class="rounded-md bg-black px-6 py-2 font-medium text-white transition duration-300 hover:bg-blue-700"
 		>
 			Get in Touch
 		</a>
@@ -26,7 +26,7 @@
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 			<!-- Project Card 1 -->
 			<div
-				class="overflow-hidden rounded-lg bg-white shadow-md transition duration-300 hover:-translate-y-1"
+				class="overflow-hidden rounded-lg bg-white shadow transition duration-300 hover:-translate-y-1 hover:shadow-lg"
 			>
 				<!-- Image placeholder -->
 				<!-- <div class="h-48 bg-gray-200">
@@ -45,7 +45,7 @@
 
 			<!-- Project Card 2 -->
 			<div
-				class="overflow-hidden rounded-lg bg-white shadow-md transition duration-300 hover:-translate-y-1"
+				class="overflow-hidden rounded-lg bg-white shadow transition duration-300 hover:-translate-y-1 hover:shadow-lg"
 			>
 				<!-- Image placeholder -->
 				<!-- <div class="h-48 bg-gray-200">
@@ -62,7 +62,7 @@
 
 			<!-- Project Card 3 -->
 			<div
-				class="overflow-hidden rounded-lg bg-white shadow-md transition duration-300 hover:-translate-y-1"
+				class="overflow-hidden rounded-lg bg-white shadow transition duration-300 hover:-translate-y-1 hover:shadow-lg"
 			>
 				<!-- Image placeholder -->
 				<!-- <div class="h-48 bg-gray-200">
@@ -81,7 +81,7 @@
 
 			<!-- Project Card 4 -->
 			<div
-				class="overflow-hidden rounded-lg bg-white shadow-md transition duration-300 hover:-translate-y-1"
+				class="overflow-hidden rounded-lg bg-white shadow transition duration-300 hover:-translate-y-1 hover:shadow-lg"
 			>
 				<!-- Image placeholder -->
 				<!-- <div class="h-48 bg-gray-200">
