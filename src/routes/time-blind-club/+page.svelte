@@ -162,6 +162,7 @@
 		</div>
 	{/key}
 </div>
+
 <div class="block flex flex-col items-center justify-start pt-10">
 	<div class="z-1 flex w-full flex-col items-center justify-center gap-2">
 		<button
@@ -205,6 +206,8 @@
 			</button>
 		</div>
 	</div>
+	<div class="bg-gray-500 text-xl text-white">{timerEndTime}</div>
+
 	<div class="flex flex-wrap items-center justify-center">
 		{#each initHoursArray as mins, index}
 			<FullCircle nowMins={hoursArray[index] || 0} initMins={initHoursArray[index] || 0} />
