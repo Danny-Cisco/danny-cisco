@@ -41,7 +41,7 @@
 			</nav>
 		</div>
 	</header>
-	<div class="h-full">
+	<div class="h-auto">
 		<slot />
 	</div>
 </div>

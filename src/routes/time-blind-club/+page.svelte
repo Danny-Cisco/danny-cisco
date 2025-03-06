@@ -107,27 +107,28 @@
 
 <!-- rear curtain of black -->
 <div class="fixed inset-0 z-[-1] bg-black"></div>
-<div class="block flex flex-col items-center justify-start">
-	<div class="relative w-full text-center">
-		{#key seconds}
-			<div
-				class=" absolute inset-0 p-1 font-mono text-xl"
-				class:hidden={seconds % 2 !== 0}
-				style="color: hsl(200, 50%, 80%);"
-			>
-				{nowMins} mins
-			</div>
-			<div
-				class="absolute inset-0 p-1 font-mono text-xl"
-				class:hidden={seconds % 2 === 0}
-				style="color:hsl(200, 50%, 27%)"
-			>
-				{nowMins} mins
-			</div>
-		{/key}
-	</div>
-	<div class="h-10"></div>
 
+<!-- start of app -->
+<!-- countdown timer display : blinking -->
+<div class="relative inset-0 w-full text-center">
+	{#key seconds}
+		<div
+			class=" absolute left-0 right-0 top-0 p-1 text-center font-mono text-xl"
+			class:hidden={seconds % 2 !== 0}
+			style="color: hsl(200, 50%, 80%);"
+		>
+			{nowMins} mins
+		</div>
+		<div
+			class="absolute left-0 right-0 top-0 p-1 text-center font-mono text-xl"
+			class:hidden={seconds % 2 === 0}
+			style="color:hsl(200, 50%, 27%)"
+		>
+			{nowMins} mins
+		</div>
+	{/key}
+</div>
+<div class="block flex flex-col items-center justify-start pt-10">
 	<div class="z-1 flex w-full flex-col items-center justify-center gap-2">
 		<button
 			on:click={handleStartStop}
