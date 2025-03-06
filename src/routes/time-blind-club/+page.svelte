@@ -7,6 +7,8 @@
 	let minutes = 0;
 	let seconds = 0;
 
+	let pageLoaded = false;
+
 	let timerDuration = 120;
 	let timerEndTime;
 	$: console.log('🚀 ~ timerEndTIme:', timerEndTime);
@@ -14,10 +16,9 @@
 	let timeMs = null;
 	let nowMs;
 
-	$: if (timerEndTime) {
-		// Get today's date in YYYY-MM-DD format
-		let today = new Date().toISOString().split('T')[0];
+	let today;
 
+	$: if (timerEndTime && pageLoaded && !isRunning) {
 		// Combine today's date with the selected time
 		let fullDateTime = `${today}T${timerEndTime}`;
 
@@ -47,7 +48,9 @@
 	let isRunning = false;
 
 	let hoursArray = [];
+	$: console.log('🚀 ~ hoursArray:', hoursArray);
 	let initHoursArray = [];
+	$: console.log('🚀 ~ initHoursArray:', initHoursArray);
 
 	let numberOfDiscs = 0;
 	let currentDisc = 0;
@@ -78,16 +81,18 @@
 		}
 	}
 
-	$: for (let i = 0; i < numberOfDiscs; i++) {
-		if (i < currentDisc) {
-			initHoursArray[i] = 60; // make all the discs 60
-		} else if (i > currentDisc) {
-			if (!isRunning) initHoursArray[i] = 60;
-			else initHoursArray[i] = 0;
-		} else if (i == currentDisc) {
-			if (!isRunning)
-				initHoursArray[i] = Math.round(timerDuration % 60) || 60; // make the last disc the remainder or 60 if no remainder
-			else initHoursArray[i] = Math.round(timerDuration % 60);
+	$: if (!isRunning) {
+		for (let i = 0; i < numberOfDiscs; i++) {
+			if (i < currentDisc) {
+				initHoursArray[i] = 60; // make all the discs 60
+			} else if (i > currentDisc) {
+				if (!isRunning) initHoursArray[i] = 60;
+				else initHoursArray[i] = 0;
+			} else if (i == currentDisc) {
+				if (!isRunning)
+					initHoursArray[i] = Math.round(timerDuration % 60) || 60; // make the last disc the remainder or 60 if no remainder
+				else initHoursArray[i] = Math.round(timerDuration % 60);
+			}
 		}
 	}
 
@@ -105,6 +110,8 @@
 	let midGrayText = 'hsl(200, 50%, 30%)'; // Mid-gray text color
 
 	onMount(() => {
+		today = new Date().toISOString().split('T')[0];
+
 		interval60 = setInterval(() => {
 			if (isRunning) minutes += 1;
 		}, 1000 * 60);
@@ -112,6 +119,8 @@
 		interval1 = setInterval(() => {
 			if (isRunning) seconds += 1;
 		}, 1000);
+
+		pageLoaded = true;
 
 		return () => {
 			clearInterval(interval60);
@@ -187,8 +196,8 @@
 		</div>
 	</div>
 	<div class="flex flex-wrap items-center justify-center">
-		{#each hoursArray as mins, index}
-			<FullCircle nowMins={mins} initMins={initHoursArray[index]} />
+		{#each initHoursArray as mins, index}
+			<FullCircle nowMins={hoursArray[index] || 0} initMins={initHoursArray[index] || 0} />
 		{/each}
 	</div>
 </div>
