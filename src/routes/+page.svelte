@@ -73,7 +73,7 @@
 					<p class="mb-4 text-gray-600">
 						Let Memmy Pets brainstorm fun mnemonics for helping learning stick
 					</p>
-					<a href="www.memmypets.com" class="font-medium text-blue-600 hover:text-blue-800">
+					<a href="http://memmypets.com" class="font-medium text-blue-600 hover:text-blue-800">
 						Visit Memmy Pets →
 					</a>
 				</div>
@@ -90,7 +90,7 @@
 				<div class="p-6">
 					<h3 class="mb-2 text-xl font-bold">MindMapr.ai</h3>
 					<p class="mb-4 text-gray-600">SEE the conversation we are swimming in...</p>
-					<a href="www.mindmapr.dev" class="font-medium text-blue-600 hover:text-blue-800">
+					<a href="http://mindmapr.dev" class="font-medium text-blue-600 hover:text-blue-800">
 						Visit MindMapr.ai →
 					</a>
 				</div>

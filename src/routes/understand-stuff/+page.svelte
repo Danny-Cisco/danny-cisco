@@ -14,6 +14,11 @@
 			title: 'Naming Conventions',
 			path: '/understand-stuff/naming-conventions',
 			description: 'When to use snake_case, camelCase etc'
+		},
+		{
+			title: 'Web Dev Time Formats',
+			path: '/understand-stuff/web-dev-time-formats',
+			description: 'Everything there is to know about time formats on the web'
 		}
 	];
 </script>
