@@ -352,8 +352,7 @@
 
 <main class="container">
 	<header>
-		<h1>Naming Conventions Reference</h1>
-		<p>A comprehensive guide to naming conventions across different technologies</p>
+		<h1 class="text-4xl font-bold">Naming Conventions - Cheat Sheet</h1>
 
 		<div class="search-container">
 			<input
