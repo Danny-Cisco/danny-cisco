@@ -47,6 +47,7 @@
 	let isRunning = false;
 
 	let hoursArray = [];
+	let initHoursArray = [];
 
 	let numberOfDiscs = 0;
 	let currentDisc = 0;
@@ -58,6 +59,7 @@
 
 	$: if (timerDuration) {
 		hoursArray = []; // clear the hoursArray if user sets new the duration
+		initHoursArray = []; // clear the hoursArray if user sets new the duration
 		minutes = 0;
 	}
 
@@ -73,6 +75,19 @@
 			if (!isRunning)
 				hoursArray[i] = Math.round(nowMins % 60) || 60; // make the last disc the remainder or 60 if no remainder
 			else hoursArray[i] = Math.round(nowMins % 60);
+		}
+	}
+
+	$: for (let i = 0; i < numberOfDiscs; i++) {
+		if (i < currentDisc) {
+			initHoursArray[i] = 60; // make all the discs 60
+		} else if (i > currentDisc) {
+			if (!isRunning) initHoursArray[i] = 60;
+			else initHoursArray[i] = 0;
+		} else if (i == currentDisc) {
+			if (!isRunning)
+				initHoursArray[i] = Math.round(timerDuration % 60) || 60; // make the last disc the remainder or 60 if no remainder
+			else initHoursArray[i] = Math.round(timerDuration % 60);
 		}
 	}
 
@@ -173,7 +188,7 @@
 	</div>
 	<div class="flex flex-wrap items-center justify-center">
 		{#each hoursArray as mins, index}
-			<FullCircle nowMins={mins} />
+			<FullCircle nowMins={mins} initMins={initHoursArray[index]} />
 		{/each}
 	</div>
 </div>
