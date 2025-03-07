@@ -8,7 +8,7 @@
 	let isDarkMode = true;
 
 	// User-typed HSL input for practice
-	let typedHue = 0;
+	let typedHue = 200;
 	let typedSaturation = 85;
 	let typedLightness = 55;
 </script>
