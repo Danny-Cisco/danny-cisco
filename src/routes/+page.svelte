@@ -6,7 +6,7 @@
 <section
 	class="flex flex-col items-center justify-center bg-gradient-to-br from-white/10 text-center md:py-24"
 >
-	<div class="container relative mx-auto px-4">
+	<div class="container relative mx-auto h-[100vh] px-4">
 		<div class="logo-container">
 			<img
 				src="/DannyCiscoLogoBlack.jpg"
@@ -18,16 +18,13 @@
 			<div class="glow"></div>
 			<div class="bottom-glow"></div>
 		</div>
-		<p class="text-light-500 glitch-text mx-auto mb-1 max-w-2xl text-xl">
-			Web developer, designer, artist.
-		</p>
-		<p class="text-light-500 glitch-text mx-auto mb-8 max-w-2xl text-xl">
-			Building useful stuff everyday.
-		</p>
+		<div class="h-4"></div>
 
-		<h3>
-			<GlitchText text="Featured Projects" />
-		</h3>
+		<p class="text-light-500 mx-auto mb-1 flex max-w-2xl flex-col items-center text-center text-xl">
+			<GlitchText text="Web developer, designer, artist." />
+			<GlitchText text="Building useful stuff everyday." />
+		</p>
+		<div class="h-10"></div>
 		<a href="/contact" class="btn"> Get in Touch </a>
 	</div>
 </section>
@@ -35,8 +32,10 @@
 <!-- Featured Projects Section -->
 <section class="bg-dark py-16">
 	<div class="container mx-auto px-4">
-		<h2 class="text-light-500 relative mb-4 inline-block text-xl font-bold">Featured Projects</h2>
-		<div class=" mb-6 h-1 w-full bg-gradient-to-r from-blue-600"></div>
+		<h3>
+			<GlitchText text="Featured Projects" />
+		</h3>
+		<div class=" mb-6 h-1 w-full bg-gradient-to-r from-pink-600"></div>
 
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 			<!-- Project Card 1 -->
@@ -107,7 +106,7 @@
 <!-- About Section -->
 <section class="py-16">
 	<div class="text-light container mx-auto flex flex-col px-4">
-		<div class=" mb-6 h-1 w-full bg-gradient-to-r from-blue-600"></div>
+		<div class=" mb-6 h-1 w-full bg-gradient-to-r from-pink-600"></div>
 
 		<p class="max-w-3xl text-sm">
 			Hello! I'm a web developer specializing in SvelteKit and modern web technologies. I'm

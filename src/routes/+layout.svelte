@@ -8,7 +8,7 @@
 		<div class="!text-light mx-auto py-4 font-light">
 			<nav class="flex w-full items-center justify-between">
 				<a href="/" class="justify-centerfont-bold flex flex-col items-center text-xl">
-					<img src="/DannyCiscoLogoBlack.jpg" alt="" class="h-14 w-14 rounded-full" />
+					<img src="/DannyCiscoLogoBlack.jpg" alt="" class="h-18 w-18 rounded-full shadow-xl" />
 				</a>
 
 				<ul class="hidden gap-8 md:flex">
