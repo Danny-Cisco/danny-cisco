@@ -44,7 +44,10 @@
 	];
 </script>
 
-<div class="bio-container {visible ? 'visible' : ''}">
+<div class="fixed inset-0 z-[0] bg-gradient-to-br from-white/10 to-black/50"></div>
+<!-- <div class="glow sticky inset-0 top-0 z-[-2]"></div> -->
+
+<div class="bio-container z-[99] {visible ? 'visible' : ''}">
 	<header>
 		<h1 class="text-white"><GlitchText text="Danny Cisco" /></h1>
 		<h2 class="text-pink-500">Maker | Artist | AI Explorer | Game Technician | Toy Designer</h2>
@@ -83,6 +86,8 @@
 		<h3>
 			<GlitchText text="What I'm up too" />
 		</h3>
+		<div class=" mb-6 h-1 w-full bg-gradient-to-r from-pink-600"></div>
+
 		<ul>
 			{#each projects as project}
 				<li>
@@ -94,6 +99,8 @@
 
 	<section class="philosophy-section">
 		<h3><GlitchText text="How I Work" /></h3>
+		<div class=" mb-6 h-1 w-full bg-gradient-to-r from-pink-600"></div>
+
 		<p>
 			I take a hands-on, iterative approach—whether I'm coding, designing, or building. I believe in
 			keeping things simple but powerful, avoiding unnecessary complexity while pushing the limits
@@ -107,15 +114,18 @@
 
 	<section class="connect-section">
 		<h3>
-			<GlitchText text="Let's Connect<" />
+			<GlitchText text="Let's Connect" />
 		</h3>
+		<div class=" mb-6 h-1 w-full bg-gradient-to-r from-pink-600"></div>
+
 		<p>
 			If you're into AI, game design, or making weird and wonderful things, I'd love to chat. Reach
 			out, and let's build something cool.
 		</p>
 		<div class="social-links">
 			<!-- You can add actual links/icons here -->
-			<button class="btn">Get In Touch</button>
+			<button class="btn border-[2px] border-transparent hover:border-pink-500">Get In Touch</button
+			>
 		</div>
 	</section>
 </div>
@@ -267,5 +277,24 @@
 		.tagline {
 			font-size: 1.2rem;
 		}
+	}
+
+	.glow {
+		position: absolute;
+		width: 120%;
+		height: 120%;
+		background: radial-gradient(
+			ellipse at bottom,
+			rgba(0, 112, 255, 0.4) 0%,
+			rgba(130, 60, 255, 0.2) 40%,
+			rgba(255, 0, 150, 0.1) 60%,
+			transparent 70%
+		);
+		border-radius: 50%;
+		filter: blur(20px);
+		/* animation: */
+		/* pulse 4s ease-in-out infinite alternate, */
+		/* glow-roll 6s linear infinite alternate; */
+		z-index: 1;
 	}
 </style>

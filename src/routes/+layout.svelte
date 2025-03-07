@@ -3,7 +3,8 @@
 	import GlitchText from '$lib/components/cool-stuff/GlitchText.svelte';
 </script>
 
-<div class="bg-dark h-full w-full">
+<div class="fixed inset-0 z-[0] bg-gradient-to-br from-white/10 to-black/50"></div>
+<div class="h-full w-full">
 	<!-- Header/Navigation -->
 	<header class="bg-dark fixed top-0 z-10 h-10 w-[100vw] px-8 pb-1 shadow-sm">
 		<div class="!text-light mx-auto py-4 font-light">
