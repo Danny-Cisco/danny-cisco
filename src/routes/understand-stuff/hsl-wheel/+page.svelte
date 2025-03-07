@@ -8,13 +8,13 @@
 	let isDarkMode = true;
 
 	// User-typed HSL input for practice
-	let typedHue = 200;
+	let typedHue = 220;
 	let typedSaturation = 85;
 	let typedLightness = 55;
 </script>
 
 <div class="fixed inset-0 z-[-1]" class:dark={isDarkMode}></div>
-<div class="relative flex w-full flex-col items-center justify-center" class:dark={isDarkMode}>
+<div class="relative flex h-full flex-col items-center justify-center" class:dark={isDarkMode}>
 	<!-- Dark mode toggle -->
 	<div class="absolute left-0 top-0 mt-4 flex items-center space-x-2 pl-4" class:dark={isDarkMode}>
 		<input type="checkbox" bind:checked={isDarkMode} class="toggle" />
@@ -44,44 +44,55 @@
 	<div class="h-20"></div>
 
 	<!-- Color Wheel Container -->
-	<div class="wheel-container mt-8">
+	<div class="wheel-container fixed inset-0 mt-8">
 		<div class="color-wheel" style="--s: {saturation}%; --l: {lightness}%"></div>
 		<!-- Markers for key angles -->
 		<div class="marker red whitespace-nowrap font-bold"><span>0° RED</span></div>
+		<div class="marker red-yellow whitespace-nowrap"><span>30°</span></div>
 		<div class="marker yellow whitespace-nowrap font-bold"><span>60° YELLOW</span></div>
+		<div class="marker yellow-green whitespace-nowrap"><span>90°</span></div>
 		<div class="marker green whitespace-nowrap font-bold"><span>120° GREEN</span></div>
+		<div class="marker green-cyan whitespace-nowrap"><span>150°</span></div>
 		<div class="marker cyan whitespace-nowrap font-bold"><span>180° CYAN</span></div>
+		<div class="marker cyan-blue whitespace-nowrap"><span>210°</span></div>
 		<div class="marker blue whitespace-nowrap font-bold"><span>240° BLUE</span></div>
+		<div class="marker blue-magenta whitespace-nowrap"><span>270°</span></div>
 		<div class="marker magenta whitespace-nowrap font-bold"><span>300° MAGENTA</span></div>
+		<div class="marker magenta-red whitespace-nowrap"><span>330°</span></div>
 	</div>
 
 	<!-- Two HSL comparison boxes -->
-	<div class="hsl-compare-container">
-		<div class="hsl-box" style="background-color: hsl({hue1}, {saturation}%, {lightness}%);">
-			<p>hsl({hue1}, {saturation}%, {lightness}%)</p>
+	<div class="hsl-compare-container fixed bottom-4 justify-center">
+		<div>
+			<div
+				class="hsl-box"
+				style="background-color: hsl({hue1}, {saturation}%, {lightness}%);"
+			></div>
+			<p class="px-4">hsl({hue1}, {saturation}%, {lightness}%)</p>
 		</div>
 
-		<div
-			class="hsl-box"
-			style="background-color: hsl({typedHue}, {typedSaturation}%, {typedLightness}%);"
-		>
-			<p>hsl({typedHue}, {typedSaturation}%, {typedLightness}%)</p>
+		<div>
+			<div
+				class="hsl-box"
+				style="background-color: hsl({typedHue}, {typedSaturation}%, {typedLightness}%);"
+			></div>
+			<p class="px-4">hsl({typedHue}, {typedSaturation}%, {typedLightness}%)</p>
 		</div>
 	</div>
 
 	<!-- HSL input fields -->
-	<div class="hsl-input-container absolute bottom-0 right-0">
-		<div>
-			<label>Hue:</label>
-			<input type="number" min="0" max="360" bind:value={typedHue} />
+	<div class="hsl-input-container fixed bottom-4 right-4 flex">
+		<div class="flex flex-col">
+			<label class:dark={isDarkMode}>Hue: </label>
+			<input type="number" min="0" max="360" bind:value={typedHue} class:dark={isDarkMode} />
 		</div>
-		<div>
-			<label>Saturation:</label>
-			<input type="number" min="0" max="100" bind:value={typedSaturation} />
+		<div class="flex flex-col">
+			<label class:dark={isDarkMode}>Sat:</label>
+			<input type="number" min="0" max="100" bind:value={typedSaturation} class:dark={isDarkMode} />
 		</div>
-		<div>
-			<label>Lightness:</label>
-			<input type="number" min="0" max="100" bind:value={typedLightness} />
+		<div class="flex flex-col">
+			<label class:dark={isDarkMode}>Lit:</label>
+			<input type="number" min="0" max="100" bind:value={typedLightness} class:dark={isDarkMode} />
 		</div>
 	</div>
 </div>
@@ -92,38 +103,60 @@
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform-origin: center center;
+		transform-origin: left;
 		width: 1px;
 		height: 1px;
 	}
 
 	.marker span {
 		position: absolute;
-		left: 0.5rem;
-		transform: translate(-50%, -50%);
+		height: 100%;
+		left: 100%; /* Ensures text starts from the same distance */
+		top: -0.65rem; /* Aligns to the marker */
+		transform-origin: center; /* Makes the text extend outward */
+		transform: rotate(0deg); /* Keeps text upright */
 		background: #fff8;
 		padding: 2px 4px;
 		border-radius: 4px;
 		font-size: 0.8rem;
+		white-space: nowrap;
 	}
-	/* Adjust positioning for each marker */
+	/* Adjust positioning for each main marker */
 	.red {
-		transform: rotate(-90deg) translate(200px, 0);
+		transform: rotate(-90deg) translate(25vh, 0);
+	}
+	.red-yellow {
+		transform: rotate(-60deg) translate(25vh, 0);
 	}
 	.yellow {
-		transform: rotate(-30deg) translate(200px, 0);
+		transform: rotate(-30deg) translate(25vh, 0);
+	}
+	.yellow-green {
+		transform: rotate(0deg) translate(25vh, 0);
 	}
 	.green {
-		transform: rotate(30deg) translate(200px, 0);
+		transform: rotate(30deg) translate(25vh, 0);
+	}
+	.green-cyan {
+		transform: rotate(60deg) translate(25vh, 0);
 	}
 	.cyan {
-		transform: rotate(90deg) translate(200px, 0);
+		transform: rotate(90deg) translate(25vh, 0);
+	}
+	.cyan-blue {
+		transform: rotate(120deg) translate(25vh, 0);
 	}
 	.blue {
-		transform: rotate(150deg) translate(200px, 0);
+		transform: rotate(150deg) translate(25vh, 0);
+	}
+	.blue-magenta {
+		transform: rotate(180deg) translate(25vh, 0);
 	}
 	.magenta {
-		transform: rotate(210deg) translate(200px, 0);
+		transform: rotate(210deg) translate(25vh, 0);
+	}
+	.magenta-red {
+		transform: rotate(240deg) translate(25vh, 0);
 	}
 
 	/* Dark mode marker text */
@@ -166,8 +199,8 @@
 
 	.wheel-container {
 		position: relative;
-		width: 300px;
-		height: 300px;
+		width: 50vh;
+		height: 50vh;
 		margin: 100px;
 	}
 
@@ -195,11 +228,12 @@
 	.hsl-compare-container {
 		display: flex;
 		margin-top: 2rem;
+		width: 800px;
 	}
 
 	.hsl-box {
-		width: 150px;
-		height: 100px;
+		width: 100%;
+		height: 10vh;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -222,7 +256,7 @@
 	}
 
 	/* HSL Input */
-	.hsl-input-container {
+	/* .hsl-input-container {
 		display: flex;
 		gap: 1rem;
 		margin-top: 1rem;
@@ -242,7 +276,7 @@
 	.hsl-input-container input {
 		width: 60px;
 		text-align: center;
-	}
+	} */
 
 	/* Fix Range Input Styling in Dark Mode */
 	.dark input[type='range']::-webkit-slider-runnable-track {
