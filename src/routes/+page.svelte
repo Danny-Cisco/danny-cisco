@@ -110,17 +110,15 @@
 
 <!-- About Section -->
 <section class="py-16">
-	<div class="text-light container mx-auto flex flex-col px-4">
+	<div class="text-light container mx-auto flex flex-col flex-col items-center px-4">
 		<div class=" mb-6 h-1 w-full bg-gradient-to-r from-pink-600"></div>
 
-		<p class="max-w-3xl text-sm">
-			Hello! I'm a web developer specializing in SvelteKit and modern web technologies. I'm
-			passionate about creating accessible, user-friendly applications that solve real problems.
+		<p class="mx-auto max-w-3xl text-sm">
+			Danny Cisco (verb) - Maker of things digital & physical. AI explorer, Game Technician, Artist,
+			Tinkerer and Toy Designer. Host of Nascent Clouds. Fork Guitarist of The Burnt Sausages. Let’s
+			build something cool.
 		</p>
-		<p class="mt-4 max-w-3xl text-sm">
-			My background includes experience in insert stuff, and I'm particularly interested in insert
-			interests. When I'm not coding, you might find me doing insert hobbies.
-		</p>
+
 		<a href="/bio" class="btn mt-6"> Read Full Bio </a>
 	</div>
 </section>
