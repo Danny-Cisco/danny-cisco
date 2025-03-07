@@ -16,7 +16,7 @@
 					<img
 						src="/DannyCiscoLogoBlack.jpg"
 						alt=""
-						class="h-18 w-18 rounded-full shadow-xl hover:border-[2px] hover:border-pink-500"
+						class="h-18 w-18 rounded-full border-[1px] border-pink-500 hover:border-[2px]"
 					/>
 				</a>
 

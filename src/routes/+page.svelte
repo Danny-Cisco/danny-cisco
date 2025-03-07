@@ -5,12 +5,12 @@
 <div class="z-[99]">
 	<!-- Hero Section -->
 	<section class="flex flex-col items-center justify-center text-center md:py-24">
-		<div class="container relative mx-auto h-[80vh] px-4">
+		<div class="scontainer relative mx-auto h-[80vh] px-4">
 			<div class="logo-container">
 				<img
 					src="/DannyCiscoLogoBlack.jpg"
 					alt="Cisco Logo"
-					class="logo shadow-lg"
+					class="logo border-[2px] border-pink-500 shadow"
 					width="200"
 					height="200"
 				/>

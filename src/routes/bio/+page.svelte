@@ -49,7 +49,19 @@
 
 <div class="bio-container z-[99] {visible ? 'visible' : ''}">
 	<header>
-		<h1 class="text-white"><GlitchText text="Danny Cisco" /></h1>
+		<div class="relative flex h-[250px] items-center justify-center gap-8">
+			<div
+				class="rotate-15 absolute -right-[3px] bottom-[30px] hidden h-[185px] w-[185px] rounded-md bg-pink-500"
+			></div>
+			<img
+				src="/danny-cisco-b+w.png"
+				class="cover rotate-10 absolute right-0 h-[180px] w-[180px] rounded-lg border-[2px] border-pink-500 object-cover"
+				alt="Danny Cisco's headshot"
+			/>
+
+			<h1 class="text-white"><GlitchText text="Danny Cisco" /></h1>
+		</div>
+
 		<h2 class="text-pink-500">Maker | Artist | AI Explorer | Game Technician | Toy Designer</h2>
 		<div class="tagline">
 			<p>
@@ -84,7 +96,7 @@
 
 	<section class="projects-section">
 		<h3>
-			<GlitchText text="What I'm up too" />
+			<GlitchText text="What I'm up to" />
 		</h3>
 		<div class=" mb-6 h-1 w-full bg-gradient-to-r from-pink-600"></div>
 
