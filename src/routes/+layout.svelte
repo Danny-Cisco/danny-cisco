@@ -1,25 +1,43 @@
 <script>
 	import '../app.css';
+	import GlitchText from '$lib/components/cool-stuff/GlitchText.svelte';
 </script>
 
-<div class="h-full w-full">
+<div class="bg-dark h-full w-full">
 	<!-- Header/Navigation -->
-	<header class="bg-dark fixed top-0 z-10 h-20 w-[100vw] px-8 py-4 shadow-sm">
+	<header class="bg-dark fixed top-0 z-10 h-10 w-[100vw] px-8 pb-1 shadow-sm">
 		<div class="!text-light mx-auto py-4 font-light">
-			<nav class="flex w-full items-center justify-between">
-				<a href="/" class="justify-centerfont-bold flex flex-col items-center text-xl">
-					<img src="/DannyCiscoLogoBlack.jpg" alt="" class="h-18 w-18 rounded-full shadow-xl" />
+			<nav class="fixed right-4 top-2 flex w-full items-center justify-end">
+				<a
+					href="/"
+					class="fixed left-4 top-0 flex flex-col items-center justify-center text-xl font-bold"
+				>
+					<img
+						src="/DannyCiscoLogoBlack.jpg"
+						alt=""
+						class="h-18 w-18 rounded-full shadow-xl hover:border-[2px] hover:border-pink-500"
+					/>
 				</a>
 
 				<ul class="hidden gap-8 md:flex">
-					<li><a href="/bio" class="font-medium hover:text-blue-600">Bio</a></li>
 					<li>
-						<a href="/understand-stuff" class="font-medium hover:text-blue-600">Understand-Stuff</a>
+						<a href="/bio" class="font-medium hover:!text-pink-500"> <GlitchText text="Bio" /> </a>
 					</li>
 					<li>
-						<a href="/time-blind-club" class="font-medium hover:text-blue-600">TimeBlind.Club</a>
+						<a href="/understand-stuff" class="font-medium hover:!text-pink-500">
+							<GlitchText text="Understand-Stuff" />
+						</a>
 					</li>
-					<li><a href="/contact" class="font-medium hover:text-blue-600">Contact</a></li>
+					<li>
+						<a href="/time-blind-club" class="font-medium hover:!text-pink-500">
+							<GlitchText text="TimeBlind.club" />
+						</a>
+					</li>
+					<li>
+						<a href="/contact" class="font-medium hover:!text-pink-500">
+							<GlitchText text="Contact" />
+						</a>
+					</li>
 				</ul>
 
 				<!-- Mobile menu button - you can add a hamburger menu implementation here -->
@@ -42,7 +60,7 @@
 			</nav>
 		</div>
 	</header>
-	<div class="relative pt-20">
+	<div class="relative top-10">
 		<slot />
 	</div>
 </div>

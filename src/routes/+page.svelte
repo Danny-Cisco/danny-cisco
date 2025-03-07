@@ -27,7 +27,9 @@
 			<GlitchText text="Building useful stuff everyday." />
 		</p>
 		<div class="h-10"></div>
-		<a href="/contact" class="btn"> Get in Touch </a>
+		<a href="/contact" class="btn border-[2px] border-transparent hover:border-pink-500">
+			Get in Touch
+		</a>
 	</div>
 </section>
 
@@ -42,7 +44,7 @@
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 			<!-- Project Card 1 -->
 			<div
-				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-gray-400"
+				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-500"
 				on:click={(event) => event.currentTarget.querySelector('a')?.click()}
 			>
 				<div class="p-6">
@@ -58,7 +60,7 @@
 
 			<!-- Project Card 2 -->
 			<div
-				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-gray-400"
+				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-500"
 				on:click={(event) => event.currentTarget.querySelector('a')?.click()}
 			>
 				<div class="p-6">
@@ -74,7 +76,7 @@
 
 			<!-- Project Card 3 -->
 			<div
-				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-gray-400"
+				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-500"
 				on:click={(event) => event.currentTarget.querySelector('a')?.click()}
 			>
 				<div class="p-6">
@@ -90,7 +92,7 @@
 
 			<!-- Project Card 4 -->
 			<div
-				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-gray-400"
+				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-500"
 				on:click={(event) => event.currentTarget.querySelector('a')?.click()}
 			>
 				<div class="p-6">

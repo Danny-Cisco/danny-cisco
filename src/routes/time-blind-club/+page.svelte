@@ -140,11 +140,11 @@
 </script>
 
 <!-- rear curtain of black -->
-<div class="fixed inset-0 z-[-1] bg-black"></div>
-
+<div class="fixed inset-0 z-[0] h-[100vh] bg-black"></div>
+<div class="h-10"></div>
 <!-- start of app -->
 <!-- countdown timer display : blinking -->
-<div class="absolute inset-0 w-full text-center">
+<div class="z-1 absolute inset-0 w-full bg-black text-center">
 	{#key seconds}
 		<div
 			class=" absolute left-0 right-0 top-0 p-1 text-center font-mono text-xl"
@@ -163,8 +163,8 @@
 	{/key}
 </div>
 
-<div class="block flex flex-col items-center justify-start pt-10">
-	<div class="z-1 flex w-full flex-col items-center justify-center gap-2">
+<div class="z-[2] block flex flex-col items-center justify-start">
+	<div class="z-[3] flex w-full flex-col items-center justify-center gap-2">
 		<button
 			on:click={handleStartStop}
 			class="fixed bottom-4 w-[200px] rounded-full p-4 text-xl font-bold shadow hover:bg-gray-500 hover:text-white"
@@ -208,7 +208,7 @@
 	</div>
 	<div class="bg-gray-500 text-xl text-white">{timerEndTime}</div>
 
-	<div class="flex flex-wrap items-center justify-center">
+	<div class="z-[10] flex flex-wrap items-center justify-center">
 		{#each initHoursArray as mins, index}
 			<FullCircle nowMins={hoursArray[index] || 0} initMins={initHoursArray[index] || 0} />
 		{/each}
