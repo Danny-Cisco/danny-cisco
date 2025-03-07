@@ -27,7 +27,7 @@
 			<GlitchText text="Building useful stuff everyday." />
 		</p>
 		<div class="h-10"></div>
-		<a href="/contact" class="btn border-[2px] border-transparent hover:border-pink-500">
+		<a href="/contact" class="btn border-[2px] border-transparent hover:border-pink-200">
 			Get in Touch
 		</a>
 	</div>
@@ -44,7 +44,7 @@
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 			<!-- Project Card 1 -->
 			<div
-				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-500"
+				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-200"
 				on:click={(event) => event.currentTarget.querySelector('a')?.click()}
 			>
 				<div class="p-6">
@@ -60,7 +60,7 @@
 
 			<!-- Project Card 2 -->
 			<div
-				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-500"
+				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-200"
 				on:click={(event) => event.currentTarget.querySelector('a')?.click()}
 			>
 				<div class="p-6">
@@ -76,7 +76,7 @@
 
 			<!-- Project Card 3 -->
 			<div
-				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-500"
+				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-200"
 				on:click={(event) => event.currentTarget.querySelector('a')?.click()}
 			>
 				<div class="p-6">
@@ -92,7 +92,7 @@
 
 			<!-- Project Card 4 -->
 			<div
-				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-500"
+				class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-200"
 				on:click={(event) => event.currentTarget.querySelector('a')?.click()}
 			>
 				<div class="p-6">
@@ -289,36 +289,4 @@
 		display: inline-block;
 		transition: color 50ms;
 	}
-
-	/* Occasionally show scan lines - uncomment if desired */
-	/*
-.glitch-text::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(32, 128, 255, 0.2) 50%,
-    transparent 100%
-  );
-  background-size: 100% 4px;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  animation: scanlines 6s infinite;
-}
-
-@keyframes scanlines {
-  0%, 85%, 100% {
-    opacity: 0;
-  }
-  92%, 93% {
-    opacity: 0.3;
-  }
-}
-*/
 </style>
