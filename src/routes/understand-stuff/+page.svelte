@@ -24,6 +24,11 @@
 			title: 'HSL Wheel',
 			path: '/understand-stuff/hsl-wheel',
 			description: 'Visualising HSL'
+		},
+		{
+			title: 'HSL Grid',
+			path: '/understand-stuff/hsl-grid',
+			description: 'Visualising HSL'
 		}
 	];
 </script>
