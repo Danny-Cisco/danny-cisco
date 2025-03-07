@@ -16,7 +16,7 @@
 						<a href="/understand-stuff" class="font-medium hover:text-blue-600">Understand Stuff</a>
 					</li>
 					<li>
-						<a href="/time-blind-club" class="font-medium hover:text-blue-600">Time Blind Club</a>
+						<a href="/time-blind-club" class="font-medium hover:text-blue-600">TimeBlind.Club</a>
 					</li>
 					<li><a href="/contact" class="font-medium hover:text-blue-600">Contact</a></li>
 				</ul>

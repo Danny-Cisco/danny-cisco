@@ -7,7 +7,7 @@ const config = {
 		adapter: adapter()
 	},
 
-	preprocess: [mdsvex()],
+	// preprocess: [mdsvex()],
 	extensions: ['.svelte', '.svx']
 };
 
