@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import GlitchText from '$lib/components/cool-stuff/GlitchText.svelte';
+	import { fade, slide } from 'svelte/transition';
 
 	// Animation for section entry
 	let visible = false;
@@ -48,28 +49,36 @@
 <!-- <div class="glow sticky inset-0 top-0 z-[-2]"></div> -->
 
 <div class="bio-container z-[99] {visible ? 'visible' : ''}">
-	<header>
+	<header in:fade>
 		<div class="relative flex h-[250px] items-center justify-center gap-8">
-			<div
-				class="rotate-15 absolute -right-[3px] bottom-[30px] hidden h-[185px] w-[185px] rounded-md bg-pink-500"
-			></div>
 			<img
+				src="/johnny-charcoal-in-packet.png"
+				class="cover -rotate-10 absolute left-0 h-[180px] w-[180px] rounded-lg border-[2px] border-transparent object-cover md:scale-150"
+				alt="Johnny Charcoal Toy"
+			/><img
 				src="/danny-cisco-b+w.png"
-				class="cover rotate-10 absolute right-0 h-[180px] w-[180px] rounded-lg border-[2px] border-pink-500 object-cover"
+				class="cover rotate-10 absolute -right-10 h-[180px] w-[180px] rounded-lg border-[2px] border-transparent object-cover md:scale-150"
 				alt="Danny Cisco's headshot"
 			/>
-
-			<h1 class="text-white"><GlitchText text="Danny Cisco" /></h1>
 		</div>
+		<div class="h-10"></div>
 
-		<h2 class="text-pink-500">Maker | Artist | AI Explorer | Game Technician | Toy Designer</h2>
+		<h1 class="text-white"><GlitchText text="Danny Cisco" /></h1>
+
+		<div class="h-10"></div>
+		<h2 class=" text-pink-500">
+			Maker | Artist | AI&nbspExplorer | Game&nbspTechnician | Toy&nbspDesigner
+		</h2>
+		<div class="h-20"></div>
 		<div class="tagline">
 			<p>
 				<GlitchText text="I build things..." />
 				<GlitchText text="digital, physical, and everything in between." />
 			</p>
 		</div>
+		<div class="h-20"></div>
 	</header>
+	<div class=" mb-6 h-1 w-full bg-gradient-to-r from-pink-600"></div>
 
 	<section class="bio-section">
 		<p>
@@ -93,6 +102,7 @@
 			with new ways to merge physical and digital worlds.
 		</p>
 	</section>
+	<div class="h-20"></div>
 
 	<section class="projects-section">
 		<h3>
@@ -108,6 +118,7 @@
 			{/each}
 		</ul>
 	</section>
+	<div class="h-20"></div>
 
 	<section class="philosophy-section">
 		<h3><GlitchText text="How I Work" /></h3>
@@ -123,6 +134,7 @@
 			interfaces or intelligent tools for artists and developers.
 		</p>
 	</section>
+	<div class="h-20"></div>
 
 	<section class="connect-section">
 		<h3>

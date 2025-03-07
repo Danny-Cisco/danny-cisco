@@ -1,8 +1,9 @@
 <script>
 	import GlitchText from '$lib/components/cool-stuff/GlitchText.svelte';
+	import { fade } from 'svelte/transition';
 </script>
 
-<div class="z-[99]">
+<div class="z-[99]" in:fade>
 	<!-- Hero Section -->
 	<section class="flex flex-col items-center justify-center text-center md:py-24">
 		<div class="scontainer relative mx-auto h-[80vh] px-4">

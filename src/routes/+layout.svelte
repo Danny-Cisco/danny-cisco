@@ -42,7 +42,7 @@
 				</ul>
 
 				<!-- Mobile menu button - you can add a hamburger menu implementation here -->
-				<button class="md:hidden">
+				<button class="absolute right-8 top-0 md:hidden">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="h-6 w-6"
