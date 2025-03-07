@@ -1,5 +1,5 @@
 <script>
-	// You can add any imports or logic you need here
+	import GlitchText from '$lib/components/cool-stuff/GlitchText.svelte';
 </script>
 
 <!-- Hero Section -->
@@ -24,6 +24,10 @@
 		<p class="text-light-500 glitch-text mx-auto mb-8 max-w-2xl text-xl">
 			Building useful stuff everyday.
 		</p>
+
+		<h3>
+			<GlitchText text="Featured Projects" />
+		</h3>
 		<a href="/contact" class="btn"> Get in Touch </a>
 	</div>
 </section>
