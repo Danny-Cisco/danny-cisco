@@ -7,8 +7,7 @@
 	export let flicker = false;
 
 	// Possible characters to use for the glitch effect
-	const glitchChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*<>[]{}|';
-
+	const glitchChars = '@#$%&*<>[]{}|\\/!?~+=-_;:()^';
 	// Text characters array
 	let chars = [];
 	let displayChars = [];

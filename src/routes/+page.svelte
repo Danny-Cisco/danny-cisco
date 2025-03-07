@@ -64,7 +64,8 @@
 				on:click={(event) => event.currentTarget.querySelector('a')?.click()}
 			>
 				<div class="p-6">
-					<h3 class="mb-2 text-xl font-bold">Time Blind Club</h3>
+					<h3 class="mb-2 text-xl font-bold"><GlitchText text="TimeBlind.Club" /></h3>
+
 					<p class="text-light-500 mb-4">
 						A set of tools for people who experience time blindness.
 					</p>
