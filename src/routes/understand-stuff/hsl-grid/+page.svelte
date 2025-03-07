@@ -1,8 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
 
-	let hueDiv = 10; // Default hue divisions
-	let lightnessDiv = 10; // Default lightness divisions
+	let hueSegments = 36; // Default number of hue segments
+	let lightnessSegments = 10; // Default number of lightness segments
 	let saturation = 50; // Default saturation level
 
 	let selectedColor = null;
@@ -10,31 +10,55 @@
 
 	const selectColor = (h, l, s) => {
 		selectedColor = `hsl(${h}, ${s}%, ${l}%)`;
+		navigator.clipboard.writeText(selectedColor);
 		showModal = true;
 	};
+
+	const closeModal = (event) => {
+		if (event.key === 'Escape') {
+			showModal = false;
+		}
+	};
+
+	onMount(() => {
+		window.addEventListener('keydown', closeModal);
+	});
 </script>
 
-<div>
-	<label>Hue Division: <input type="number" bind:value={hueDiv} min="1" max="360" /></label>
-	<label
-		>Lightness Division: <input type="number" bind:value={lightnessDiv} min="1" max="100" /></label
-	>
-	<label>Saturation: <input type="number" bind:value={saturation} min="0" max="100" /></label>
+<div class="fixed bottom-0 left-4 right-4 flex justify-between">
+	<label>
+		Hue Chips:
+		<input type="number" bind:value={hueSegments} min="1" max="360" />
+	</label>
+	<label>
+		Lightness Chips:
+		<input type="number" bind:value={lightnessSegments} min="1" max="100" />
+	</label>
+	<label>
+		Saturation:
+		<input type="number" bind:value={saturation} min="0" max="100" />
+	</label>
 </div>
 
 <div
 	class="grid"
-	style="grid-template-columns: repeat({360 / hueDiv}, 1fr); grid-template-rows: repeat({100 /
-		lightnessDiv}, 1fr);"
+	style="grid-template-columns: repeat({hueSegments}, 1fr); grid-template-rows: repeat({lightnessSegments -
+		1}, 1fr);"
 >
-	{#each Array(100 / lightnessDiv).fill(0) as _, y}
-		<!-- Lightness loop (rows) -->
-		{#each Array(360 / hueDiv).fill(0) as _, x}
+	{#each Array(lightnessSegments - 1).fill(0) as _, y}
+		<!-- Lightness loop (rows), ignoring the lightest row -->
+		{#each Array(hueSegments).fill(0) as _, x}
 			<!-- Hue loop (columns) -->
 			<div
 				class="color-box"
-				style="background-color: hsl({x * hueDiv}, {saturation}%, {100 - y * lightnessDiv}%);"
-				on:click={() => selectColor(x * hueDiv, 100 - y * lightnessDiv, saturation)}
+				style="background-color: hsl({(x * 360) / hueSegments}, {saturation}%, {100 -
+					((y + 1) * 100) / lightnessSegments}%);"
+				on:click={() =>
+					selectColor(
+						(x * 360) / hueSegments,
+						100 - ((y + 1) * 100) / lightnessSegments,
+						saturation
+					)}
 			></div>
 		{/each}
 	{/each}
@@ -42,7 +66,7 @@
 
 {#if showModal}
 	<div class="modal" on:click={() => (showModal = false)}>
-		<p>Selected Color: {selectedColor}</p>
+		<p>Selected Color (copied to clipboard): {selectedColor}</p>
 		<p
 			style="background-color: {selectedColor}; width: 100px; height: 50px; border: 1px solid black;"
 		></p>
@@ -54,7 +78,7 @@
 	.grid {
 		display: grid;
 		width: 100vw;
-		height: 100vh;
+		height: 90vh;
 		gap: 1px;
 	}
 	.color-box {
@@ -63,7 +87,7 @@
 	}
 	.color-box:hover {
 		transform: scale(1.1);
-		border: 1px solid white;
+		border: 1px solid black;
 	}
 	.modal {
 		position: fixed;
