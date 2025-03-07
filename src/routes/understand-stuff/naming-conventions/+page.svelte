@@ -370,14 +370,14 @@
 			{#each caseTypes as caseType}
 				<div class="case-type-card">
 					<h3>{caseType.name}</h3>
-					<p class="example">Example: <code>{caseType.example}</code></p>
+					<p class="example text-light-500"><code>{caseType.example}</code></p>
 				</div>
 			{/each}
 		</div>
 	</section>
 
 	<section class="conventions-section">
-		<div class="tabs">
+		<div class="tabs flex flex-wrap">
 			<button class:active={activeTab === 'all'} on:click={() => selectTab('all')}> All </button>
 			{#each categories as category}
 				<button class:active={activeTab === category} on:click={() => selectTab(category)}>
@@ -386,8 +386,8 @@
 			{/each}
 		</div>
 
-		<div class="results-info">
-			{filteredConventions.length} conventions found
+		<div class="text-light mb-2 font-mono">
+			{filteredConventions.length} results:
 			{searchQuery ? `for "${searchQuery}"` : ''}
 			{activeTab !== 'all' ? `in ${activeTab}` : ''}
 		</div>
@@ -470,8 +470,9 @@
 	}
 
 	.case-type-card {
-		background: #f8f9fa;
-		border-radius: 6px;
+		border: solid 1px #222222;
+		background: #222222;
+		border-radius: 12px;
 		padding: 1rem;
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	}
@@ -493,13 +494,18 @@
 	}
 
 	.tabs button {
-		background: #f1f3f5;
+		background: #222222;
 		border: none;
 		padding: 0.5rem 1rem;
 		border-radius: 4px;
 		cursor: pointer;
 		font-size: 0.9rem;
 		transition: all 0.2s;
+	}
+
+	.tabs button:hover {
+		background: black;
+		color: white;
 	}
 
 	.tabs button.active {
@@ -518,6 +524,7 @@
 	}
 
 	.conventions-table {
+		background-color: #222222;
 		width: 100%;
 		border-collapse: collapse;
 		margin-bottom: 2rem;
@@ -531,16 +538,15 @@
 	}
 
 	.conventions-table th {
-		background: #f8f9fa;
+		font-size: larger;
 		font-weight: 600;
 	}
 
 	.conventions-table tr:hover {
-		background: #f1f3f5;
+		background: black;
 	}
 
 	code {
-		background: #f1f3f5;
 		padding: 0.2rem 0.4rem;
 		border-radius: 3px;
 		font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
@@ -552,7 +558,9 @@
 		padding: 2rem;
 		color: #868e96;
 	}
-
+	input {
+		background-color: #222222;
+	}
 	@media (max-width: 768px) {
 		.tabs {
 			flex-wrap: wrap;

@@ -43,10 +43,10 @@
 
 	<ul class="links-list">
 		{#each links as link}
-			<li>
+			<li class="border-[1px] border-white bg-gradient-to-br from-white/10">
 				<a href={link.path}>
-					<h2 class="font-bold">{link.title}</h2>
-					<p>{link.description}</p>
+					<h2 class="text-light font-bold">{link.title}</h2>
+					<p class="text-light-500">{link.description}</p>
 				</a>
 			</li>
 		{/each}
@@ -61,11 +61,10 @@
 		gap: 1rem;
 	}
 
-	.links-list li a {
+	.links-list li {
 		display: block;
 		padding: 1.5rem;
 		border-radius: 8px;
-		background: #f2f2f2;
 		text-decoration: none;
 		color: inherit;
 		transition:

@@ -194,9 +194,11 @@
 		padding: 0.5rem;
 		margin: 0.5rem 0;
 		font-size: 1rem;
+		color: black;
 	}
 	.code-block {
 		background: #f5f5f5;
+		color: black;
 		padding: 1rem;
 		border-radius: 5px;
 		font-family: monospace;

@@ -2,18 +2,19 @@
 	import '../app.css';
 </script>
 
-<div class="bg-white-100 h-full w-full">
+<div class="h-full w-full">
 	<!-- Header/Navigation -->
-	<header class="sticky top-0 z-10 bg-white shadow-sm">
-		<div class="container mx-auto px-4 py-4">
-			<nav class="flex items-center justify-between">
-				<a href="/" class="text-xl font-bold text-blue-600">Danny Cisco</a>
+	<header class="bg-dark fixed top-0 z-10 h-20 w-[100vw] px-8 py-4 shadow-sm">
+		<div class="!text-light mx-auto py-4 font-light">
+			<nav class="flex w-full items-center justify-between">
+				<a href="/" class="justify-centerfont-bold flex flex-col items-center text-xl">
+					<img src="/DannyCiscoLogoBlack.jpg" alt="" class="h-14 w-14 rounded-full" />
+				</a>
 
-				<ul class="hidden space-x-8 md:flex">
-					<li><a href="/" class="font-medium hover:text-blue-600">Home</a></li>
+				<ul class="hidden gap-8 md:flex">
 					<li><a href="/bio" class="font-medium hover:text-blue-600">Bio</a></li>
 					<li>
-						<a href="/understand-stuff" class="font-medium hover:text-blue-600">Understand Stuff</a>
+						<a href="/understand-stuff" class="font-medium hover:text-blue-600">Understand-Stuff</a>
 					</li>
 					<li>
 						<a href="/time-blind-club" class="font-medium hover:text-blue-600">TimeBlind.Club</a>
@@ -41,7 +42,7 @@
 			</nav>
 		</div>
 	</header>
-	<div class="h-auto">
+	<div class="relative pt-20">
 		<slot />
 	</div>
 </div>
