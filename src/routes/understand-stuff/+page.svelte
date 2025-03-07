@@ -19,6 +19,11 @@
 			title: 'Web Dev Time Formats',
 			path: '/understand-stuff/web-dev-time-formats',
 			description: 'Everything there is to know about time formats on the web'
+		},
+		{
+			title: 'HSL Wheel',
+			path: '/understand-stuff/hsl-wheel',
+			description: 'Visualising HSL'
 		}
 	];
 </script>
