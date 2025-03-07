@@ -1,7 +1,7 @@
 <script>
 	// Exposed variables for user control
-	export let saturation = 85; // Range: 0 - 100
-	export let lightness = 55; // Range: 0 - 100
+	export let saturation = 60; // Range: 0 - 100
+	export let lightness = 50; // Range: 0 - 100
 	export let hue1 = 200; // First color hue (user can edit)
 
 	// Light mode / Dark mode state
@@ -9,8 +9,8 @@
 
 	// User-typed HSL input for practice
 	let typedHue = 220;
-	let typedSaturation = 85;
-	let typedLightness = 55;
+	let typedSaturation = 60;
+	let typedLightness = 50;
 </script>
 
 <div class="fixed inset-0 z-[-1]" class:dark={isDarkMode}></div>

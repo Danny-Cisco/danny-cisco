@@ -3,13 +3,13 @@
 
 	let hueSegments = 36; // Default number of hue segments
 	let lightnessSegments = 10; // Default number of lightness segments
-	let saturation = 50; // Default saturation level
+	let saturation = 60; // Default saturation level
 
 	let selectedColor = null;
 	let showModal = false;
 
 	const selectColor = (h, l, s) => {
-		selectedColor = `hsl(${h}, ${s}%, ${l}%)`;
+		selectedColor = `hsl(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%)`;
 		navigator.clipboard.writeText(selectedColor);
 		showModal = true;
 	};
@@ -25,18 +25,18 @@
 	});
 </script>
 
-<div class="fixed bottom-0 left-4 right-4 flex justify-between">
+<div class="fixed bottom-0 left-0 right-0 flex justify-between bg-black px-4 text-white">
 	<label>
 		Hue Chips:
-		<input type="number" bind:value={hueSegments} min="1" max="360" />
+		<input type="number" bind:value={hueSegments} min="1" max="360" class="bg-gray-800" />
 	</label>
 	<label>
 		Lightness Chips:
-		<input type="number" bind:value={lightnessSegments} min="1" max="100" />
+		<input type="number" bind:value={lightnessSegments} min="1" max="100" class="bg-gray-800" />
 	</label>
 	<label>
 		Saturation:
-		<input type="number" bind:value={saturation} min="0" max="100" />
+		<input type="number" bind:value={saturation} min="0" max="100" class="bg-gray-800" />
 	</label>
 </div>
 
@@ -66,11 +66,11 @@
 
 {#if showModal}
 	<div class="modal" on:click={() => (showModal = false)}>
-		<p>Selected Color (copied to clipboard): {selectedColor}</p>
+		<p>{selectedColor}</p>
 		<p
-			style="background-color: {selectedColor}; width: 100px; height: 50px; border: 1px solid black;"
+			style="background-color: {selectedColor}; width: 100%; height: 50px; border: 1px solid black;"
 		></p>
-		<button on:click={() => (showModal = false)}>Close</button>
+		<button class="btn mt-4" on:click={() => (showModal = false)}>Close</button>
 	</div>
 {/if}
 
