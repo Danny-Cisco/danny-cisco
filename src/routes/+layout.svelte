@@ -1,14 +1,53 @@
 <script>
 	import '../app.css';
 	import GlitchText from '$lib/components/cool-stuff/GlitchText.svelte';
+	import { onMount } from 'svelte';
+
+	// Shared navigation items for both desktop and mobile menus
+	const navItems = [
+		{ text: 'Bio', href: '/bio' },
+		{ text: 'Understand-Stuff', href: '/understand-stuff' },
+		{ text: 'TimeBlind.club', href: '/time-blind-club' },
+		{ text: 'Contact', href: '/contact' }
+	];
+
+	// State for mobile menu toggle
+	let isMobileMenuOpen = false;
+
+	// Toggle mobile menu
+	function toggleMobileMenu() {
+		isMobileMenuOpen = !isMobileMenuOpen;
+	}
+
+	// Close menu when clicking outside
+	function handleClickOutside(event) {
+		const mobileMenu = document.getElementById('mobile-menu');
+		const hamburgerBtn = document.getElementById('hamburger-btn');
+
+		if (
+			mobileMenu &&
+			hamburgerBtn &&
+			!mobileMenu.contains(event.target) &&
+			!hamburgerBtn.contains(event.target)
+		) {
+			isMobileMenuOpen = false;
+		}
+	}
+
+	onMount(() => {
+		document.addEventListener('click', handleClickOutside);
+		return () => {
+			document.removeEventListener('click', handleClickOutside);
+		};
+	});
 </script>
 
 <div class="fixed inset-0 z-[0] bg-gradient-to-br from-white/10 to-black/50"></div>
-<div class="h-full w-full">
+<div class="relative isolate h-full w-full">
 	<!-- Header/Navigation -->
 	<header class="bg-dark fixed top-0 z-10 h-10 w-[100vw] px-8 pb-1 shadow-sm">
 		<div class="!text-light mx-auto py-4 font-light">
-			<nav class="fixed right-4 top-2 flex w-full items-center justify-end">
+			<nav class="fixed left-0 right-4 top-2 isolate flex w-[100vw] items-center justify-end pr-6">
 				<a
 					href="/"
 					class="fixed left-4 top-0 flex flex-col items-center justify-center text-xl font-bold"
@@ -20,48 +59,75 @@
 					/>
 				</a>
 
+				<!-- Desktop Navigation -->
 				<ul class="hidden gap-8 md:flex">
-					<li>
-						<a href="/bio" class="font-medium hover:!text-pink-500"> <GlitchText text="Bio" /> </a>
-					</li>
-					<li>
-						<a href="/understand-stuff" class="font-medium hover:!text-pink-500">
-							<GlitchText text="Understand-Stuff" />
-						</a>
-					</li>
-					<li>
-						<a href="/time-blind-club" class="font-medium hover:!text-pink-500">
-							<GlitchText text="TimeBlind.club" />
-						</a>
-					</li>
-					<li>
-						<a href="/contact" class="font-medium hover:!text-pink-500">
-							<GlitchText text="Contact" />
-						</a>
-					</li>
+					{#each navItems as item}
+						<li>
+							<a href={item.href} class="font-medium hover:!text-pink-500">
+								<GlitchText text={item.text} />
+							</a>
+						</li>
+					{/each}
 				</ul>
 
-				<!-- Mobile menu button - you can add a hamburger menu implementation here -->
-				<button class="absolute right-8 top-0 md:hidden">
+				<!-- Mobile hamburger button -->
+				<button
+					id="hamburger-btn"
+					class="z-[9999] flex flex-col items-center justify-center p-1 md:hidden"
+					on:click={toggleMobileMenu}
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="h-6 w-6"
+						class="h-6 w-6 text-white"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
 					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M4 6h16M4 12h16m-7 6h7"
-						/>
+						{#if isMobileMenuOpen}
+							<!-- X icon when menu is open -->
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M6 18L18 6M6 6l12 12"
+							/>
+						{:else}
+							<!-- Hamburger icon when menu is closed -->
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M4 6h16M4 12h16m-7 6h7"
+							/>
+						{/if}
 					</svg>
 				</button>
+
+				<!-- Mobile Menu -->
+				{#if isMobileMenuOpen}
+					<div
+						id="mobile-menu"
+						class="absolute right-0 top-10 w-48 rounded-md bg-gray-900 py-2 shadow-lg transition-all duration-200"
+					>
+						<ul class="flex flex-col">
+							{#each navItems as item}
+								<li>
+									<a
+										href={item.href}
+										class="block px-4 py-2 text-white hover:bg-gray-800 hover:text-pink-500"
+										on:click={() => (isMobileMenuOpen = false)}
+									>
+										{item.text}
+									</a>
+								</li>
+							{/each}
+						</ul>
+					</div>
+				{/if}
 			</nav>
 		</div>
 	</header>
-	<div class="relative top-10">
+	<div class="relative top-10 isolate">
 		<slot />
 	</div>
 </div>
