@@ -1,15 +1,23 @@
 <script>
+	import GlitchText from '$lib/components/cool-stuff/GlitchText.svelte';
 	import { fade } from 'svelte/transition';
-	const links = [
+	const usLinks = [
+		{
+			title: 'HSL Wheel',
+			path: '/understand-stuff/hsl-wheel',
+			img: '/hsl-wheel.png',
+			description: 'Visualising HSL'
+		},
+		{
+			title: 'HSL Grid',
+			path: '/understand-stuff/hsl-grid',
+			img: '/hsl-grid.png',
+			description: 'Visualising HSL'
+		},
 		{
 			title: 'Web Dev Storage',
 			path: '/understand-stuff/web-dev-storage',
-			description: 'Information about web development storage options'
-		},
-		{
-			title: 'FP4 Mantissa',
-			path: '/understand-stuff/fp4-mantissa',
-			description: 'Details about FP4 mantissa format'
+			description: 'LocalStorage? Locals? Cookies? Where do they live and what are they are for.'
 		},
 		{
 			title: 'Naming Conventions',
@@ -22,29 +30,34 @@
 			description: 'Everything there is to know about time formats on the web'
 		},
 		{
-			title: 'HSL Wheel',
-			path: '/understand-stuff/hsl-wheel',
-			description: 'Visualising HSL'
-		},
-		{
-			title: 'HSL Grid',
-			path: '/understand-stuff/hsl-grid',
-			description: 'Visualising HSL'
+			title: 'FP4 Mantissa',
+			path: '/understand-stuff/fp4-mantissa',
+			description: 'Details about FP4 mantissa format'
 		}
 	];
 </script>
 
 <div in:fade>
 	<main class="mx-auto flex max-w-md flex-col gap-4 py-4">
-		<p>Various AI generated pages I have collected in order to...</p>
-		<h1 class="text-center text-4xl font-bold underline">Understand Stuff 🤔</h1>
+		<h1 class="text-center text-4xl font-bold underline"><GlitchText text="Understand Stuff" /></h1>
+		<div class="text-center">
+			<p>Tools I have generated in order to</p>
+			<p>'understand stuff'</p>
+		</div>
 
 		<ul class="links-list">
-			{#each links as link}
+			{#each usLinks as link}
 				<li class="border-[1px] border-white bg-gradient-to-br from-white/10">
-					<a href={link.path}>
-						<h2 class="text-light font-bold">{link.title}</h2>
-						<p class="text-light-500">{link.description}</p>
+					<a href={link.path}
+						><div class="flex justify-between gap-4">
+							<div class="flex flex-col">
+								<h2 class="text-light font-bold">{link.title}</h2>
+								<p class="text-light-500">{link.description}</p>
+							</div>
+							{#if link.img}
+								<img src={link.img} class="h-20 w-20 rounded" alt="" />
+							{/if}
+						</div>
 					</a>
 				</li>
 			{/each}

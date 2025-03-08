@@ -49,7 +49,6 @@
 	onMount(async () => {
 		let boxNum = window.innerWidth / 13;
 		boxSize = Math.round(boxNum).toString() + 'px';
-		console.log('🚀 ~ onMount ~ boxSize:', boxSize);
 	});
 </script>
 
@@ -301,7 +300,7 @@
 		align-items: center;
 		justify-content: center;
 		border: 2px solid rgba(255, 255, 255, 0.5);
-		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+		box-shadow: 0 0 5vh hsla(0, 0%, 20%, 0.5);
 		z-index: 3;
 		font-weight: bold;
 	}
