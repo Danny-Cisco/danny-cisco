@@ -105,16 +105,6 @@
 </div>
 
 <style>
-	body {
-		background-color: black;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 80vh;
-		margin: 0;
-		overflow: hidden;
-	}
-
 	em {
 		color: hsl(320, 73%, 60%);
 		white-space: nowrap;
