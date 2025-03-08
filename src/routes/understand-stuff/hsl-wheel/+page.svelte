@@ -41,6 +41,34 @@
 		'RED'
 	];
 
+	// Animation variables
+	let isPlaying = false;
+	let animationInterval;
+	let currentHueIndex = 0;
+
+	// Function to start animation
+	function startAnimation() {
+		if (isPlaying) return;
+
+		isPlaying = true;
+		currentHueIndex = 0;
+
+		// Set initial hue
+		hue1 = hueValues[currentHueIndex];
+
+		// Set interval to cycle through hues
+		animationInterval = setInterval(() => {
+			currentHueIndex = (currentHueIndex + 1) % hueValues.length;
+			hue1 = hueValues[currentHueIndex];
+		}, 1000); // Change every second
+	}
+
+	// Function to stop animation
+	function stopAnimation() {
+		isPlaying = false;
+		clearInterval(animationInterval);
+	}
+
 	// Function to set the hue from a button
 	function setHue(hueValue) {
 		hue1 = hueValue;
@@ -124,6 +152,7 @@
 		</div>
 	</div>
 	<div class="h-4"></div>
+
 	<!-- Color Wheel Container -->
 	<div class="wheel-container fixed inset-0">
 		<div class="color-wheel" style="--s: {saturation}%; --l: {lightness}%"></div>
@@ -157,27 +186,77 @@
 	<!-- Horizontal Hue Buttons (Bottom) with Slider -->
 	<div class=" fixed bottom-0 left-0 right-0 z-10 flex flex-col items-end">
 		<!-- Horizontal Hue Slider -->
-		<div class="flex items-center gap-2">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="size-6">
-				<!-- Largest Arc - Red -->
-				<path
-					d="M12 4C18.0751 4 23 8.92487 23 15V20H21V15C21 10.1182 17.1132 6.14421 12.2654 6.00384L12 6C7.1182 6 3.14421 9.88681 3.00384 14.7346L3 15V20H1V15C1 8.92487 5.92487 4 12 4Z"
-					fill="#FF0055"
-				/>
 
-				<!-- Middle Arc - Green -->
-				<path
-					d="M12 8C15.866 8 19 11.134 19 15V20H17V15C17 12.3112 14.8777 10.1182 12.2169 10.0046L12 10C9.31124 10 7.11818 12.1223 7.00462 14.7831L7 15V20H5V15C5 11.134 8.13401 8 12 8Z"
-					fill="#44FF00"
-				/>
+		<div class="flex w-full justify-between">
+			<!-- Play/Stop Controls -->
+			<div class="z-10 ml-10 flex gap-2">
+				{#if !isPlaying}
+					<button
+						on:click={startAnimation}
+						disabled={isPlaying}
+						class="play-button"
+						class:disabled={isPlaying}
+						title="Play Animation"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="size-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+					</button>
+				{:else}
+					<button
+						on:click={stopAnimation}
+						disabled={!isPlaying}
+						class="stop-button"
+						class:disabled={!isPlaying}
+						title="Stop Animation"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							class="size-6"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M4.5 7.5a3 3 0 013-3h9a3 3 0 013 3v9a3 3 0 01-3 3h-9a3 3 0 01-3-3v-9z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+					</button>
+				{/if}
+			</div>
+			<div class="flex items-center gap-2">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="size-6">
+					<!-- Largest Arc - Red -->
+					<path
+						d="M12 4C18.0751 4 23 8.92487 23 15V20H21V15C21 10.1182 17.1132 6.14421 12.2654 6.00384L12 6C7.1182 6 3.14421 9.88681 3.00384 14.7346L3 15V20H1V15C1 8.92487 5.92487 4 12 4Z"
+						fill="#FF0055"
+					/>
 
-				<!-- Smallest Arc - Blue -->
-				<path
-					d="M12 12C13.6569 12 15 13.3431 15 15V20H13V15C13 14.4872 12.614 14.0645 12.1166 14.0067L12 14C11.4872 14 11.0645 14.386 11.0067 14.8834L11 15V20H9V15C9 13.3431 10.3431 12 12 12Z"
-					fill="#00aaFF"
-				/>
-			</svg><input type="number" min="0" max="360" bind:value={hue1} class:dark={isDarkMode} />
+					<!-- Middle Arc - Green -->
+					<path
+						d="M12 8C15.866 8 19 11.134 19 15V20H17V15C17 12.3112 14.8777 10.1182 12.2169 10.0046L12 10C9.31124 10 7.11818 12.1223 7.00462 14.7831L7 15V20H5V15C5 11.134 8.13401 8 12 8Z"
+						fill="#44FF00"
+					/>
+
+					<!-- Smallest Arc - Blue -->
+					<path
+						d="M12 12C13.6569 12 15 13.3431 15 15V20H13V15C13 14.4872 12.614 14.0645 12.1166 14.0067L12 14C11.4872 14 11.0645 14.386 11.0067 14.8834L11 15V20H9V15C9 13.3431 10.3431 12 12 12Z"
+						fill="#00aaFF"
+					/>
+				</svg><input type="number" min="0" max="360" bind:value={hue1} class:dark={isDarkMode} />
+			</div>
 		</div>
+
 		<div class="horizontal-slider px-[6px] md:px-[30px]">
 			<input type="range" min="0" max="360" step="1" bind:value={hue1} class:dark={isDarkMode} />
 		</div>
@@ -187,6 +266,7 @@
 			{#each hueValues as hueValue, index}
 				<button
 					class="hue-button square"
+					class:active-hue={hueValue === hue1}
 					style="background-color: hsl({hueValue}, {saturation}%, {lightness}%); {boxCss}"
 					on:click={() => setHue(hueValue)}
 					title="{hueNames[index]}: {hueValue}°"
@@ -196,41 +276,6 @@
 			{/each}
 		</div>
 	</div>
-
-	<!-- Two HSL comparison boxes -->
-	<!-- <div class="hsl-compare-container fixed bottom-4  justify-center">
-		<div>
-			<div
-				class="hsl-box"
-				style="background-color: hsl({hue1}, {saturation}%, {lightness}%);"
-			></div>
-			<p class="px-4">hsl({hue1}, {saturation}%, {lightness}%)</p>
-		</div>
-
-		<div>
-			<div
-				class="hsl-box"
-				style="background-color: hsl({typedHue}, {typedSaturation}%, {typedLightness}%);"
-			></div>
-			<p class="px-4">hsl({typedHue}, {typedSaturation}%, {typedLightness}%)</p>
-		</div>
-	</div> -->
-
-	<!-- HSL input fields -->
-	<!-- <div class="hsl-input-container fixed bottom-4 right-4 flex">
-		<div class="flex flex-col">
-			<label class:dark={isDarkMode}>Hue: </label>
-			<input type="number" min="0" max="360" bind:value={typedHue} class:dark={isDarkMode} />
-		</div>
-		<div class="flex flex-col">
-			<label class:dark={isDarkMode}>Sat:</label>
-			<input type="number" min="0" max="100" bind:value={typedSaturation} class:dark={isDarkMode} />
-		</div>
-		<div class="flex flex-col">
-			<label class:dark={isDarkMode}>Lit:</label>
-			<input type="number" min="0" max="100" bind:value={typedLightness} class:dark={isDarkMode} />
-		</div>
-	</div> -->
 </div>
 
 <!-- Styling -->
@@ -326,6 +371,16 @@
 		cursor: pointer;
 		padding: 0;
 		margin: 0;
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	/* Active hue button styling */
+	.hue-button.active-hue {
+		transform: translateY(-4px);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+		z-index: 1;
 	}
 
 	.hue-label {
@@ -541,5 +596,41 @@
 	.dark input[type='range']::-moz-range-thumb {
 		background: white;
 		border: 1px solid #aaa;
+	}
+
+	/* Play/Stop button styling */
+	.play-button,
+	.stop-button {
+		background-color: #333;
+		color: white;
+		border: none;
+		border-radius: 8px;
+		padding: 8px;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.play-button:hover,
+	.stop-button:hover {
+		background-color: #555;
+	}
+
+	.play-button.disabled,
+	.stop-button.disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	.dark .play-button,
+	.dark .stop-button {
+		background-color: #555;
+	}
+
+	.dark .play-button:hover,
+	.dark .stop-button:hover {
+		background-color: #777;
 	}
 </style>
