@@ -2,6 +2,7 @@
 	import '../app.css';
 	import GlitchText from '$lib/components/cool-stuff/GlitchText.svelte';
 	import { onMount } from 'svelte';
+	import { fly } from 'svelte/transition';
 
 	// Shared navigation items for both desktop and mobile menus
 	const navItems = [
@@ -15,8 +16,10 @@
 	let isMobileMenuOpen = false;
 
 	// Toggle mobile menu
-	function toggleMobileMenu() {
-		isMobileMenuOpen = !isMobileMenuOpen;
+	async function toggleMobileMenu() {
+		await setTimeout(() => {
+			isMobileMenuOpen = !isMobileMenuOpen;
+		}, 100);
 	}
 
 	// Close menu when clicking outside
@@ -45,9 +48,13 @@
 <div class="fixed inset-0 z-[0] bg-gradient-to-br from-white/10 to-black/50"></div>
 <div class="relative isolate h-full w-full">
 	<!-- Header/Navigation -->
-	<header class="bg-dark fixed top-0 z-10 h-10 w-[100vw] px-8 pb-1 shadow-sm">
+	<header
+		class="bg-dark fixed top-0 z-10 h-10 w-[110vw] border-b-[1px] border-pink-500 px-8 pb-1 shadow-sm"
+	>
 		<div class="!text-light mx-auto py-4 font-light">
-			<nav class="fixed left-0 right-4 top-2 isolate flex w-[100vw] items-center justify-end pr-6">
+			<nav
+				class="absolute left-0 right-0 top-2 isolate flex w-[100vw] items-center justify-end pr-6"
+			>
 				<a
 					href="/"
 					class="fixed left-4 top-0 flex flex-col items-center justify-center text-xl font-bold"
@@ -107,7 +114,8 @@
 				{#if isMobileMenuOpen}
 					<div
 						id="mobile-menu"
-						class="absolute right-0 top-10 w-48 rounded-md bg-gray-900 py-2 shadow-lg transition-all duration-200"
+						class="absolute -right-4 top-8 w-48 rounded-md bg-gray-900 pr-4 pt-6 shadow-lg transition-all duration-200"
+						transition:fly={{ y: -300 }}
 					>
 						<ul class="flex flex-col">
 							{#each navItems as item}
@@ -131,3 +139,9 @@
 		<slot />
 	</div>
 </div>
+
+<style>
+	#hamburger-btn:active {
+		transform: scale(0.8) translateY(1px); /* Slight press effect */
+	}
+</style>

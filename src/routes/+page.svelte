@@ -57,7 +57,7 @@
 			<div class="h-4"></div>
 
 			<p
-				class="text-light-500 mx-auto mb-1 flex max-w-2xl flex-col items-center text-center text-sm md:text-2xl"
+				class="text-light-500 text-md mx-auto mb-1 flex max-w-2xl flex-col items-center text-center md:text-2xl"
 			>
 				<GlitchText text="Web developer, designer, artist." />
 				<GlitchText text="Building useful stuff everyday." />
