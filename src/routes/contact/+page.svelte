@@ -1,4 +1,5 @@
 <script>
+	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import GlitchText from '$lib/components/cool-stuff/GlitchText.svelte';
 
@@ -88,7 +89,7 @@
 	}
 </script>
 
-<div class="min-h-screen w-full pt-20">
+<div class="min-h-screen w-full pt-20" in:fade>
 	<div class=" mx-auto px-4 py-20">
 		<div class="pb-20 text-center">
 			<h1 class="mb-8 text-4xl font-bold">

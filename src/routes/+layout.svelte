@@ -56,6 +56,7 @@
 				class="absolute left-0 right-0 top-2 isolate flex w-[100vw] items-center justify-end pr-6"
 			>
 				<a
+					id="home-btn"
 					href="/"
 					class="fixed left-4 top-0 flex flex-col items-center justify-center text-xl font-bold"
 				>
@@ -143,5 +144,9 @@
 <style>
 	#hamburger-btn:active {
 		transform: scale(0.8) translateY(1px); /* Slight press effect */
+	}
+
+	#home-btn:active {
+		transform: scale(0.95) translateY(1px); /* Slight press effect */
 	}
 </style>
