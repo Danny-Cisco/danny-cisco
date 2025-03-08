@@ -208,31 +208,6 @@
 			transform: translateX(5px);
 		}
 	}
-	/* CSS for the glitch text effect */
-	.glitch-text {
-		position: relative;
-		display: inline-block;
-		font-family: monospace; /* Optional: monospace fonts work well for this effect */
-	}
-
-	/* Optional flicker effect for more visual impact */
-	.glitch-text::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: rgba(0, 255, 255, 0.1);
-		opacity: 0;
-		z-index: -1;
-		pointer-events: none;
-	}
-
-	/* Add occasional flicker animations */
-	.glitch-text.flicker::before {
-		animation: flicker 8s infinite;
-	}
 
 	@keyframes flicker {
 		0%,
@@ -244,12 +219,5 @@
 		97% {
 			opacity: 0.3;
 		}
-	}
-
-	/* Style for individual glitching characters */
-	.glitch-text span {
-		position: relative;
-		display: inline-block;
-		transition: color 50ms;
 	}
 </style>
