@@ -114,9 +114,9 @@
 			<div class=" mb-6 h-1 w-full bg-gradient-to-r from-pink-600"></div>
 
 			<p class="mx-auto max-w-3xl text-sm">
-				Danny Cisco (verb) - Maker of things digital & physical. AI explorer, Game Technician,
-				Artist, Tinkerer and Toy Designer. Host of Nascent Clouds. Fork Guitarist of The Burnt
-				Sausages. Let’s build something cool.
+				<em><strong> Danny Cisco </strong></em> (verb) - Maker of things digital & physical. AI explorer,
+				Game Technician, Artist, Tinkerer and Toy Designer. Host of Nascent Clouds. Fork Guitarist of
+				The Burnt Sausages. Let’s build something cool.
 			</p>
 
 			<a href="/bio" class="btn mt-6 border-[2px] border-transparent hover:border-pink-500">
@@ -135,6 +135,16 @@
 		height: 80vh;
 		margin: 0;
 		overflow: hidden;
+	}
+
+	em {
+		color: hsl(320, 73%, 60%);
+		white-space: nowrap;
+	}
+
+	strong {
+		font-weight: bold;
+		font-size: large;
 	}
 
 	.logo-container {

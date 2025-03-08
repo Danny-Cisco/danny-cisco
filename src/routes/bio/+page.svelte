@@ -148,7 +148,8 @@
 		</p>
 		<div class="social-links">
 			<!-- You can add actual links/icons here -->
-			<button class="btn border-[2px] border-transparent hover:border-pink-500">Get In Touch</button
+			<a class="btn border-[2px] border-transparent hover:border-pink-500" href="/contact"
+				>Get In Touch</a
 			>
 		</div>
 	</section>
