@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
 
 	let hueSegments = 36; // Default number of hue segments
 	let lightnessSegments = 10; // Default number of lightness segments
@@ -38,24 +39,31 @@
 </script>
 
 <div class="fixed bottom-0 left-0 right-0 flex justify-between bg-black px-4 text-white">
-	<label>
-		Hue Chips:
-		<input type="number" bind:value={hueSegments} min="1" max="360" class="bg-gray-800" />
-	</label>
-	<label>
-		Lightness Chips:
-		<input type="number" bind:value={lightnessSegments} min="1" max="100" class="bg-gray-800" />
-	</label>
-	<label>
-		Saturation:
-		<input type="number" bind:value={saturation} min="0" max="100" class="bg-gray-800" />
-	</label>
+	<div class="flex w-full flex-wrap justify-between">
+		<label class="flex flex-1 items-center justify-center gap-2 whitespace-nowrap">
+			<input type="number" bind:value={hueSegments} min="1" max="360" class="bg-gray-800" />
+			HUE: #chips</label
+		>
+		<label class="flex flex-1 items-center justify-center gap-2 whitespace-nowrap">
+			<input type="number" bind:value={saturation} min="0" max="100" class="bg-gray-800" />
+			SAT: value%
+		</label>
+		<label class="flex flex-1 items-center justify-center gap-2 whitespace-nowrap">
+			<input type="number" bind:value={lightnessSegments} min="1" max="100" class="bg-gray-800" />
+			LIGHT: #chips
+		</label>
+	</div>
+
+	{#if showModal}
+		<div class="fixed h-full w-full bg-black/70"></div>
+	{/if}
 </div>
 
 <div
 	class="grid"
 	style="grid-template-columns: repeat({hueSegments}, 1fr); grid-template-rows: repeat({lightnessSegments -
 		1}, 1fr);"
+	in:fade
 >
 	{#each Array(lightnessSegments - 1).fill(0) as _, y}
 		<!-- Lightness loop (rows), ignoring the lightest row -->
@@ -79,7 +87,7 @@
 {#if showModal}
 	<div class="modal" on:click|self={() => (showModal = false)}>
 		<button
-			class="absolute -right-5 -top-10 mt-4 flex h-10 w-10 flex-col items-center justify-center rounded-full bg-red-500 text-white"
+			class="absolute -right-5 -top-10 mt-4 flex h-10 w-10 flex-col items-center justify-center rounded-full bg-gray-700 text-white hover:bg-red-500"
 			on:click={() => (showModal = false)}
 			><svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +102,7 @@
 		</button>
 
 		<p
-			style="background-color: {selectedColor}; width: 300px; height: 500px; border: 1px solid black;"
+			style="background-color: {selectedColor}; width: 300px; height: 400px; border: 1px solid black;"
 		></p>
 		<div class="h-10"></div>
 		<div class="flex items-center justify-center gap-2 text-white">
