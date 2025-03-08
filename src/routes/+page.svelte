@@ -42,7 +42,7 @@
 <div class="z-[99]" in:fade>
 	<!-- Hero Section -->
 	<section class="flex flex-col items-center justify-center text-center md:py-24">
-		<div class="scontainer relative mx-auto h-[80vh] px-4">
+		<div class="scontainer relative mx-auto h-[80dvh] px-4">
 			<div class="logo-container">
 				<img
 					src="/DannyCiscoLogoBlack.jpg"
@@ -117,7 +117,7 @@
 
 	.logo-container {
 		position: relative;
-		height: 50vh;
+		height: 50dvh;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -125,8 +125,8 @@
 
 	.logo {
 		position: relative;
-		height: 50vh;
-		width: 50vh;
+		height: 50dvh;
+		width: 50dvh;
 		z-index: 2;
 		border-radius: 50%;
 		filter: drop-shadow(0 0 100px rgba(255, 255, 255, 0.3));
@@ -136,8 +136,8 @@
 
 	.logo {
 		position: relative;
-		height: 50vh;
-		width: 50vh;
+		height: 50dvh;
+		width: 50dvh;
 		z-index: 2;
 		border-radius: 50%;
 		filter: drop-shadow(0 0 100px rgba(255, 255, 255, 0.3));

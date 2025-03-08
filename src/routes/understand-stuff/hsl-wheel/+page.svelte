@@ -271,7 +271,7 @@
 		top: 50%;
 		left: 50%;
 		height: 1px;
-		width: 25vh; /* Same as wheel radius */
+		width: 25dvh; /* Same as wheel radius */
 		background-color: black;
 		transform-origin: left;
 		transition: transform 0.2s ease; /* Smooth rotation */
@@ -292,15 +292,15 @@
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		width: 25vh;
-		height: 25vh;
+		width: 25dvh;
+		height: 25dvh;
 		border-radius: 50%;
 		transform: translate(-50%, -50%);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		border: 2px solid rgba(255, 255, 255, 0.5);
-		box-shadow: 0 0 5vh hsla(0, 0%, 20%, 0.5);
+		box-shadow: 0 0 5dvh hsla(0, 0%, 20%, 0.5);
 		z-index: 3;
 		font-weight: bold;
 	}
@@ -327,40 +327,40 @@
 
 	/* Adjust positioning for each main marker */
 	.red {
-		transform: rotate(-90deg) translate(25vh, 0);
+		transform: rotate(-90deg) translate(25dvh, 0);
 	}
 	.red-yellow {
-		transform: rotate(-60deg) translate(25vh, 0);
+		transform: rotate(-60deg) translate(25dvh, 0);
 	}
 	.yellow {
-		transform: rotate(-30deg) translate(25vh, 0);
+		transform: rotate(-30deg) translate(25dvh, 0);
 	}
 	.yellow-green {
-		transform: rotate(0deg) translate(25vh, 0);
+		transform: rotate(0deg) translate(25dvh, 0);
 	}
 	.green {
-		transform: rotate(30deg) translate(25vh, 0);
+		transform: rotate(30deg) translate(25dvh, 0);
 	}
 	.green-cyan {
-		transform: rotate(60deg) translate(25vh, 0);
+		transform: rotate(60deg) translate(25dvh, 0);
 	}
 	.cyan {
-		transform: rotate(90deg) translate(25vh, 0);
+		transform: rotate(90deg) translate(25dvh, 0);
 	}
 	.cyan-blue {
-		transform: rotate(120deg) translate(25vh, 0);
+		transform: rotate(120deg) translate(25dvh, 0);
 	}
 	.blue {
-		transform: rotate(150deg) translate(25vh, 0);
+		transform: rotate(150deg) translate(25dvh, 0);
 	}
 	.blue-magenta {
-		transform: rotate(180deg) translate(25vh, 0);
+		transform: rotate(180deg) translate(25dvh, 0);
 	}
 	.magenta {
-		transform: rotate(210deg) translate(25vh, 0);
+		transform: rotate(210deg) translate(25dvh, 0);
 	}
 	.magenta-red {
-		transform: rotate(240deg) translate(25vh, 0);
+		transform: rotate(240deg) translate(25dvh, 0);
 	}
 
 	/* Dark mode marker text */
@@ -400,8 +400,8 @@
 
 	.wheel-container {
 		position: relative;
-		width: 50vh;
-		height: 50vh;
+		width: 50dvh;
+		height: 50dvh;
 		margin: 100px;
 	}
 
@@ -434,7 +434,7 @@
 
 	.hsl-box {
 		width: 100%;
-		height: 10vh;
+		height: 10dvh;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
