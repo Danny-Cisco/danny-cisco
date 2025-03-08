@@ -140,11 +140,11 @@
 </script>
 
 <!-- rear curtain of black -->
-<div class="fixed inset-0 z-[0] h-[100dvh] bg-black"></div>
+<!-- <div class="fixed inset-0 z-[0] h-[100dvh] ></div> -->
 <div class="h-10"></div>
 <!-- start of app -->
 <!-- countdown timer display : blinking -->
-<div class="z-1 absolute inset-0 w-full bg-black text-center">
+<div class="z-1 absolute inset-0 w-full text-center">
 	{#key seconds}
 		<div
 			class=" absolute left-0 right-0 top-0 p-1 text-center font-mono text-xl"
