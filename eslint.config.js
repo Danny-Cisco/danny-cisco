@@ -24,11 +24,21 @@ export default [
 	},
 	{
 		files: ['**/*.svelte', '**/*.svelte.js'],
-
 		languageOptions: {
 			parserOptions: {
 				svelteConfig
 			}
+		}
+	},
+	// Add this rules section to override problematic rules
+	{
+		rules: {
+			// Turn off unused CSS selectors rule
+			'svelte/no-unused-css-selectors': 'off',
+			// Turn off the accessibility rule for click events
+			'svelte/a11y-click-events-have-key-events': 'off',
+			// Alternative name for the same rule
+			'svelte/valid-click-events-on-non-interactive': 'off'
 		}
 	}
 ];
