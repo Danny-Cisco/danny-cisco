@@ -263,13 +263,13 @@
 	.light-mode {
 		background: #f5f5f5;
 		color: #333;
-		min-height: 100vh;
+		min-height: 100dvh;
 	}
 
 	.dark-mode {
 		background: #222;
 		color: #eee;
-		min-height: 100vh;
+		min-height: 100dvh;
 	}
 
 	.theme-toggle {
