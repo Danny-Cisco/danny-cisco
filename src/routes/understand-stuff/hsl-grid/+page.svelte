@@ -150,7 +150,7 @@
 	.grid {
 		display: grid;
 		width: 100vw;
-		height: 90vh;
+		height: 90dvh;
 		gap: 1px;
 	}
 	.color-box {
