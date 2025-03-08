@@ -9,29 +9,29 @@
 				{
 					heading: 'Understand Stuff',
 					paragraph: 'Tools Ive generated in order to understand stuff',
-					image: '',
-					link: { href: '/understand-stuff', label: 'See the full list of tools' },
+					image: '/hsl-wheel.png',
+					link: { href: '/understand-stuff', label: 'See list of tools' },
 					size: 'big'
 				},
 				{
 					heading: 'Time Blind Club',
 					paragraph: 'Clocks arent for everyone',
-					image: '',
-					link: { href: '/time-blind-club', label: 'See my time visualisation tools' },
+					image: '/time-blind-club.png',
+					link: { href: '/time-blind-club', label: 'See time visualisation' },
 					size: 'big'
 				},
 				{
 					heading: 'Memmy Pets',
 					paragraph: 'Let Memmy Pets brainstorm fun mnemonics that make learning stick',
-					image: '',
-					link: { href: 'https://www.memmypets.com', label: 'visit MemmyPets.com' },
+					image: '/memmypets.png',
+					link: { href: 'https://www.memmypets.com', label: 'Visit MemmyPets.com' },
 					size: 'big'
 				},
 				{
 					heading: 'MindMapr.ai',
 					paragraph: 'SEE the conversation we are swimming in...',
-					image: '',
-					link: { href: 'https://www.mindmapr.dev', label: 'visit MindMapr.ai' },
+					image: '/mindmapr.png',
+					link: { href: 'https://www.mindmapr.dev', label: 'Visit MindMapr.ai' },
 					size: 'big'
 				}
 			]
