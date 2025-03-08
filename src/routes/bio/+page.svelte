@@ -267,18 +267,6 @@
 		margin-top: 1.5rem;
 	}
 
-	.contact-btn {
-		border: none;
-		padding: 0.75rem 1.5rem;
-		border-radius: 4px;
-		font-size: 1rem;
-		cursor: pointer;
-		transition: background-color 0.3s ease;
-	}
-
-	.contact-btn:hover {
-	}
-
 	@keyframes fadeIn {
 		from {
 			opacity: 0;
@@ -302,24 +290,5 @@
 		.tagline {
 			font-size: 1.2rem;
 		}
-	}
-
-	.glow {
-		position: absolute;
-		width: 120%;
-		height: 120%;
-		background: radial-gradient(
-			ellipse at bottom,
-			rgba(0, 112, 255, 0.4) 0%,
-			rgba(130, 60, 255, 0.2) 40%,
-			rgba(255, 0, 150, 0.1) 60%,
-			transparent 70%
-		);
-		border-radius: 50%;
-		filter: blur(20px);
-		/* animation: */
-		/* pulse 4s ease-in-out infinite alternate, */
-		/* glow-roll 6s linear infinite alternate; */
-		z-index: 1;
 	}
 </style>

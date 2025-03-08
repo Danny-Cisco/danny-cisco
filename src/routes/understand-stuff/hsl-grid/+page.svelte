@@ -69,7 +69,9 @@
 		<!-- Lightness loop (rows), ignoring the lightest row -->
 		{#each Array(hueSegments).fill(0) as _, x}
 			<!-- Hue loop (columns) -->
-			<div
+			<!-- svelte-ignore a11y_consider_explicit_label -->
+			<button
+				aria-label="color rectangle for seeing hsl color"
 				class="color-box"
 				style="background-color: hsl({(x * 360) / hueSegments}, {saturation}%, {100 -
 					((y + 1) * 100) / lightnessSegments}%);"
@@ -79,7 +81,7 @@
 						100 - ((y + 1) * 100) / lightnessSegments,
 						saturation
 					)}
-			></div>
+			></button>
 		{/each}
 	{/each}
 </div>
