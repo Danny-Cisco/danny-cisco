@@ -1,17 +1,17 @@
 <script>
 	import { onMount } from 'svelte';
 	// Exposed variables for user control
-	export let saturation = 90; // Range: 0 - 100
-	export let lightness = 50; // Range: 0 - 100
-	export let hue1 = 200; // First color hue (user can edit)
+	export let saturation = 75; // Range: 0 - 100
+	export let lightness = 55; // Range: 0 - 100
+	export let hue1 = 300; // First color hue (user can edit)
 
 	// Light mode / Dark mode state
 	let isDarkMode = true;
 
 	// User-typed HSL input for practice
 	let typedHue = 220;
-	let typedSaturation = 90;
-	let typedLightness = 50;
+	let typedSaturation = 60;
+	let typedLightness = 40;
 
 	let boxSize = '10px';
 	// $: console.log('🚀 ~ boxSize:', boxSize);
@@ -64,7 +64,7 @@
 		</div> -->
 		<div class="flex items-center justify-end gap-4" class:dark={isDarkMode}>
 			Saturation:
-			<input type="range" min="0" max="100" step="5" bind:value={saturation} />
+			<input type="range" class="rounded-full" min="0" max="100" step="5" bind:value={saturation} />
 			<input type="number" min="0" max="100" bind:value={saturation} class:dark={isDarkMode} />
 		</div>
 
@@ -167,6 +167,11 @@
 
 <!-- Styling -->
 <style>
+	input {
+		border-radius: 8px;
+		margin: 2px;
+		min-height: 20px;
+	}
 	.marker {
 		position: absolute;
 		top: 50%;
@@ -218,15 +223,18 @@
 		height: 20px;
 		margin-left: -170px;
 		margin-right: -170px;
+		border-radius: 9999px;
 	}
 
 	/* Horizontal Slider */
 	.horizontal-slider {
 		width: 100%;
+		border-radius: 9999px;
 	}
 
 	.horizontal-slider input[type='range'] {
 		width: 100%;
+		border-radius: 9999px;
 	}
 
 	/* Button Containers */
