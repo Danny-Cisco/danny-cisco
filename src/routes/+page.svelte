@@ -1,6 +1,42 @@
 <script>
 	import GlitchText from '$lib/components/cool-stuff/GlitchText.svelte';
+	import Card from '$lib/components/ui/Card.svelte';
 	import { fade } from 'svelte/transition';
+
+	let data = {
+		featuredProjects: {
+			cards: [
+				{
+					heading: 'Understand Stuff',
+					paragraph: 'Tools Ive generated in order to understand stuff',
+					image: '',
+					link: { href: '/understand-stuff', label: 'See the full list of tools' },
+					size: 'big'
+				},
+				{
+					heading: 'Time Blind Club',
+					paragraph: 'Clocks arent for everyone',
+					image: '',
+					link: { href: '/time-blind-club', label: 'See my time visualisation tools' },
+					size: 'big'
+				},
+				{
+					heading: 'Memmy Pets',
+					paragraph: 'Let Memmy Pets brainstorm fun mnemonics that make learning stick',
+					image: '',
+					link: { href: 'https://www.memmypets.com', label: 'visit MemmyPets.com' },
+					size: 'big'
+				},
+				{
+					heading: 'MindMapr.ai',
+					paragraph: 'SEE the conversation we are swimming in...',
+					image: '',
+					link: { href: 'https://www.mindmapr.dev', label: 'visit MindMapr.ai' },
+					size: 'big'
+				}
+			]
+		}
+	};
 </script>
 
 <div class="z-[99]" in:fade>
@@ -42,68 +78,10 @@
 			<div class=" mb-6 h-1 w-full bg-gradient-to-r from-pink-600"></div>
 
 			<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-				<!-- Project Card 1 -->
-				<div
-					class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-200"
-					on:click={(event) => event.currentTarget.querySelector('a')?.click()}
-				>
-					<div class="p-6">
-						<h3 class="mb-2 text-xl font-bold">Understand Stuff</h3>
-						<p class="text-light-500 mb-4">
-							A place to keep various AI-generated tools that assist my understanding of stuff.
-						</p>
-						<a href="/understand-stuff" class="font-medium text-blue-600 hover:text-blue-800">
-							View Understanding List →
-						</a>
-					</div>
-				</div>
-
-				<!-- Project Card 2 -->
-				<div
-					class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-200"
-					on:click={(event) => event.currentTarget.querySelector('a')?.click()}
-				>
-					<div class="p-6">
-						<h3 class="mb-2 text-xl font-bold"><GlitchText text="TimeBlind.Club" /></h3>
-
-						<p class="text-light-500 mb-4">
-							A set of tools for people who experience time blindness.
-						</p>
-						<a href="/time-blind-club" class="font-medium text-blue-600 hover:text-blue-800">
-							Try Time Blind Club →
-						</a>
-					</div>
-				</div>
-
-				<!-- Project Card 3 -->
-				<div
-					class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-200"
-					on:click={(event) => event.currentTarget.querySelector('a')?.click()}
-				>
-					<div class="p-6">
-						<h3 class="mb-2 text-xl font-bold">Memmy Pets</h3>
-						<p class="text-light-500 mb-4">
-							Let Memmy Pets brainstorm fun mnemonics for helping learning stick
-						</p>
-						<a href="http://memmypets.com" class="font-medium text-blue-600 hover:text-blue-800">
-							Visit Memmy Pets →
-						</a>
-					</div>
-				</div>
-
-				<!-- Project Card 4 -->
-				<div
-					class="overflow-hidden rounded-lg border border-2 border-transparent bg-white/10 shadow transition duration-300 hover:cursor-pointer hover:border-dashed hover:border-pink-200"
-					on:click={(event) => event.currentTarget.querySelector('a')?.click()}
-				>
-					<div class="p-6">
-						<h3 class="mb-2 text-xl font-bold">MindMapr.ai</h3>
-						<p class="text-light-500 mb-4">SEE the conversation we are swimming in...</p>
-						<a href="http://mindmapr.dev" class="font-medium text-blue-600 hover:text-blue-800">
-							Visit MindMapr.ai →
-						</a>
-					</div>
-				</div>
+				<!-- Loop Through All Project Cards-->
+				{#each data.featuredProjects.cards as card}
+					<Card {card} />
+				{/each}
 			</div>
 		</div>
 	</section>
