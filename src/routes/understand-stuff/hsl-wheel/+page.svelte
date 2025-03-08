@@ -110,7 +110,7 @@
 	<!-- Horizontal Hue Buttons (Bottom) with Slider -->
 	<div class="horizontal-hue-container fixed bottom-0 left-1/2 z-10 -translate-x-1/2 transform">
 		<!-- Horizontal Hue Slider -->
-		<div class="horizontal-slider px-[21px]">
+		<div class="horizontal-slider px-[6px] md:px-[30px]">
 			<input type="range" min="0" max="360" step="1" bind:value={hue1} class:dark={isDarkMode} />
 		</div>
 
