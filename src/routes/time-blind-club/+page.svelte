@@ -1,164 +1,123 @@
 <script lang="ts">
 	import FullCircle from '$lib/components/ring-timer/FullCircle.svelte';
+	import { onMount, onDestroy } from 'svelte';
+	import { timerStore } from '$lib/stores/timerStore.js';
 
-	import { onMount } from 'svelte';
-	let interval60;
-	let interval1;
-	let minutes = 0;
-	let seconds = 0;
-
-	let pageLoaded = false;
-
-	let timerDuration = 120;
-	let timerEndTime;
-	$: console.log('🚀 ~ timerEndTIme:', timerEndTime);
-	let nowMins = 120;
-	let timeMs = null;
-	let nowMs;
+	// Destructure what we need from the store
+	const {
+		nowDateObj,
+		nowMs,
+		timerEndTime,
+		timerDuration,
+		isRunning,
+		seconds,
+		minutes,
+		nowMins,
+		pageLoaded,
+		isEndTime,
+		buttonLabel,
+		toggleTimer,
+		updateEndTime,
+		initializeDates,
+		toggleEndTimeMode,
+		cleanup
+	} = timerStore;
 
 	let today;
+	let timeMs = null;
 
-	$: if (timerEndTime && pageLoaded && !isRunning) {
-		// Combine today's date with the selected time
-		let fullDateTime = `${today}T${timerEndTime}`;
-
-		console.log('🚀 ~ fulldateTime = `${today}T${timerEndTime}`:', `${today}T${timerEndTime}`);
-		// Convert to milliseconds
-		timeMs = new Date(fullDateTime).getTime();
-		console.log(
-			'🚀 ~ timeMs = new Date(fullDateTime).getTime();:',
-			new Date(fullDateTime).getTime()
-		);
-
-		nowMs = new Date().getTime();
-		console.log('🚀 ~ nowMs = new Date().getTime();:', new Date().getTime());
-
-		timerDuration = Math.trunc((timeMs - nowMs) / 1000 / 60);
-		// If timerDuration is negative, add 24 hours (1440 minutes)
-		if (timerDuration < 0) {
-			timerDuration += 1440;
-		}
-	}
-
-	$: console.log('🚀 ~ nowMs:', nowMs);
-
-	$: console.log('🚀 ~ Time in ms:', timeMs);
-
-	let isEndTime = true;
-
-	let endTimeButtonLabel = 'DURATION';
-
-	$: if (isEndTime) endTimeButtonLabel = 'END TIME';
-	else endTimeButtonLabel = 'DURATION';
-
-	let isRunning = false;
-
+	// Reactive variables for the circles calculation
 	let hoursArray = [];
-	$: console.log('🚀 ~ hoursArray:', hoursArray);
 	let initHoursArray = [];
-	$: console.log('🚀 ~ initHoursArray:', initHoursArray);
-
 	let numberOfDiscs = 0;
 	let currentDisc = 0;
-	$: numberOfDiscs = Math.trunc(timerDuration / 60); // removes decimal places
 
-	$: if (timerDuration % 60) {
+	// Compute number of discs based on timer duration
+	$: numberOfDiscs = Math.trunc($timerDuration / 60);
+	$: if ($timerDuration % 60) {
 		numberOfDiscs += 1; // add a disc if there is a partial disc left
 	}
 
-	$: if (timerDuration) {
-		hoursArray = []; // clear the hoursArray if user sets new the duration
-		initHoursArray = []; // clear the hoursArray if user sets new the duration
-		minutes = 0;
+	// Clear arrays when duration changes
+	$: if ($timerDuration) {
+		hoursArray = [];
+		initHoursArray = [];
 	}
 
-	$: currentDisc = Math.trunc(nowMins / 60);
+	// Calculate current disc
+	$: currentDisc = Math.trunc($nowMins / 60);
 
-	$: for (let i = 0; i < numberOfDiscs; i++) {
-		if (i < currentDisc) {
-			hoursArray[i] = 60; // make all the discs 60
-		} else if (i > currentDisc) {
-			if (!isRunning) hoursArray[i] = 60;
-			else hoursArray[i] = 0;
-		} else if (i == currentDisc) {
-			if (!isRunning)
-				hoursArray[i] = Math.round(nowMins % 60) || 60; // make the last disc the remainder or 60 if no remainder
-			else hoursArray[i] = Math.round(nowMins % 60);
-		}
-	}
-
-	$: if (!isRunning) {
+	// Fill the hoursArray based on current state
+	$: {
+		hoursArray = [];
 		for (let i = 0; i < numberOfDiscs; i++) {
 			if (i < currentDisc) {
-				initHoursArray[i] = 60; // make all the discs 60
+				hoursArray[i] = 60; // make all previous discs 60
 			} else if (i > currentDisc) {
-				if (!isRunning) initHoursArray[i] = 60;
-				else initHoursArray[i] = 0;
+				if (!$isRunning) hoursArray[i] = 60;
+				else hoursArray[i] = 0;
 			} else if (i == currentDisc) {
-				if (!isRunning)
-					initHoursArray[i] = Math.round(timerDuration % 60) || 60; // make the last disc the remainder or 60 if no remainder
-				else initHoursArray[i] = Math.round(timerDuration % 60);
+				if (!$isRunning)
+					hoursArray[i] = Math.round($nowMins % 60) || 60; // make the last disc the remainder or 60 if no remainder
+				else hoursArray[i] = Math.round($nowMins % 60);
 			}
 		}
 	}
 
-	$: if (nowMins) nowMins = timerDuration - minutes;
-
-	let buttonLabel = 'START';
-
-	$: if (isRunning) buttonLabel = 'STOP';
-	else buttonLabel = 'START';
-
-	function handleStartStop() {
-		isRunning = !isRunning;
+	// Fill the initHoursArray
+	$: {
+		if (!$isRunning) {
+			initHoursArray = [];
+			for (let i = 0; i < numberOfDiscs; i++) {
+				if (i < currentDisc) {
+					initHoursArray[i] = 60; // make all the discs 60
+				} else if (i > currentDisc) {
+					initHoursArray[i] = 60;
+				} else if (i == currentDisc) {
+					initHoursArray[i] = Math.round($timerDuration % 60) || 60; // make the last disc the remainder or 60 if no remainder
+				}
+			}
+		}
 	}
+
+	// Handle end time changes
+	function handleEndTimeChange(event) {
+		updateEndTime(event.target.value);
+	}
+
+	// Style variables
 	let runningBg = 'hsl(200, 50%, 12%)'; // Background when running
 	let midGrayText = 'hsl(200, 50%, 30%)'; // Mid-gray text color
 
 	onMount(() => {
-		today = new Date().toISOString().split('T')[0];
-		console.log(
-			"🚀 ~ onMount ~ today = new Date().toISOString().split('T')[0]:",
-			new Date().toISOString().split('T')[0]
-		);
+		today = initializeDates();
+		pageLoaded.set(true);
+	});
 
-		interval60 = setInterval(() => {
-			if (isRunning) minutes += 1;
-		}, 1000 * 60);
-
-		interval1 = setInterval(() => {
-			if (isRunning) seconds += 1;
-		}, 1000);
-
-		pageLoaded = true;
-
-		return () => {
-			clearInterval(interval60);
-			clearInterval(interval1);
-		};
+	onDestroy(() => {
+		cleanup();
 	});
 </script>
 
 <!-- rear curtain of black -->
-<!-- <div class="fixed inset-0 z-[0] h-[100dvh] ></div> -->
 <div class="h-10"></div>
 <!-- start of app -->
 <!-- countdown timer display : blinking -->
 <div class="z-1 absolute inset-0 w-full text-center">
-	{#key seconds}
+	{#key $seconds}
 		<div
-			class=" absolute left-0 right-0 top-0 p-1 text-center font-mono text-xl"
-			class:hidden={seconds % 2 !== 0}
+			class="absolute left-0 right-0 top-0 p-1 text-center font-mono text-xl"
+			class:hidden={$seconds % 2 !== 0}
 			style="color: hsl(200, 50%, 80%);"
 		>
-			{nowMins} mins
+			{$nowMins} mins
 		</div>
 		<div
 			class="absolute left-0 right-0 top-0 p-1 text-center font-mono text-xl"
-			class:hidden={seconds % 2 === 0}
+			class:hidden={$seconds % 2 === 0}
 			style="color:hsl(200, 50%, 27%)"
 		>
-			{nowMins} mins
+			{$nowMins} mins
 		</div>
 	{/key}
 </div>
@@ -166,47 +125,47 @@
 <div class="z-[2] block flex flex-col items-center justify-start">
 	<div class="z-[3] flex w-full flex-col items-center justify-center gap-2">
 		<button
-			on:click={handleStartStop}
+			on:click={toggleTimer}
 			class="fixed bottom-4 w-[200px] rounded-full p-4 text-xl font-bold shadow hover:bg-gray-500 hover:text-white"
-			style="background-color: {isRunning ? runningBg : 'hsl(200, 50%, 80%)'}; color: {isRunning
+			style="background-color: {$isRunning ? runningBg : 'hsl(200, 50%, 80%)'}; color: {$isRunning
 				? 'black'
-				: 'black'};">{buttonLabel}</button
+				: 'black'};">{$buttonLabel}</button
 		>
 		<div class="flex flex-col items-center gap-2">
-			{#if isEndTime}
+			{#if $isEndTime}
 				<input
 					type="time"
 					id="endTime"
 					class="w-50 rounded-full p-2 px-5 text-xl transition-all"
-					style="background-color: {isRunning ? runningBg : 'white'}; color: {isRunning
+					style="background-color: {$isRunning ? runningBg : 'white'}; color: {$isRunning
 						? midGrayText
 						: 'black'};"
-					bind:value={timerEndTime}
+					value={$timerEndTime}
+					on:input={handleEndTimeChange}
 				/>
 			{:else}
 				<input
 					type="number"
 					id="duration"
 					class="w-50 rounded-full p-2 px-5 text-xl transition-all"
-					style="background-color: {isRunning ? runningBg : 'white'}; color: {isRunning
+					style="background-color: {$isRunning ? runningBg : 'white'}; color: {$isRunning
 						? midGrayText
 						: 'black'};"
-					bind:value={timerDuration}
+					bind:value={$timerDuration}
 				/>
-			{/if}<button
+			{/if}
+			<button
 				class="text-sm font-light transition-all"
-				style="background-color: {isRunning ? 'transparent' : 'transparent'}; color: {isRunning
+				style="background-color: {$isRunning ? 'transparent' : 'transparent'}; color: {$isRunning
 					? midGrayText
 					: 'white'};"
-				on:click={() => {
-					isEndTime = !isEndTime;
-				}}
+				on:click={toggleEndTimeMode}
 			>
-				{isEndTime ? 'Set End Time' : 'Set Duration'}
+				{$isEndTime ? 'Set End Time' : 'Set Duration'}
 			</button>
 		</div>
 	</div>
-	<div class="bg-gray-500 text-xl text-white">{timerEndTime}</div>
+	<div class="bg-gray-500 text-xl text-white">{$timerEndTime}</div>
 
 	<div class="z-[10] flex flex-wrap items-center justify-center">
 		{#each initHoursArray as mins, index}
