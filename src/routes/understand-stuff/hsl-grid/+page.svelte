@@ -39,18 +39,95 @@
 </script>
 
 <div class="fixed bottom-0 left-0 right-0 flex justify-between bg-black px-4 text-white">
-	<div class="flex w-full flex-wrap justify-between">
-		<label class="flex flex-1 items-center justify-center gap-2 whitespace-nowrap">
-			<input type="number" bind:value={hueSegments} min="1" max="360" class="bg-gray-800" />
-			HUE: #chips</label
+	<div class="mx-auto flex w-full max-w-sm flex-wrap justify-between">
+		<div class="flex gap-2">
+			<label class="flex flex-1 flex-col items-center justify-center gap-1 whitespace-nowrap">
+				<input
+					type="number"
+					bind:value={lightnessSegments}
+					min="1"
+					max="100"
+					class="rounded bg-gray-800"
+				/>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="size-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
+					/>
+				</svg>
+			</label>
+			<label class=" flex flex-1 flex-col items-center justify-center gap-1 whitespace-nowrap">
+				<input
+					type="number"
+					bind:value={hueSegments}
+					min="1"
+					max="360"
+					class="rounded bg-gray-800"
+				/>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="size-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+					/>
+				</svg>
+			</label>
+		</div>
+
+		<label
+			class="gap-1whitespace-nowrap mx-auto flex w-full flex-1 flex-col items-center justify-center"
 		>
-		<label class="flex flex-1 items-center justify-center gap-2 whitespace-nowrap">
-			<input type="number" bind:value={saturation} min="0" max="100" class="bg-gray-800" />
-			SAT: value%
-		</label>
-		<label class="flex flex-1 items-center justify-center gap-2 whitespace-nowrap">
-			<input type="number" bind:value={lightnessSegments} min="1" max="100" class="bg-gray-800" />
-			LIGHT: #chips
+			<input type="number" bind:value={saturation} min="0" max="100" class="rounded bg-gray-800" />
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-6">
+				<!-- Define gradients -->
+				<defs>
+					<!-- Horizontal gradient from grayscale to color for the top bar -->
+					<linearGradient id="satGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+						<stop offset="0%" stop-color="#777777" />
+						<stop offset="50%" stop-color="#777777" />
+						<stop offset="100%" stop-color="#FF0055" />
+					</linearGradient>
+
+					<!-- Horizontal gradient from grayscale to color for the middle bar -->
+					<linearGradient id="satGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+						<stop offset="0%" stop-color="#777777" />
+						<stop offset="50%" stop-color="#777777" />
+						<stop offset="100%" stop-color="#44FF00" />
+					</linearGradient>
+
+					<!-- Horizontal gradient from grayscale to color for the bottom bar -->
+					<linearGradient id="satGradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+						<stop offset="0%" stop-color="#777777" />
+						<stop offset="50%" stop-color="#777777" />
+						<stop offset="100%" stop-color="#00aaFF" />
+					</linearGradient>
+				</defs>
+
+				<!-- Three horizontal bars with different color gradients -->
+				<rect x="2" y="6" width="20" height="4" rx="1" fill="url(#satGradient1)" />
+				<rect x="2" y="12" width="20" height="4" rx="1" fill="url(#satGradient2)" />
+				<rect x="2" y="18" width="20" height="4" rx="1" fill="url(#satGradient3)" />
+
+				<!-- Optional slider knobs -->
+				<circle cx="16" cy="8" r="2" fill="white" stroke="#333" stroke-width="0.5" />
+				<circle cx="16" cy="14" r="2" fill="white" stroke="#333" stroke-width="0.5" />
+				<circle cx="16" cy="20" r="2" fill="white" stroke="#333" stroke-width="0.5" />
+			</svg>
 		</label>
 	</div>
 
@@ -104,7 +181,7 @@
 		</button>
 
 		<p
-			style="background-color: {selectedColor}; width: 300px; height: 400px; border: 1px solid black;"
+			style="background-color: {selectedColor}; width: 300px; height: 30dvh; border: 1px solid black;"
 		></p>
 		<div class="h-10"></div>
 		<div class="flex items-center justify-center gap-2 text-white">
