@@ -1,6 +1,6 @@
 <script>
 	import GlitchText from '$lib/components/cool-stuff/GlitchText.svelte';
-	import Card from '$lib/components/ui/card.svelte';
+	import Card from '$lib/components/ui/Card.svelte';
 	import { fade } from 'svelte/transition';
 	const data = {
 		understandStuff: {
