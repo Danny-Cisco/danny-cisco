@@ -2,6 +2,7 @@
 	import FullCircle from '$lib/components/ring-timer/FullCircle.svelte';
 	import { onMount, onDestroy } from 'svelte';
 	import { timerStore } from '$lib/stores/timerStore.js';
+	import { fade } from 'svelte/transition';
 
 	// Destructure what we need from the store
 	const {
@@ -99,77 +100,79 @@
 	});
 </script>
 
-<!-- rear curtain of black -->
-<div class="h-10"></div>
-<!-- start of app -->
-<!-- countdown timer display : blinking -->
-<div class="z-1 absolute inset-0 w-full text-center">
-	{#key $seconds}
-		<div
-			class="absolute left-0 right-0 top-0 p-1 text-center font-mono text-xl"
-			class:hidden={$seconds % 2 !== 0}
-			style="color: hsl(200, 50%, 80%);"
-		>
-			{$nowMins} mins
-		</div>
-		<div
-			class="absolute left-0 right-0 top-0 p-1 text-center font-mono text-xl"
-			class:hidden={$seconds % 2 === 0}
-			style="color:hsl(200, 50%, 27%)"
-		>
-			{$nowMins} mins
-		</div>
-	{/key}
-</div>
-
-<div class="z-[2] block flex flex-col items-center justify-start">
-	<div class="z-[3] flex w-full flex-col items-center justify-center gap-2">
-		<button
-			on:click={toggleTimer}
-			class="fixed bottom-4 w-[200px] rounded-full p-4 text-xl font-bold shadow hover:bg-gray-500 hover:text-white"
-			style="background-color: {$isRunning ? runningBg : 'hsl(200, 50%, 80%)'}; color: {$isRunning
-				? 'black'
-				: 'black'};">{$buttonLabel}</button
-		>
-		<div class="flex flex-col items-center gap-2">
-			{#if $isEndTime}
-				<input
-					type="time"
-					id="endTime"
-					class="w-50 rounded-full p-2 px-5 text-xl transition-all"
-					style="background-color: {$isRunning ? runningBg : 'white'}; color: {$isRunning
-						? midGrayText
-						: 'black'};"
-					value={$timerEndTime}
-					on:input={handleEndTimeChange}
-				/>
-			{:else}
-				<input
-					type="number"
-					id="duration"
-					class="w-50 rounded-full p-2 px-5 text-xl transition-all"
-					style="background-color: {$isRunning ? runningBg : 'white'}; color: {$isRunning
-						? midGrayText
-						: 'black'};"
-					bind:value={$timerDuration}
-				/>
-			{/if}
-			<button
-				class="text-sm font-light transition-all"
-				style="background-color: {$isRunning ? 'transparent' : 'transparent'}; color: {$isRunning
-					? midGrayText
-					: 'white'};"
-				on:click={toggleEndTimeMode}
+<div in:fade>
+	<!-- rear curtain of black -->
+	<div class="h-10"></div>
+	<!-- start of app -->
+	<!-- countdown timer display : blinking -->
+	<div class="z-1 absolute inset-0 w-full text-center">
+		{#key $seconds}
+			<div
+				class="absolute left-0 right-0 top-0 p-1 text-center font-mono text-xl"
+				class:hidden={$seconds % 2 !== 0}
+				style="color: hsl(200, 50%, 80%);"
 			>
-				{$isEndTime ? 'Set End Time' : 'Set Duration'}
-			</button>
-		</div>
+				{$nowMins} mins
+			</div>
+			<div
+				class="absolute left-0 right-0 top-0 p-1 text-center font-mono text-xl"
+				class:hidden={$seconds % 2 === 0}
+				style="color:hsl(200, 50%, 27%)"
+			>
+				{$nowMins} mins
+			</div>
+		{/key}
 	</div>
-	<div class="bg-gray-500 text-xl text-white">{$timerEndTime}</div>
 
-	<div class="z-[10] flex flex-wrap items-center justify-center">
-		{#each initHoursArray as mins, index}
-			<FullCircle nowMins={hoursArray[index] || 0} initMins={initHoursArray[index] || 0} />
-		{/each}
+	<div class="z-[2] block flex flex-col items-center justify-start">
+		<div class="z-[3] flex w-full flex-col items-center justify-center gap-2">
+			<button
+				on:click={toggleTimer}
+				class="fixed bottom-4 w-[200px] rounded-full p-4 text-xl font-bold shadow hover:bg-gray-500 hover:text-white"
+				style="background-color: {$isRunning ? runningBg : 'hsl(200, 50%, 80%)'}; color: {$isRunning
+					? 'black'
+					: 'black'};">{$buttonLabel}</button
+			>
+			<div class="flex flex-col items-center gap-2">
+				{#if $isEndTime}
+					<input
+						type="time"
+						id="endTime"
+						class="w-50 rounded-full p-2 px-5 text-xl transition-all"
+						style="background-color: {$isRunning ? runningBg : 'white'}; color: {$isRunning
+							? midGrayText
+							: 'black'};"
+						value={$timerEndTime}
+						on:input={handleEndTimeChange}
+					/>
+				{:else}
+					<input
+						type="number"
+						id="duration"
+						class="w-50 rounded-full p-2 px-5 text-xl transition-all"
+						style="background-color: {$isRunning ? runningBg : 'white'}; color: {$isRunning
+							? midGrayText
+							: 'black'};"
+						bind:value={$timerDuration}
+					/>
+				{/if}
+				<button
+					class="text-sm font-light transition-all"
+					style="background-color: {$isRunning ? 'transparent' : 'transparent'}; color: {$isRunning
+						? midGrayText
+						: 'white'};"
+					on:click={toggleEndTimeMode}
+				>
+					{$isEndTime ? 'Set End Time' : 'Set Duration'}
+				</button>
+			</div>
+		</div>
+		<div class="bg-gray-500 text-xl text-white">{$timerEndTime}</div>
+
+		<div class="z-[10] flex flex-wrap items-center justify-center">
+			{#each initHoursArray as mins, index}
+				<FullCircle nowMins={hoursArray[index] || 0} initMins={initHoursArray[index] || 0} />
+			{/each}
+		</div>
 	</div>
 </div>

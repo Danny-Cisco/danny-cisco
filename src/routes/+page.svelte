@@ -1,8 +1,40 @@
 <script>
 	import GlitchText from '$lib/components/cool-stuff/GlitchText.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
-	import { fade } from 'svelte/transition';
-
+	import { fade, fly } from 'svelte/transition';
+	import {
+		backIn,
+		backInOut,
+		backOut,
+		bounceIn,
+		bounceInOut,
+		bounceOut,
+		circIn,
+		circInOut,
+		circOut,
+		cubicIn,
+		cubicInOut,
+		cubicOut,
+		elasticIn,
+		elasticInOut,
+		elasticOut,
+		expoIn,
+		expoInOut,
+		expoOut,
+		linear,
+		quadIn,
+		quadInOut,
+		quadOut,
+		quartIn,
+		quartInOut,
+		quartOut,
+		quintIn,
+		quintInOut,
+		quintOut,
+		sineIn,
+		sineInOut,
+		sineOut
+	} from 'svelte/easing';
 	let data = {
 		featuredProjects: {
 			cards: [
@@ -50,6 +82,7 @@
 					class="logo border-[2px] border-pink-500 shadow"
 					width="200"
 					height="200"
+					in:fly={{ y: 30, delay: 10, easing: backInOut }}
 				/>
 				<div class="glow"></div>
 				<div class="bottom-glow"></div>
