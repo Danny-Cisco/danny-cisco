@@ -19,8 +19,10 @@
 	let initTimers = [1, 1, 1, 1, 1, 1];
 	$: console.log('🚀 ~ initTimers:', initTimers);
 	let timersReverse = [];
+	let initTimersReverse = [];
 
 	$: timersReverse = [...timers].reverse();
+	$: initTimersReverse = [...initTimers].reverse();
 
 	for (let i = 5; i >= 0; i--) {
 		ringsRadius[i] = innerRadius + i * stroke + i * gap; // calculate all 6 ring sizes
@@ -46,16 +48,34 @@
 </script>
 
 <svg {height} {width} class="" transition:fade>
+	<!-- full hour sized backgroud disc -->
+	<circle
+		cx={width / 2}
+		cy={height / 2}
+		r={Math.min((width, height) / 2) - padding}
+		stroke-width="1"
+		fill="black"
+	/>
+
 	{#each ringsRadius as radius, index}
+		<!-- elapsed time shadow rings-->
 		<CircleArc
 			{height}
 			{width}
 			{stroke}
 			color="hsl(200, 50%, 22%)"
-			arc={initTimers[index]}
+			arc={initTimersReverse[index]}
 			{radius}
 		/>
 
-		<CircleArc {height} {width} {stroke} color="hsl(200, 50%, 80%)" {radius} arc={timers[index]} />
+		<!-- time remaining rings -->
+		<CircleArc
+			{height}
+			{width}
+			{stroke}
+			color="hsl(200, 50%, 80%)"
+			{radius}
+			arc={timersReverse[index]}
+		/>
 	{/each}
 </svg>
