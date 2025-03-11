@@ -77,8 +77,6 @@
 </script>
 
 <div class="mt-4 flex w-full flex-col items-center justify-center">
-	<h1 class="text-center">No Ui Timer</h1>
-
 	<div class="w-xs m-4 flex flex-col items-center gap-2 rounded border p-4 px-10">
 		{#if $isRunning}
 			<p class="text-green-500">TIMER IS RUNNING</p>
@@ -134,7 +132,7 @@
 	</div>
 
 	<div class="flex gap-4 p-2">
-		<button class="btn" on:click={start}>Start</button>
-		<button class="btn" on:click={stop}>Stop</button>
+		<button class="hover:text-green-500" on:click={start}>[Start]</button>
+		<button class="hover:text-red-500" on:click={stop}>[Stop]</button>
 	</div>
 </div>
