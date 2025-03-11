@@ -17,6 +17,21 @@
 
 	let timePickerValue;
 
+	function getOneHourLater() {
+		// this function loads the time picker with a value 1 hour from the clients local time
+		let oneHour = new Date().getTime() + 1 * 60 * 60 * 1000;
+		let oneHourString = new Date(oneHour).toISOString().slice(0, 16);
+		let tz = new Date().getTimezoneOffset() / 60;
+		let tzHour = Math.trunc(tz); // removes decimals
+		let tzMin = tz % 1; // extracts only decimals
+		tzMin = Math.abs(tzMin); // removes sign from decimal
+		tzMin = tzMin * 60; // turns decimal hours into minutes
+		if (!tzMin) tzMin = '00';
+		let tzString = `${tzHour}:${tzMin}`;
+		let finalString = new Date(oneHourString + tzString).toISOString().slice(0, 16);
+		return finalString;
+	}
+
 	export function getNow() {
 		nowMs.set(Date.now());
 	}
@@ -49,8 +64,11 @@
 
 	onMount(async () => {
 		timer1000 = setInterval(() => getNow(), 100);
-		const d = new Date().getTime() + 1 * 60 * 60 * 1000;
-		$endMs = d;
+		const date = new Date() + 1 * 60 * 60 * 1000;
+		$endMs = date;
+		// timePickerValue = getOneHourLater().slice(0, 16);
+		timePickerValue = getOneHourLater();
+		console.log('getonehourlater: ', timePickerValue);
 	});
 
 	onDestroy(() => {
