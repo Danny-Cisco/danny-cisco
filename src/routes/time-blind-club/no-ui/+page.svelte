@@ -12,12 +12,10 @@
 	const isRunning = writable(false);
 	const alarmIsRinging = writable(false);
 	const durationMode = writable(false);
-	console.log('🚀 ~ durationMode:', $durationMode);
 
 	let timer1000;
 
 	let timePickerValue;
-	$: console.log('🚀 ~ timePickerValue:', timePickerValue);
 
 	export function getNow() {
 		nowMs.set(Date.now());
@@ -50,7 +48,6 @@
 	}
 
 	onMount(async () => {
-		console.log('onmount');
 		timer1000 = setInterval(() => getNow(), 100);
 		const d = new Date().getTime() + 1 * 60 * 60 * 1000;
 		$endMs = d;
