@@ -43,6 +43,7 @@
 				{
 					heading: 'Javascript slice()',
 					link: { href: '/understand-stuff/js-slice', label: 'Try it' },
+					image: '/js-slice.png',
 					paragraph: 'see how the slice function works in real time'
 				}
 			]

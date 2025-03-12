@@ -2,7 +2,14 @@
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
-	let inputArray = writable(`["go", "to", "hell", "in", "a", "basket"]`);
+	const examples = {
+		String: 'Hello World',
+		'Number Array': '[0,1,2,3,4,5,6,7,8,9]',
+		'String Array': '["go", "to", "hell", "in", "a", "hand", "basket"]'
+	};
+
+	let selectedExample = writable('String Array');
+	let inputArray = writable(examples['String Array']);
 	let startIndex = writable(0);
 	let endIndex = writable(5);
 	let slicedArray = writable([]);
@@ -41,22 +48,21 @@
 						kept: index >= adjustedStart && index < adjustedEnd // Check if within slice bounds
 					}));
 				} else {
-					// ADD THE SAME CODE HERE FOR REGULAR ARRAYS
 					comparison = parsedInput.map((item, index) => ({
 						char: item,
-						kept: index >= adjustedStart && index < adjustedEnd // Check if within slice bounds
+						kept: index >= adjustedStart && index < adjustedEnd
 					}));
 				}
 
 				coloredElements.set(comparison);
 			} else {
 				originalArray.set([]);
-				slicedArray.set('Invalid input2');
+				slicedArray.set('Invalid input');
 				coloredElements.set([]);
 			}
 		} catch (e) {
 			originalArray.set([]);
-			slicedArray.set('Invalid input1');
+			slicedArray.set('Invalid input');
 			coloredElements.set([]);
 		}
 	}
@@ -66,19 +72,33 @@
 	});
 
 	$: if ($inputArray) updateSlice($startIndex, $endIndex);
+
+	function selectExample(event) {
+		inputArray.set(examples[event.target.value]);
+		updateSlice($startIndex, $endIndex);
+	}
 </script>
 
 <div class="mx-auto flex max-w-xl flex-col gap-4">
 	<h1 class="mb-4 mt-4 text-center text-xl font-bold">JavaScript Slice() Demo</h1>
 
+	<label class="mb-2 text-xl"
+		>Select Example:
+		<select bind:value={$selectedExample} on:change={selectExample} class="border p-2">
+			{#each Object.keys(examples) as key}
+				<option value={key}>{key}</option>
+			{/each}
+		</select>
+	</label>
+
 	<label class="mb-2 flex items-center text-xl">
 		myArray=
 		<input bind:value={$inputArray} class="w-full border p-2" />
 	</label>
+
 	<div class="flex items-center text-xl">
 		<p>myArray.slice(</p>
 		<input type="number" bind:value={$startIndex} class="w-18 border" />
-
 		<input type="number" bind:value={$endIndex} class="w-18 border" />
 		<p>) <span class="text-xs">*Hint* Try negative numbers too!!</span></p>
 	</div>
