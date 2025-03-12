@@ -3,15 +3,15 @@
 
 	import { writable } from 'svelte/store';
 
-	const startMs = writable(0);
-	const nowMs = writable(0);
-	const endMs = writable(0);
+	let startMs = 0;
+	let nowMs = 0;
+	let endMs = 0;
 
-	const durationMs = writable(5000);
+	let durationMs = 5000;
 
-	const isRunning = writable(false);
-	const alarmIsRinging = writable(false);
-	const durationMode = writable(false);
+	let isRunning = false;
+	let alarmIsRinging = false;
+	let durationMode = false;
 
 	let timer1000;
 
@@ -20,21 +20,13 @@
 	let barWidth = 50;
 	let barClass = '';
 
-	let endTimeString = writable('');
+	let endTimeString = '';
 
-	let endTimeFull = writable('');
-	$: $endTimeFull = new Date($endMs).toLocaleTimeString();
-	$: console.log('🚀 ~ endTimeFull:', $endTimeFull);
+	let endTimeFull = '';
+	$: endTimeFull = new Date(endMs).toLocaleTimeString();
+	$: console.log('🚀 ~ endTimeFull:', endTimeFull);
 
-	$: $endTimeString = $endTimeFull; // for now lets see the full string on mobile
-
-	// $: if ($endTimeFull.length == 7) {
-	// 	$endTimeString = $endTimeFull.slice(0, 4);
-	// } else if ($endTimeFull.length == 8) {
-	// 	$endTimeString = $endTimeFull.slice(0, 5);
-	// }
-
-	// $: $barWidth;
+	$: endTimeString = endTimeFull; // for now lets see the full string on mobile
 
 	function getOneHourLater() {
 		// this function loads the time picker with a value 1 hour from the clients local time
@@ -52,41 +44,45 @@
 	}
 
 	export function getNow() {
-		nowMs.set(Date.now());
+		nowMs = Date.now();
 	}
 
 	export function start() {
-		startMs.set(Date.now());
-		$alarmIsRinging = false;
-		$isRunning = true;
+		if (endMs <= nowMs) return;
+		startMs = Date.now();
+		alarmIsRinging = false;
+		isRunning = true;
 	}
 
 	export function stop() {
-		endMs.set(Date.now());
-		$isRunning = false;
-		$alarmIsRinging = false;
+		endMs = Date.now() + 60 * 60 * 1000;
+		isRunning = false;
+		alarmIsRinging = false;
 	}
 
-	$: if ($durationMode) {
-		$endMs = $startMs + $durationMs;
+	$: if (durationMode) {
+		endMs = startMs + durationMs;
 	}
-	$: if (!$durationMode) {
-		$endMs = new Date(timePickerValue).getTime();
+	$: if (!durationMode) {
+		endMs = new Date(timePickerValue).getTime();
 	}
 
-	$: if ($nowMs >= $endMs) {
-		if ($isRunning) {
-			$isRunning = false;
-			$alarmIsRinging = true;
+	$: if (nowMs >= endMs) {
+		if (isRunning) {
+			isRunning = false;
+			alarmIsRinging = true;
 		}
 	}
 
-	$: barWidth = (($endMs - $nowMs) / ($endMs - $startMs)) * 100;
+	$: if (isRunning) {
+		barWidth = ((endMs - nowMs) / (endMs - startMs)) * 100;
+	} else if (alarmIsRinging) barWidth = 0;
+	else barWidth = 100;
 
 	onMount(async () => {
 		timer1000 = setInterval(() => getNow(), Math.trunc(1000 / 60));
 		const date = new Date() + 1 * 60 * 60 * 1000;
-		$endMs = date;
+		endMs = date;
 		timePickerValue = getOneHourLater();
 	});
 
@@ -97,37 +93,45 @@
 
 <div class="flex w-full flex-col items-center justify-center px-4 pt-4">
 	<div class="w-xs m-4 flex flex-col items-center gap-2 rounded border p-4 px-10">
-		{#if $isRunning}
+		{#if isRunning}
 			<p class="text-green-500">TIMER IS RUNNING</p>
 		{:else}
 			<p class="text-gray-500">TIMER STOPPED</p>
 		{/if}
 		<p class="flex w-full justify-between">
-			start <span>{$startMs}</span>
+			start <span>{startMs}</span>
 		</p>
 		<p class="flex w-full justify-between">
-			now <span>{$nowMs}</span>
+			now <span>{nowMs}</span>
 		</p>
 		<p class="flex w-full justify-between">
-			end <span>{$endMs}</span>
+			end <span>{endMs}</span>
 		</p>
 		<p class="flex w-full justify-between">
-			endTime <span>{$endTimeString}</span>
+			endTime <span>{endTimeString}</span>
 		</p>
-		{#if $alarmIsRinging}
+		{#if alarmIsRinging}
 			<p class="text-red-500">ALARM IS RINGING!!</p>
 		{:else}
 			<p class="text-gray-500">ALARM IS SILENT</p>
 		{/if}
 	</div>
-	<div class="w-xs flex flex-col items-center rounded border p-4">
+	<div
+		class="w-xs relative flex flex-col items-center rounded border p-4"
+		class:border-red-500={!durationMode && endMs < nowMs}
+	>
+		{#if isRunning}
+			<div class="z-1 absolute inset-0 bg-transparent"></div>
+		{/if}
 		<div class="mb-4">
 			<button
 				on:click={() => {
-					$durationMode = !$durationMode;
+					durationMode = !durationMode;
+					endMs = nowMs + durationMs;
+					startMs = nowMs;
 				}}
 			>
-				{#if $durationMode}
+				{#if durationMode}
 					<div class="flex gap-2">
 						<p class="text-gray-600 hover:text-white">END TIME</p>
 						<p>~</p>
@@ -142,9 +146,9 @@
 				{/if}
 			</button>
 		</div>
-		{#if $durationMode}
+		{#if durationMode}
 			<label for="duration">
-				<input type="number" class="bg-gray-700" bind:value={$durationMs} />
+				<input type="number" class="bg-gray-700" bind:value={durationMs} />
 			</label>
 		{:else}
 			<label for="endTime">
