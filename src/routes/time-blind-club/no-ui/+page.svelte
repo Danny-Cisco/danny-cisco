@@ -66,9 +66,7 @@
 		timer1000 = setInterval(() => getNow(), 100);
 		const date = new Date() + 1 * 60 * 60 * 1000;
 		$endMs = date;
-		// timePickerValue = getOneHourLater().slice(0, 16);
 		timePickerValue = getOneHourLater();
-		console.log('getonehourlater: ', timePickerValue);
 	});
 
 	onDestroy(() => {
