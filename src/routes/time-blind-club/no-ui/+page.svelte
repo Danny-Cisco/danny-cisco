@@ -31,11 +31,37 @@
 	$: if (alarmIsRinging) {
 		if (Notification.permission === 'granted') {
 			console.log('SENDING NOTIFICATION');
+			playSound();
 
 			new Notification('Time Blind Club', {
 				body: 'Alarm Is Ringing!'
 			});
 		}
+	}
+
+	function playSound() {
+		const context = new (window.AudioContext || window.webkitAudioContext)();
+		const oscillator = context.createOscillator();
+		const gainNode = context.createGain(); // To avoid pops
+
+		oscillator.type = 'sine'; // Change to "square", "sawtooth", "triangle" for different effects
+		oscillator.connect(gainNode);
+		gainNode.connect(context.destination);
+
+		let startTime = context.currentTime; // Start time
+		let frequency = 250; // Start frequency
+		let stepDuration = 0.1; // Each step lasts 100ms (0.1 seconds)
+		let maxFrequency = 4000;
+
+		// Schedule stepped frequency changes
+		for (let i = 0; frequency <= maxFrequency; i++) {
+			let stepTime = startTime + i * stepDuration; // Schedule each step 100ms apart
+			oscillator.frequency.setValueAtTime(frequency, stepTime);
+			frequency *= 2; // Double the frequency each step
+		}
+
+		oscillator.start();
+		oscillator.stop(startTime + Math.log2(maxFrequency / 250) * stepDuration); // Stop when done
 	}
 
 	let permissionGranted = false;
