@@ -98,16 +98,16 @@
 
 	<div class="flex items-center text-xl">
 		<p>myArray.slice(</p>
-		<input type="number" bind:value={$startIndex} class="w-18 border" />
+		<input type="number" bind:value={$startIndex} class="w-18 border" />,
 		<input type="number" bind:value={$endIndex} class="w-18 border" />
 		<p>) <span class="text-xs">*negative numbers?</span></p>
 	</div>
 
 	<div class="mb-4">
-		<div class="mt-2 flex flex-wrap gap-2 text-2xl">
+		<div class=" mt-2 flex flex-wrap gap-2 text-2xl">
 			{#each $coloredElements as item}
 				<span
-					class="min-w-10 rounded px-3 py-1 text-white"
+					class="min-w-10 rounded px-3 py-4 text-white"
 					class:bg-green-600={item.kept}
 					class:bg-red-500={!item.kept}
 				>
