@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
-	let inputArray = writable('Hello World');
+	let inputArray = writable(`["go", "to", "hell", "in", "a", "basket"]`);
 	let startIndex = writable(0);
 	let endIndex = writable(5);
 	let slicedArray = writable([]);
@@ -12,18 +12,18 @@
 	function updateSlice(startIndex, endIndex) {
 		try {
 			let parsedInput;
-
+			let isString = false;
 			// Attempt to parse JSON input
 			try {
 				parsedInput = JSON.parse($inputArray);
 			} catch {
+				isString = true;
 				parsedInput = $inputArray; // Treat as a string if parsing fails
 			}
 
 			// Ensure input is valid for slicing
 			if (Array.isArray(parsedInput) || typeof parsedInput === 'string') {
 				originalArray.set(parsedInput); // Store full input
-				console.log('🚀 ~ updateSlice ~ originalArray:', $originalArray);
 
 				// Handle negative indices correctly
 				let adjustedStart = startIndex < 0 ? parsedInput.length + startIndex : startIndex;
@@ -33,11 +33,20 @@
 				let result = parsedInput.slice(adjustedStart, adjustedEnd);
 				slicedArray.set(result);
 
-				// Generate array that checks if each item at a position is kept
-				let comparison = parsedInput.split('').map((item, index) => ({
-					char: item,
-					kept: index >= adjustedStart && index < adjustedEnd // Check if within slice bounds
-				}));
+				let comparison;
+				if (isString) {
+					// Generate array that checks if each item at a position is kept
+					comparison = parsedInput.split('').map((item, index) => ({
+						char: item,
+						kept: index >= adjustedStart && index < adjustedEnd // Check if within slice bounds
+					}));
+				} else {
+					// ADD THE SAME CODE HERE FOR REGULAR ARRAYS
+					comparison = parsedInput.map((item, index) => ({
+						char: item,
+						kept: index >= adjustedStart && index < adjustedEnd // Check if within slice bounds
+					}));
+				}
 
 				coloredElements.set(comparison);
 			} else {
@@ -71,14 +80,14 @@
 		<input type="number" bind:value={$startIndex} class="w-15 border" />
 
 		<input type="number" bind:value={$endIndex} class="w-15 border" />
-		<p>)</p>
+		<p>) <span class="text-xs">*Hint* Try negative numbers too!!</span></p>
 	</div>
 
 	<div class="mb-4">
 		<div class="mt-2 flex flex-wrap gap-2 text-2xl">
 			{#each $coloredElements as item}
 				<span
-					class="w-10 rounded px-3 py-1 text-white"
+					class="min-w-10 rounded px-3 py-1 text-white"
 					class:bg-green-600={item.kept}
 					class:bg-red-500={!item.kept}
 				>
