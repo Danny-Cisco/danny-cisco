@@ -74,7 +74,7 @@
 	});
 </script>
 
-<div class="mt-4 flex w-full flex-col items-center justify-center">
+<div class="flex w-full flex-col items-center justify-center px-4 pt-4">
 	<div class="w-xs m-4 flex flex-col items-center gap-2 rounded border p-4 px-10">
 		{#if $isRunning}
 			<p class="text-green-500">TIMER IS RUNNING</p>
@@ -132,5 +132,9 @@
 	<div class="flex gap-4 p-2">
 		<button class="hover:text-green-500" on:click={start}>[Start]</button>
 		<button class="hover:text-red-500" on:click={stop}>[Stop]</button>
+	</div>
+
+	<div class="relative h-10 w-full overflow-hidden rounded-full">
+		<div class="absolute inset-0 bg-gray-500"></div>
 	</div>
 </div>
