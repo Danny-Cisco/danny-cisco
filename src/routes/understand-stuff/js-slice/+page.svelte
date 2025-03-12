@@ -77,9 +77,9 @@
 	</label>
 	<div class="flex items-center text-xl">
 		<p>myArray.slice(</p>
-		<input type="number" bind:value={$startIndex} class="w-15 border" />
+		<input type="number" bind:value={$startIndex} class="w-18 border" />
 
-		<input type="number" bind:value={$endIndex} class="w-15 border" />
+		<input type="number" bind:value={$endIndex} class="w-18 border" />
 		<p>) <span class="text-xs">*Hint* Try negative numbers too!!</span></p>
 	</div>
 
