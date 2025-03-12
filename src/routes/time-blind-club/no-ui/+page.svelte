@@ -20,6 +20,9 @@
 	let barWidth = 50;
 	let barClass = '';
 
+	let endTimeString = writable('');
+	$: $endTimeString = new Date($endMs).toLocaleTimeString().slice(0, 5);
+
 	// $: $barWidth;
 
 	function getOneHourLater() {
@@ -97,6 +100,9 @@
 		<p class="flex w-full justify-between">
 			end <span>{$endMs}</span>
 		</p>
+		<p class="flex w-full justify-between">
+			endTime <span>{$endTimeString}</span>
+		</p>
 		{#if $alarmIsRinging}
 			<p class="text-red-500">ALARM IS RINGING!!</p>
 		{:else}
@@ -112,7 +118,7 @@
 			>
 				{#if $durationMode}
 					<div class="flex gap-2">
-						<p class="text-gray-600">END TIME</p>
+						<p class="text-gray-600 hover:text-white">END TIME</p>
 						<p>~</p>
 						<p class="text-white">DURATION</p>
 					</div>
@@ -120,7 +126,7 @@
 					<div class="flex gap-2">
 						<p class="text-white">END TIME</p>
 						<p>~</p>
-						<p class="text-gray-600">DURATION</p>
+						<p class="text-gray-600 hover:text-white">DURATION</p>
 					</div>
 				{/if}
 			</button>
