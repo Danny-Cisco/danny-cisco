@@ -21,7 +21,18 @@
 	let barClass = '';
 
 	let endTimeString = writable('');
-	$: $endTimeString = new Date($endMs).toLocaleTimeString().slice(0, 5);
+
+	let endTimeFull = writable('');
+	$: $endTimeFull = new Date($endMs).toLocaleTimeString();
+	$: console.log('🚀 ~ endTimeFull:', $endTimeFull);
+
+	$: $endTimeString = $endTimeFull; // for now lets see the full string on mobile
+
+	// $: if ($endTimeFull.length == 7) {
+	// 	$endTimeString = $endTimeFull.slice(0, 4);
+	// } else if ($endTimeFull.length == 8) {
+	// 	$endTimeString = $endTimeFull.slice(0, 5);
+	// }
 
 	// $: $barWidth;
 
