@@ -17,6 +17,11 @@
 
 	let timePickerValue;
 
+	let barWidth = 50;
+	let barClass = '';
+
+	// $: $barWidth;
+
 	function getOneHourLater() {
 		// this function loads the time picker with a value 1 hour from the clients local time
 		let oneHour = new Date().getTime() + 1 * 60 * 60 * 1000;
@@ -62,8 +67,10 @@
 		}
 	}
 
+	$: barWidth = (($endMs - $nowMs) / ($endMs - $startMs)) * 100;
+
 	onMount(async () => {
-		timer1000 = setInterval(() => getNow(), 100);
+		timer1000 = setInterval(() => getNow(), Math.trunc(1000 / 60));
 		const date = new Date() + 1 * 60 * 60 * 1000;
 		$endMs = date;
 		timePickerValue = getOneHourLater();
@@ -136,5 +143,6 @@
 
 	<div class="relative h-10 w-full overflow-hidden rounded-full">
 		<div class="absolute inset-0 bg-gray-500"></div>
+		<div class="absolute bottom-0 left-0 top-0 bg-blue-500" style="width: {barWidth}%"></div>
 	</div>
 </div>
