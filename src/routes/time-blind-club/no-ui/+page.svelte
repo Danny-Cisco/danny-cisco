@@ -154,8 +154,8 @@
 	</div>
 
 	<div class="flex gap-4 p-2">
-		<button class="hover:text-green-500" on:click={start}>[Start]</button>
-		<button class="hover:text-red-500" on:click={stop}>[Stop]</button>
+		<button class="hover:text-green-500" on:click={start}>[START]</button>
+		<button class="hover:text-red-500" on:click={stop}>[STOP]</button>
 	</div>
 
 	<div class="relative h-10 w-full overflow-hidden rounded-full">
