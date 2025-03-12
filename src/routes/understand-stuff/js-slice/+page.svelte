@@ -3,13 +3,13 @@
 	import { writable } from 'svelte/store';
 
 	const examples = {
-		String: 'Hello World',
 		'Number Array': '[0,1,2,3,4,5,6,7,8,9]',
+		String: '11:35:00 pm',
 		'String Array': '["go", "to", "hell", "in", "a", "hand", "basket"]'
 	};
 
-	let selectedExample = writable('String Array');
-	let inputArray = writable(examples['String Array']);
+	let selectedExample = writable('Number Array');
+	let inputArray = writable(examples['Number Array']);
 	let startIndex = writable(0);
 	let endIndex = writable(5);
 	let slicedArray = writable([]);
@@ -100,7 +100,7 @@
 		<p>myArray.slice(</p>
 		<input type="number" bind:value={$startIndex} class="w-18 border" />
 		<input type="number" bind:value={$endIndex} class="w-18 border" />
-		<p>) <span class="text-xs">*Hint* Try negative numbers too!!</span></p>
+		<p>) <span class="text-xs">*negative numbers?</span></p>
 	</div>
 
 	<div class="mb-4">
