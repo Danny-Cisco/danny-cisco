@@ -119,6 +119,7 @@
 	<div
 		class="w-xs relative flex flex-col items-center rounded border p-4"
 		class:border-red-500={!durationMode && endMs < nowMs}
+		class:border-dashed={!durationMode && endMs < nowMs}
 	>
 		{#if isRunning}
 			<div class="z-1 absolute inset-0 bg-transparent"></div>
