@@ -149,10 +149,8 @@
 		class="w-xs relative flex flex-col items-center rounded border p-4"
 		class:border-red-500={!durationMode && endMs < nowMs}
 		class:border-dashed={!durationMode && endMs < nowMs}
+		class:invisible={isRunning || alarmIsRinging}
 	>
-		{#if isRunning}
-			<div class="z-1 absolute inset-0 bg-transparent"></div>
-		{/if}
 		<div class="mb-4">
 			<button
 				on:click={() => {
@@ -192,7 +190,8 @@
 		<button class="hover:text-red-500" on:click={stop}>[STOP]</button>
 	</div>
 
-	<div class="relative h-10 w-full overflow-hidden rounded-full">
+	<!-- progress bar -->
+	<div class="relative mt-8 h-10 w-full max-w-4xl overflow-hidden rounded-full">
 		<div class="absolute inset-0 bg-gray-500"></div>
 		<div class="absolute bottom-0 left-0 top-0 bg-blue-500" style="width: {barWidth}%"></div>
 	</div>
