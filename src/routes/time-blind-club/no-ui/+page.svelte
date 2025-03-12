@@ -28,6 +28,34 @@
 
 	$: endTimeString = endTimeFull; // for now lets see the full string on mobile
 
+	$: if (alarmIsRinging) {
+		if (Notification.permission === 'granted') {
+			console.log('SENDING NOTIFICATION');
+
+			new Notification('Time Blind Club', {
+				body: 'Alarm Is Ringing!'
+			});
+		}
+	}
+
+	let permissionGranted = false;
+
+	function requestNotificationPermission() {
+		if ('Notification' in window) {
+			Notification.requestPermission().then((permission) => {
+				console.log(Notification.permission);
+				if (permission === 'granted') {
+					permissionGranted = true;
+					console.log('Notifications are allowed!');
+				} else {
+					console.log('Notifications are blocked!');
+				}
+			});
+		} else {
+			console.log('This browser does not support notifications.');
+		}
+	}
+
 	function getOneHourLater() {
 		// this function loads the time picker with a value 1 hour from the clients local time
 		let oneHour = new Date().getTime() + 1 * 60 * 60 * 1000;
@@ -84,6 +112,7 @@
 		const date = new Date() + 1 * 60 * 60 * 1000;
 		endMs = date;
 		timePickerValue = getOneHourLater();
+		requestNotificationPermission();
 	});
 
 	onDestroy(() => {
