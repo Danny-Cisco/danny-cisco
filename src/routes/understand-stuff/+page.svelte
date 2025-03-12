@@ -39,6 +39,11 @@
 					heading: 'FP4 Mantissa',
 					link: { href: '/understand-stuff/fp4-mantissa', label: 'Try it' },
 					paragraph: 'Details about FP4 mantissa format'
+				},
+				{
+					heading: 'Javascript slice()',
+					link: { href: '/understand-stuff/js-slice', label: 'Try it' },
+					paragraph: 'see how the slice function works in real time'
 				}
 			]
 		}
