@@ -9,3 +9,4 @@ export const durationMs = writable(5000);
 export const isRunning = writable(false);
 export const alarmIsRinging = writable(false);
 export const durationMode = writable(false);
+export const endTimeString = writable('');

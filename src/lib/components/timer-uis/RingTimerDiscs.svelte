@@ -7,7 +7,8 @@
 		nowMs,
 		isRunning,
 		alarmIsRinging,
-		durationMode
+		durationMode,
+		endTimeString
 	} from '$lib/stores/timerStore.js';
 	import { onDestroy, onMount } from 'svelte';
 
@@ -19,6 +20,7 @@
 		$isRunning;
 		$alarmIsRinging;
 		$durationMode;
+		$endTimeString;
 	}
 
 	let minutes = 0;
@@ -100,4 +102,5 @@
 			{/each}
 		{/key}
 	</div>
+	<div><h1 class="mt-8 text-4xl">{$endTimeString}</h1></div>
 </div>

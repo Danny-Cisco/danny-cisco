@@ -9,7 +9,8 @@
 		nowMs,
 		isRunning,
 		alarmIsRinging,
-		durationMode
+		durationMode,
+		endTimeString
 	} from '$lib/stores/timerStore.js';
 
 	$: {
@@ -20,18 +21,17 @@
 		$isRunning;
 		$alarmIsRinging;
 		$durationMode;
+		$endTimeString;
 	}
 	export let debug = false;
 	let timer1000;
 
 	let timePickerValue;
 
-	let endTimeString = '';
-
 	let endTimeFull = '';
 	$: endTimeFull = new Date($endMs).toLocaleTimeString();
 
-	$: endTimeString = endTimeFull; // for now lets see the full string on mobile
+	$: $endTimeString = endTimeFull; // for now lets see the full string on mobile
 
 	$: if ($alarmIsRinging) {
 		if (Notification.permission === 'granted') {
