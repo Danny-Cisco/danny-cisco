@@ -5,6 +5,6 @@
 </script>
 
 <div class="page" in:fade>
-	<TimerCore />
+	<TimerCore debug={true} />
 	<ProgressBar />
 </div>

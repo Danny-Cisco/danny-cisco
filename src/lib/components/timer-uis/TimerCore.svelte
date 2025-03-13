@@ -21,7 +21,7 @@
 		$alarmIsRinging;
 		$durationMode;
 	}
-
+	export let debug = false;
 	let timer1000;
 
 	let timePickerValue;
@@ -77,6 +77,10 @@
 		}
 	}
 
+	let durationMins = 45;
+
+	$: $durationMs = durationMins * 60 * 1000;
+
 	onMount(async () => {
 		timer1000 = setInterval(() => getNow(), Math.trunc(1000 / 60));
 		const date = new Date() + 1 * 60 * 60 * 1000;
@@ -92,30 +96,32 @@
 </script>
 
 <div class="flex w-full flex-col items-center justify-center px-4 pt-4">
-	<div class="w-xs m-4 flex flex-col items-center gap-2 rounded border p-4 px-10">
-		{#if $isRunning}
-			<p class="text-green-500">TIMER IS RUNNING</p>
-		{:else}
-			<p class="text-gray-500">TIMER STOPPED</p>
-		{/if}
-		<p class="flex w-full justify-between">
-			start <span>{$startMs}</span>
-		</p>
-		<p class="flex w-full justify-between">
-			now <span>{$nowMs}</span>
-		</p>
-		<p class="flex w-full justify-between">
-			end <span>{$endMs}</span>
-		</p>
-		<p class="flex w-full justify-between">
-			endTime <span>{endTimeString}</span>
-		</p>
-		{#if $alarmIsRinging}
-			<p class="text-red-500">ALARM IS RINGING!!</p>
-		{:else}
-			<p class="text-gray-500">ALARM IS SILENT</p>
-		{/if}
-	</div>
+	{#if debug}
+		<div class="w-xs m-4 flex flex-col items-center gap-2 rounded border p-4 px-10">
+			{#if $isRunning}
+				<p class="text-green-500">TIMER IS RUNNING</p>
+			{:else}
+				<p class="text-gray-500">TIMER STOPPED</p>
+			{/if}
+			<p class="flex w-full justify-between">
+				start <span>{$startMs}</span>
+			</p>
+			<p class="flex w-full justify-between">
+				now <span>{$nowMs}</span>
+			</p>
+			<p class="flex w-full justify-between">
+				end <span>{$endMs}</span>
+			</p>
+			<p class="flex w-full justify-between">
+				endTime <span>{endTimeString}</span>
+			</p>
+			{#if $alarmIsRinging}
+				<p class="text-red-500">ALARM IS RINGING!!</p>
+			{:else}
+				<p class="text-gray-500">ALARM IS SILENT</p>
+			{/if}
+		</div>
+	{/if}
 	<div
 		class="w-xs relative flex flex-col items-center rounded border p-4"
 		class:border-red-500={!$durationMode && $endMs < $nowMs}
@@ -145,9 +151,10 @@
 				{/if}
 			</button>
 		</div>
+
 		{#if $durationMode}
 			<label for="duration">
-				<input type="number" class="bg-gray-700" bind:value={$durationMs} />
+				<input type="number" class="bg-gray-700" bind:value={durationMins} />
 			</label>
 		{:else}
 			<label for="endTime">
