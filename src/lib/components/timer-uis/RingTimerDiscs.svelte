@@ -57,46 +57,35 @@
 		minutes = 0;
 	}
 
-	$: currentDisc = Math.trunc(nowMins / 60);
+	$: currentDisc = Math.max(Math.trunc(nowMins / 60), 0);
+	$: nowMins = ($endMs - $nowMs) / 1000 / 60;
 
 	function onChange() {
 		if (!$isRunning) {
 			for (let i = 0; i < numberOfDiscs; i++) {
 				if (i < currentDisc) {
-					initHoursArray[i] = 60; // make all the discs 60
+					initHoursArray[i] = 60;
 				} else if (i > currentDisc) {
-					if (!$isRunning) initHoursArray[i] = 60;
-					else initHoursArray[i] = 0;
+					initHoursArray[i] = 60;
 				} else if (i == currentDisc) {
-					if (!$isRunning)
-						initHoursArray[i] =
-							Math.round((($endMs - $startMs - ($nowMs - $startMs)) / 1000 / 60) % 60) || 0;
-					else
-						initHoursArray[i] =
-							Math.round((($endMs - $startMs - ($nowMs - $startMs)) / 1000 / 60) % 60) || 0;
+					initHoursArray[i] =
+						Math.round((($endMs - $startMs - ($nowMs - $startMs)) / 1000 / 60) % 60) || 0;
 				}
+				hoursArray = initHoursArray;
 			}
 		} else {
 			for (let i = 0; i < numberOfDiscs; i++) {
 				if (i < currentDisc) {
-					hoursArray[i] = 60; // make all the discs 60
+					hoursArray[i] = 60;
 				} else if (i > currentDisc) {
-					if (!$isRunning) hoursArray[i] = 60;
-					else hoursArray[i] = 60;
+					hoursArray[i] = 0;
 				} else if (i == currentDisc) {
-					if (!$isRunning)
-						hoursArray[i] =
-							Math.round((($endMs - $startMs - ($nowMs - $startMs)) / 1000 / 60) % 60) || 0;
-					// make the last disc the remainder or 60 if no remainder
-					else
-						hoursArray[i] =
-							Math.round((($endMs - $startMs - ($nowMs - $startMs)) / 1000 / 60) % 60) || 0;
+					hoursArray[i] =
+						Math.round((($endMs - $startMs - ($nowMs - $startMs)) / 1000 / 60) % 60) || 0;
 				}
 			}
 		}
 	}
-
-	$: nowMins = ($nowMs - $startMs) / 1000 / 60;
 
 	onMount(() => {
 		interval = setInterval(onChange, 1000);
@@ -108,7 +97,7 @@
 </script>
 
 <div class="block flex flex-col items-center justify-start pt-10">
-	<div class="flex flex-row-reverse flex-wrap items-center justify-center">
+	<div class="flex flex-wrap items-center justify-center">
 		{#key initHoursArray}
 			{#each initHoursArray as mins, index}
 				<FullCircle nowMins={hoursArray[index] || 0} initMins={mins || 0} />
