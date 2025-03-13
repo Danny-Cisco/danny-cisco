@@ -1,8 +1,10 @@
 <script>
 	import CircleArc from '$lib/components/ring-timer/CircleArc.svelte';
 	export let nowMins = 39;
+	console.log('🚀 ~ nowMins:', nowMins);
 	export let initMins = 60;
-	$: console.log('🚀 ~ initMins:', initMins);
+	console.log('🚀 ~ initMins:', initMins);
+	// $: console.log('🚀 ~ initMins:', initMins);
 
 	import { fade } from 'svelte/transition';
 
@@ -17,12 +19,6 @@
 
 	let timers = [1, 1, 1, 1, 1, 1];
 	let initTimers = [1, 1, 1, 1, 1, 1];
-	$: console.log('🚀 ~ initTimers:', initTimers);
-	let timersReverse = [];
-	let initTimersReverse = [];
-
-	$: timersReverse = [...timers].reverse();
-	$: initTimersReverse = [...initTimers].reverse();
 
 	for (let i = 5; i >= 0; i--) {
 		ringsRadius[i] = innerRadius + i * stroke + i * gap; // calculate all 6 ring sizes
@@ -64,18 +60,11 @@
 			{width}
 			{stroke}
 			color="hsl(200, 50%, 22%)"
-			arc={initTimersReverse[index]}
+			arc={initTimers[index]}
 			{radius}
 		/>
 
 		<!-- time remaining rings -->
-		<CircleArc
-			{height}
-			{width}
-			{stroke}
-			color="hsl(200, 50%, 80%)"
-			{radius}
-			arc={timersReverse[index]}
-		/>
+		<CircleArc {height} {width} {stroke} color="hsl(200, 50%, 80%)" {radius} arc={timers[index]} />
 	{/each}
 </svg>
