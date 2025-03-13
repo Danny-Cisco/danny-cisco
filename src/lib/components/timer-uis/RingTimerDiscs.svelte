@@ -20,8 +20,6 @@
 		$alarmIsRinging;
 		$durationMode;
 	}
-	$: console.log('🚀 ~ $durationMs:', $durationMs);
-	$: console.log('🚀 ~ numberOfDiscs:', numberOfDiscs);
 
 	let minutes = 0;
 	let durationMins = 0;
@@ -35,23 +33,19 @@
 	$: nowSeconds = Math.trunc($nowMs - $startMs / 1000);
 
 	let initHoursArray = [];
-	$: console.log('🚀 ~ initHoursArray:', initHoursArray);
 	let hoursArray = [];
-	$: console.log('🚀 ~ hoursArray:', hoursArray);
 
 	let numberOfDiscs = 0;
 	let currentDisc = 0;
 	$: numberOfDiscs = Math.min(Math.trunc(durationMins / 60), 9); // set a maximum disc number to avoid excess memory
 
 	$: durationMins = Math.round(($endMs - $startMs) / 1000 / 60);
-	$: console.log('🚀 ~ durationMins:', durationMins);
 
 	$: if (durationMins % 60) {
 		numberOfDiscs += 1; // add a disc if there is a partial disc left
 	}
 
-	$: if ($durationMs) {
-		console.log('clearingArrays');
+	function clearArrays() {
 		hoursArray = []; // clear the hoursArray if user sets new the duration
 		initHoursArray = []; // clear the hoursArray if user sets new the duration
 		minutes = 0;
@@ -62,6 +56,8 @@
 
 	function onChange() {
 		if (!$isRunning) {
+			clearArrays();
+
 			for (let i = 0; i < numberOfDiscs; i++) {
 				if (i < currentDisc) {
 					initHoursArray[i] = 60;
@@ -88,7 +84,7 @@
 	}
 
 	onMount(() => {
-		interval = setInterval(onChange, 1000);
+		interval = setInterval(onChange, 100);
 	});
 
 	onDestroy(() => {

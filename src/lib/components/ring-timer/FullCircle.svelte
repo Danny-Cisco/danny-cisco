@@ -1,9 +1,7 @@
 <script>
 	import CircleArc from '$lib/components/ring-timer/CircleArc.svelte';
 	export let nowMins = 39;
-	console.log('🚀 ~ nowMins:', nowMins);
 	export let initMins = 60;
-	console.log('🚀 ~ initMins:', initMins);
 	// $: console.log('🚀 ~ initMins:', initMins);
 
 	import { fade } from 'svelte/transition';
