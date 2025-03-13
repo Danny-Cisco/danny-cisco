@@ -28,10 +28,30 @@
 
 	let timePickerValue;
 
-	let endTimeFull = '';
-	$: endTimeFull = new Date($endMs).toLocaleTimeString();
+	let ampm;
 
-	$: $endTimeString = endTimeFull; // for now lets see the full string on mobile
+	let endTimeFull = new Date().toLocaleTimeString();
+	$: if ($endMs) endTimeFull = new Date($endMs).toLocaleTimeString() || 0;
+
+	$: if (endTimeFull.slice(-1, 999) == 'm') {
+		// format Time string for safari browsers
+		ampm = endTimeFull.slice(-2, 999);
+		$endTimeString = endTimeFull.slice(-999, -6) + ' ' + ampm;
+	}
+
+	$: if (endTimeFull.slice(-1, 999) != 'm') {
+		// format time string for chrome browsers
+		parseInt(endTimeFull.slice(-999, -6));
+		if (parseInt(endTimeFull.slice(-999, -6)) >= 12) {
+			ampm = 'pm';
+		} else if (parseInt(endTimeFull.slice(-999, -6)) < 12) {
+			ampm = 'am';
+		}
+		let mins = endTimeFull.slice(-5, -3);
+		let hours24 = endTimeFull.slice(-999, -6);
+		let hours12 = hours24 % 12 || 12;
+		$endTimeString = `${hours12}:${mins} ${ampm}`;
+	}
 
 	$: if ($alarmIsRinging) {
 		if (Notification.permission === 'granted') {
