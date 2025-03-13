@@ -24,21 +24,36 @@
 	$: console.log('🚀 ~ numberOfDiscs:', numberOfDiscs);
 
 	let minutes = 0;
+	let durationMins = 0;
 
+	let nowSeconds = 0;
 	let nowMins = 120;
+	$: nowMins = ($nowMs - $startMs) / 1000 / 60;
+	// $: console.log('🚀 ~ nowMins:', nowMins);
+
+	let startMinNow = $startMs - $nowMs;
+
+	$: nowMinStart = ($nowMs - $startMs) / 1000;
+
+	$: nowSeconds = Math.trunc($nowMs - $startMs / 1000);
+	// $: console.log('🚀 ~ nowSeconds:', nowSeconds);
 
 	let hoursArray = [];
 	let initHoursArray = [];
 
 	let numberOfDiscs = 0;
 	let currentDisc = 0;
-	$: numberOfDiscs = Math.trunc($durationMs / 1000 / 60); // removes decimal places
+	$: numberOfDiscs = Math.min(Math.trunc(durationMins / 60), 9); // set a maximum disc number to avoid excess memory
 
-	$: if (($durationMs / 1000) % 60) {
+	$: durationMins = Math.round(($endMs - $startMs) / 1000 / 60);
+	$: console.log('🚀 ~ durationMins:', durationMins);
+
+	$: if (durationMins % 60) {
 		numberOfDiscs += 1; // add a disc if there is a partial disc left
 	}
 
 	$: if ($durationMs) {
+		console.log('clearingArrays');
 		hoursArray = []; // clear the hoursArray if user sets new the duration
 		initHoursArray = []; // clear the hoursArray if user sets new the duration
 		minutes = 0;
@@ -54,8 +69,8 @@
 			else hoursArray[i] = 0;
 		} else if (i == currentDisc) {
 			if (!$isRunning)
-				hoursArray[i] = Math.round(nowMins % 60) || 60; // make the last disc the remainder or 60 if no remainder
-			else hoursArray[i] = Math.round(nowMins % 60);
+				hoursArray[i] = Math.round((($nowMs - $startMs) / 1000 / 60) % 60) || 60; // make the last disc the remainder or 60 if no remainder
+			else hoursArray[i] = Math.round((($nowMs - $startMs) / 1000 / 60) % 60);
 		}
 	}
 
@@ -68,13 +83,13 @@
 				else initHoursArray[i] = 0;
 			} else if (i == currentDisc) {
 				if (!$isRunning)
-					initHoursArray[i] = Math.round($durationMs % 60) || 60; // make the last disc the remainder or 60 if no remainder
-				else initHoursArray[i] = Math.round($durationMs % 60);
+					initHoursArray[i] = Math.round(durationMins % 60) || 60; // make the last disc the remainder or 60 if no remainder
+				else initHoursArray[i] = Math.round(durationMins % 60);
 			}
 		}
 	}
 
-	$: if (nowMins) nowMins = $durationMs - minutes;
+	$: nowMins = ($nowMs - $startMs) / 1000 / 60;
 
 	let buttonLabel = 'START';
 

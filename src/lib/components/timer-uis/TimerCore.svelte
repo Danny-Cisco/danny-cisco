@@ -83,6 +83,7 @@
 		$endMs = date;
 		timePickerValue = getOneHourLater();
 		permissionGranted = requestNotificationPermission();
+		$startMs = new Date().getTime();
 	});
 
 	onDestroy(() => {
