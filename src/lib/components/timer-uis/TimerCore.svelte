@@ -22,8 +22,6 @@
 		$durationMode;
 	}
 
-	import ProgressBar from '$lib/components/timer-uis/ProgressBar.svelte';
-
 	let timer1000;
 
 	let timePickerValue;
@@ -161,5 +159,4 @@
 		<button class="hover:text-green-500" on:click={start}>[START]</button>
 		<button class="hover:text-red-500" on:click={stop}>[STOP]</button>
 	</div>
-	<ProgressBar />
 </div>
