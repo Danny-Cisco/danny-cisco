@@ -38,8 +38,18 @@
 	$: nowSeconds = Math.trunc($nowMs - $startMs / 1000);
 	// $: console.log('🚀 ~ nowSeconds:', nowSeconds);
 
-	let hoursArray = [];
 	let initHoursArray = [];
+	$: console.log('🚀 ~ initHoursArray:', initHoursArray);
+	let hoursArray = [];
+	$: console.log('🚀 ~ hoursArray:', hoursArray);
+
+	let initHoursArrayReverse;
+	let hoursArrayReverse;
+
+	$: initHoursArrayReverse = [...initHoursArray].reverse();
+	$: console.log('🚀 ~ initHoursArrayReverse:', initHoursArrayReverse);
+	$: hoursArrayReverse = [...hoursArray].reverse();
+	$: console.log('🚀 ~ hoursArrayReverse:', hoursArrayReverse);
 
 	let numberOfDiscs = 0;
 	let currentDisc = 0;
@@ -66,11 +76,15 @@
 			hoursArray[i] = 60; // make all the discs 60
 		} else if (i > currentDisc) {
 			if (!$isRunning) hoursArray[i] = 60;
-			else hoursArray[i] = 0;
+			else hoursArray[i] = 60;
 		} else if (i == currentDisc) {
 			if (!$isRunning)
-				hoursArray[i] = Math.round((($nowMs - $startMs) / 1000 / 60) % 60) || 60; // make the last disc the remainder or 60 if no remainder
-			else hoursArray[i] = Math.round((($nowMs - $startMs) / 1000 / 60) % 60);
+				hoursArray[i] =
+					Math.round((($endMs - $startMs - ($nowMs - $startMs)) / 1000 / 60) % 60) || 60;
+			// make the last disc the remainder or 60 if no remainder
+			else
+				hoursArray[i] =
+					Math.round((($endMs - $startMs - ($nowMs - $startMs)) / 1000 / 60) % 60) || 60;
 		}
 	}
 
@@ -83,8 +97,12 @@
 				else initHoursArray[i] = 0;
 			} else if (i == currentDisc) {
 				if (!$isRunning)
-					initHoursArray[i] = Math.round(durationMins % 60) || 60; // make the last disc the remainder or 60 if no remainder
-				else initHoursArray[i] = Math.round(durationMins % 60);
+					initHoursArray[i] =
+						Math.round((($endMs - $startMs - ($nowMs - $startMs)) / 1000 / 60) % 60) || 60;
+				else
+					initHoursArray[i] = Math.round(
+						(($endMs - $startMs - ($nowMs - $startMs)) / 1000 / 60) % 60
+					);
 			}
 		}
 	}
@@ -99,8 +117,11 @@
 
 <div class="block flex flex-col items-center justify-start pt-10">
 	<div class="flex flex-wrap items-center justify-center">
-		{#each initHoursArray as mins, index}
-			<FullCircle nowMins={hoursArray[index] || 0} initMins={initHoursArray[index] || 0} />
+		{#each initHoursArrayReverse as mins, index}
+			<FullCircle
+				nowMins={hoursArrayReverse[index] || 0}
+				initMins={initHoursArrayReverse[index] || 0}
+			/>
 		{/each}
 	</div>
 </div>
