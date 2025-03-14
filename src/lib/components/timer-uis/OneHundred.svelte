@@ -45,7 +45,11 @@
 		background-color: blue;
 		transition: background-color 0.5s ease-in-out;
 	}
+	.square:hover {
+		transform: rotate(15deg);
+	}
 	.square.faded {
 		background-color: gray;
+		transform: rotate(15deg);
 	}
 </style>
