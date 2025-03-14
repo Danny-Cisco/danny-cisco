@@ -16,6 +16,12 @@
 					link: { href: '/time-blind-club/progress-bar', label: 'Try it' },
 					image: '',
 					paragraph: 'Simple as can be.'
+				},
+				{
+					heading: 'One Hundred',
+					link: { href: '/time-blind-club/one-hundred', label: 'Try it' },
+					image: '',
+					paragraph: 'Grid of 100 squares.'
 				}
 			]
 		}

@@ -1,10 +1,10 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import TimerCore from '$lib/components/timer-uis/TimerCore.svelte';
-	import ProgressBar from '$lib/components/timer-uis/ProgressBar.svelte';
+	import OneHundred from '$lib/components/timer-uis/OneHundred.svelte';
 </script>
 
 <div class="page" in:fade>
 	<TimerCore debug={false} />
-	<ProgressBar />
+	<OneHundred />
 </div>
