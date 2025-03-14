@@ -6,7 +6,8 @@
 		nowMs,
 		isRunning,
 		alarmIsRinging,
-		durationMode
+		durationMode,
+		endTimeString
 	} from '$lib/stores/timerStore.js';
 
 	$: {
@@ -17,6 +18,7 @@
 		$isRunning;
 		$alarmIsRinging;
 		$durationMode;
+		$endTimeString;
 	}
 	let barWidth = 50;
 	let barClass = '';
