@@ -13,6 +13,8 @@
 	let height = 12 * stroke + 10 * gap + 2 * innerRadius + padding;
 	let width = height;
 
+	console.log('height: ', height);
+
 	let ringsRadius = [];
 
 	let timers = [1, 1, 1, 1, 1, 1];
