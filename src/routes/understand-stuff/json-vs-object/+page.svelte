@@ -128,17 +128,6 @@
 </div>
 
 <style>
-	.container {
-		display: flex;
-		gap: 20px;
-	}
-	.box {
-		width: 100%;
-		padding: 15px;
-		border-radius: 8px;
-		background-color: #1e1e1e; /* Dark mode background */
-		color: white;
-	}
 	.json-key {
 		background-color: #3b82f6; /* Tailwind bg-blue-500 */
 		color: white;
@@ -151,14 +140,7 @@
 		padding: 2px 5px;
 		border-radius: 3px;
 	}
-	.shared {
-		color: #10b981; /* Tailwind text-green-500 */
-	}
-	pre {
-		width: 100%;
-		font-family: monospace;
-		white-space: pre-wrap;
-	}
+
 	h3 {
 		height: 50px;
 	}
