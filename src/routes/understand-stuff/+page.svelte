@@ -51,6 +51,12 @@
 					link: { href: '/understand-stuff/json-vs-object', label: 'Try it' },
 					// image: '/js-slice.png',
 					paragraph: 'compare JSON to a regular object'
+				},
+				{
+					heading: 'The Fetch API',
+					link: { href: '/understand-stuff/fetch-api', label: 'Try it' },
+					// image: '/js-slice.png',
+					paragraph: 'visualising the anatomy of a fetch api'
 				}
 			]
 		}
