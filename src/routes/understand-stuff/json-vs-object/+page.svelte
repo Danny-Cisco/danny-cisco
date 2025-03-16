@@ -1,5 +1,6 @@
 <script>
-	let isOpen = false;
+	let isOpenStringify = false;
+	let isOpenParse = false;
 
 	const jsonExample = `{
     "name": "Alex",
@@ -18,12 +19,15 @@
 		}
 	};
 
-	const toggleDetails = () => {
-		isOpen = !isOpen;
+	const toggleParse = () => {
+		isOpenParse = !isOpenParse;
+	};
+	const toggleStringify = () => {
+		isOpenStringify = !isOpenStringify;
 	};
 </script>
 
-<div class="page">
+<div class="page pb-40">
 	<h2>JSON vs JavaScript Object</h2>
 
 	<div class="flex w-full flex-col items-center gap-20">
@@ -62,7 +66,7 @@
 
 	<hr class="mt-10 w-full border-t-white" />
 
-	<div class="mx-auto mt-10 flex w-full max-w-lg gap-2">
+	<div class="mx-auto mt-10 flex w-full max-w-2xl items-center justify-center gap-2">
 		<div class="js-key">Object</div>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -96,9 +100,23 @@
 		</svg>
 
 		<div class="json-key">JSON string</div>
+		<button
+			class="flex items-center justify-between rounded-full bg-gray-700 text-left hover:bg-gray-600"
+			on:click={toggleStringify}
+		>
+			<svg
+				class="size-6 transition-transform {isOpenStringify ? 'rotate-180' : ''}"
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+			>
+				<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+			</svg>
+		</button>
 	</div>
 
-	<div class="mx-auto mt-4 flex w-full max-w-lg gap-2">
+	<div class="mx-auto mt-4 flex w-full max-w-2xl items-center justify-center gap-2">
 		<div class="json-key">JSON string</div>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -132,17 +150,12 @@
 		</svg>
 
 		<div class="js-key">Object</div>
-	</div>
-
-	<!-- Collapsible Details Section -->
-	<div class="mx-auto mt-10 w-full max-w-lg">
 		<button
-			class="flex w-full items-center justify-between rounded-lg bg-gray-700 p-4 text-left hover:bg-gray-600"
-			on:click={toggleDetails}
+			class="flex items-center justify-between rounded-full bg-gray-700 text-left hover:bg-gray-600"
+			on:click={toggleParse}
 		>
-			<span>More about JSON methods</span>
 			<svg
-				class="size-6 transition-transform {isOpen ? 'rotate-180' : ''}"
+				class="size-6 transition-transform {isOpenParse ? 'rotate-180' : ''}"
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
 				viewBox="0 0 24 24"
@@ -151,8 +164,11 @@
 				<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
 			</svg>
 		</button>
+	</div>
 
-		{#if isOpen}
+	<!-- Collapsible Details Section -->
+	<div class="mx-auto w-full max-w-lg">
+		{#if isOpenStringify}
 			<div class="mt-4 rounded-lg bg-gray-800 p-6 transition-all">
 				<div class="mb-8">
 					<h4 class="mb-4 text-lg font-semibold">JSON.stringify()</h4>
@@ -160,20 +176,24 @@
 						<li>Converts JavaScript objects into JSON strings</li>
 						<li>
 							Can take up to 3 parameters:
-							<pre class="mt-2 bg-gray-900 p-2">JSON.stringify(value, replacer, space)</pre>
+							<pre class="mt-2 bg-gray-900 p-2">JSON.stringify(object, replacer, space)</pre>
 						</li>
 						<li>
-							<span class="js-key">value</span>: The object to convert
+							<span class="js-key">object</span>: The object to convert
 						</li>
 						<li>
 							<span class="js-key">replacer</span> (optional): A function or array to transform values
 						</li>
 						<li>
-							<span class="js-key">space</span> (optional): Adds indentation for readability
+							<span class="js-key">space</span> (optional): Adds indentation for readability. Common
+							value is 2.
 						</li>
 					</ul>
 				</div>
-
+			</div>
+		{/if}
+		{#if isOpenParse}
+			<div class="mt-4 rounded-lg bg-gray-800 p-6 transition-all">
 				<div>
 					<h4 class="mb-4 text-lg font-semibold">JSON.parse()</h4>
 					<ul class="list-inside list-disc space-y-2">
