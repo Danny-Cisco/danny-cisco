@@ -38,16 +38,18 @@
 		width: 100%;
 		max-width: 400px;
 		aspect-ratio: 1;
+		transition: transform 250ms;
 	}
+
 	.square {
 		width: 100%;
 		aspect-ratio: 1;
 		background-color: blue;
-		transition: background-color 0.5s ease-in-out;
+		transition:
+			background-color 150ms ease-in-out,
+			transform 500ms;
 	}
-	.square:hover {
-		transform: rotate(15deg);
-	}
+
 	.square.faded {
 		background-color: gray;
 		transform: rotate(15deg);
