@@ -39,7 +39,7 @@
 			<p>Functions are allowed</p>
 		</div>
 		<div class="flex w-full max-w-xl flex-col items-stretch gap-2">
-			<h3 class="json-key w-full">JSON</h3>
+			<h3 class="json-key w-full">JSON string</h3>
 			<div class="w-full bg-gray-800 p-4">
 				&#123;
 				<p><span class="json-key">"name"</span>: "Danny",</p>
