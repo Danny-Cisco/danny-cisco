@@ -28,7 +28,7 @@
 </script>
 
 <div class="page pb-40">
-	<h2>JSON vs JavaScript Object</h2>
+	<h2 class="py-10 text-2xl">JSON vs JavaScript Object</h2>
 
 	<div class="flex w-full flex-col items-center gap-20">
 		<div class="flex w-full max-w-xl flex-col items-stretch gap-2">
@@ -64,7 +64,7 @@
 		</div>
 	</div>
 
-	<hr class="mt-10 w-full border-t-white" />
+	<hr class="mt-10 w-full border-dashed border-t-white/50" />
 
 	<div class="mx-auto mt-10 flex w-full max-w-2xl items-center justify-center gap-2">
 		<div class="js-key">Object</div>
@@ -101,18 +101,10 @@
 
 		<div class="json-key">JSON string</div>
 		<button
-			class="flex items-center justify-between rounded-full bg-gray-700 text-left hover:bg-gray-600"
+			class="ml-20 flex w-5 items-center justify-center rounded-full bg-gray-700 hover:cursor-pointer hover:bg-gray-600"
 			on:click={toggleStringify}
 		>
-			<svg
-				class="size-6 transition-transform {isOpenStringify ? 'rotate-180' : ''}"
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke="currentColor"
-			>
-				<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-			</svg>
+			?
 		</button>
 	</div>
 
@@ -151,18 +143,10 @@
 
 		<div class="js-key">Object</div>
 		<button
-			class="flex items-center justify-between rounded-full bg-gray-700 text-left hover:bg-gray-600"
+			class="ml-20 flex w-5 items-center justify-center rounded-full bg-gray-700 hover:cursor-pointer hover:bg-gray-600"
 			on:click={toggleParse}
 		>
-			<svg
-				class="size-6 transition-transform {isOpenParse ? 'rotate-180' : ''}"
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke="currentColor"
-			>
-				<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-			</svg>
+			?
 		</button>
 	</div>
 
