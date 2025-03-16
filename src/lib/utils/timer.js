@@ -54,3 +54,16 @@ export function getOneHourLater() {
 	let finalString = new Date(oneHourString + tzString).toISOString().slice(0, 16);
 	return finalString;
 }
+
+export function checkSessionStorage() {
+	if (!sessionStorage.getItem('startMs')) {
+		sessionStorage.setItem('startMs', new Date().getTime());
+	}
+	if (!sessionStorage.getItem('endMs')) {
+		sessionStorage.setItem('endMs', new Date().getTime() + 1 * 60 * 60 * 1000);
+	}
+
+	if (!sessionStorage.getItem('isRunning')) {
+		sessionStorage.setItem('isRunning', false);
+	}
+}
