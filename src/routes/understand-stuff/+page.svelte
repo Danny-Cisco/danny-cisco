@@ -45,6 +45,12 @@
 					link: { href: '/understand-stuff/js-slice', label: 'Try it' },
 					image: '/js-slice.png',
 					paragraph: 'see how the slice function works in real time'
+				},
+				{
+					heading: 'JSON vs Javascript Object',
+					link: { href: '/understand-stuff/json-vs-object', label: 'Try it' },
+					// image: '/js-slice.png',
+					paragraph: 'compare JSON to a regular object'
 				}
 			]
 		}
