@@ -57,6 +57,12 @@
 					link: { href: '/understand-stuff/fetch-api', label: 'Try it' },
 					// image: '/js-slice.png',
 					paragraph: 'visualising the anatomy of a fetch api'
+				},
+				{
+					heading: 'Socials HTML Head',
+					link: { href: '/understand-stuff/socials-html-head', label: 'Try it' },
+					// image: '/js-slice.png',
+					paragraph: 'make sure twitter and facebook preview your site nicely'
 				}
 			]
 		}
