@@ -75,9 +75,9 @@
 			<p>Keys must be quoted</p>
 			<p>Cannot include functions</p>
 			<p>Must be parsed into a javascript object before it can be used in javascript</p>
-			<p>The 2 common ways are:</p>
+			<p>The 2 common ways of parsing are:</p>
 			<p>response.body.json() if parsing from a fetch api call</p>
-			<p>or JSON.parse(myJsonString) for other parsing such as json stored on a server.</p>
+			<p>or JSON.parse(myJsonString) for other parsing such as when json is stored on a server.</p>
 		</div>
 		<h3 class="js-key mt-20 w-full">JavaScript Object</h3>
 		<div class="w-full bg-gray-800 p-4">
@@ -98,6 +98,7 @@
 			JavaScript objects contain many built in methods that must be stripped away if intending to
 			store the object in JSON notation
 		</p>
+		<p>That is where JSON.stringify(myObject) comes in.</p>
 	</div>
 
 	<hr class="mt-10 w-full border-dashed border-t-white/50" />
@@ -264,12 +265,12 @@
 							<pre class="mt-2 bg-gray-900 p-2">JSON.parse(text, reviver)</pre>
 						</li>
 						<li>
-							<span class="json-key">text</span>: The JSON string to parse
+							<span class="json-key">text</span>: The JSON string to parse.
 						</li>
 						<li>
-							<span class="json-key">reviver</span> (optional): A function to transform parsed values
+							<span class="json-key">reviver</span> (optional): A function to transform parsed values.
 						</li>
-						<li>Throws a SyntaxError if the JSON is invalid</li>
+						<li>Throws a SyntaxError if the JSON is invalid.</li>
 					</ul>
 				</div>
 			</div>
