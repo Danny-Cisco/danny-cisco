@@ -30,25 +30,37 @@
 <div class="page pb-40">
 	<h2 class="py-10 text-2xl">JSON vs JavaScript Object</h2>
 
-	<div class="flex w-full flex-col items-center gap-20">
-		<div class="flex w-full max-w-xl flex-col items-stretch gap-2">
-			<h3 class="js-key w-full">JavaScript Object</h3>
-			<div class="w-full bg-gray-800 p-4">
-				&#123;
-				<p><span class="js-key">name</span>: "Danny",</p>
-				<p><span class="js-key">age</span>: 48,</p>
-				<p><span class="js-key">skills</span>: ["coding", "drawing", "skateboarding"],</p>
-				<p><span class="js-key">active</span>: true,</p>
-				<p>
-					<span class="js-key">greeting</span>:
-					<span class="js-key">function() &#123; return "✋ High Five!"; &#125;</span>
-				</p>
-				&#125;
-			</div>
-			<p>Keys are unquoted</p>
-			<p>Functions are allowed</p>
-		</div>
-		<div class="flex w-full max-w-xl flex-col items-stretch gap-2">
+	<div class="flex w-full flex-col items-start gap-8">
+		<p>
+			JSON and Javascript objects look very similar at a glance, but they are actually very
+			different.
+		</p>
+		<p>
+			JSON can be thought of as a simple notation standard for storing key/value pairs outside of
+			your code.
+		</p>
+		<p>
+			A javascript object stores key/value pairs, but it is also more active. It can mutate itself
+			with methods (functions), as well as enable object oriented programming by encapsulating
+			related functions inside the object.
+		</p>
+		<p>
+			From a practical standpoint, most front-end code on the web shies away from object-oriented
+			programming do to the trouble of triggering reactivity when an object mutates. The biggest
+			asset remains being able to use dot notation to access key value pairs, and the many built in
+			methods such as sort and map which are built in to every object.
+		</p>
+		<p>Summary:</p>
+		<p>
+			<span class="js-key">Use javascript objects</span> to deal key/value pairs internally.
+		</p>
+		<p>
+			<span class="json-key">Use json notation </span> to send, receive and store key/value pairs externally.
+		</p>
+	</div>
+
+	<div class="flex w-full max-w-xl flex-col items-stretch gap-2">
+		<div class="mt-10 flex w-full max-w-xl flex-col items-stretch gap-2">
 			<h3 class="json-key w-full">JSON string</h3>
 			<div class="w-full bg-gray-800 p-4">
 				&#123;
@@ -58,10 +70,34 @@
 				<p><span class="json-key">"active"</span>: true</p>
 				&#125;
 			</div>
+			<p>JSON is just a notation standard</p>
 			<p>JSON is stored as a plain string</p>
 			<p>Keys must be quoted</p>
 			<p>Cannot include functions</p>
+			<p>Must be parsed into a javascript object before it can be used in javascript</p>
+			<p>The 2 common ways are:</p>
+			<p>response.body.json() if parsing from a fetch api call</p>
+			<p>or JSON.parse(myJsonString) for other parsing such as json stored on a server.</p>
 		</div>
+		<h3 class="js-key mt-20 w-full">JavaScript Object</h3>
+		<div class="w-full bg-gray-800 p-4">
+			&#123;
+			<p><span class="js-key">name</span>: "Danny",</p>
+			<p><span class="js-key">age</span>: 48,</p>
+			<p><span class="js-key">skills</span>: ["coding", "drawing", "skateboarding"],</p>
+			<p><span class="js-key">active</span>: true,</p>
+			<p>
+				<span class="js-key">greeting</span>:
+				<span class="js-key">function() &#123; return "✋ High Five!"; &#125;</span>
+			</p>
+			&#125;
+		</div>
+		<p>Keys are unquoted</p>
+		<p>Functions are allowed</p>
+		<p>
+			JavaScript objects contain many built in methods that must be stripped away if intending to
+			store the object in JSON notation
+		</p>
 	</div>
 
 	<hr class="mt-10 w-full border-dashed border-t-white/50" />
@@ -126,6 +162,47 @@
 		</svg>
 
 		<div class="">JSON.parse(<span class="json-key">JSON string</span>)</div>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke-width="1.5"
+			stroke="currentColor"
+			class="size-6"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+			/>
+		</svg>
+
+		<div class="js-key">Object</div>
+		<button
+			class="ml-20 flex w-5 items-center justify-center rounded-full bg-gray-700 hover:cursor-pointer hover:bg-gray-600"
+			on:click={toggleParse}
+		>
+			?
+		</button>
+	</div>
+	<div class="mx-auto mt-4 flex w-full max-w-2xl items-center justify-center gap-2">
+		<div class="json-key">JSON from fetch api</div>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke-width="1.5"
+			stroke="currentColor"
+			class="size-6"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+			/>
+		</svg>
+
+		<div class="">response.body.json()</div>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
