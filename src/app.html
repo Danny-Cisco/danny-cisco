@@ -2,7 +2,11 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<!-- `sizes="any"` is to fix Chrome bug -->
+		<title>Danny Cisco</title>
+		<meta
+			name="description"
+			content="Danny Cisco is a maker and web designer from Melbourne. This is a place for all his hacky experiments."
+		/>
 		<link rel="icon" href="/favicon.ico" sizes="any" />
 		<link rel="icon" href="/icon.svg" type="image/svg+xml" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -12,8 +16,49 @@
 			rel="stylesheet"
 		/>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Danny Cisco" />
+		<meta
+			property="og:description"
+			content="Danny Cisco is a maker and web designer from Melbourne. This is a place for all his hacky experiments."
+		/>
+		<meta property="og:url" content="https://dannycisco.com" />
+		<meta property="og:image" content="https://dannycisco.com/DannyCiscoLogoBlack.jpg" />
+		<meta property="og:image:alt" content="Danny Cisco logo" />
+		<meta property="og:site_name" content="Danny Cisco's home on the web." />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Danny Cisco" />
+		<meta
+			name="twitter:description"
+			content="Danny Cisco is a maker and web designer from Melbourne. This is a place for all his hacky experiments."
+		/>
+		<meta name="twitter:image" content="https://dannycisco.com/DannyCiscoLogoBlack.jpg" />
+		<meta name="twitter:image:alt" content="A description of the image." />
+		<meta name="twitter:site" content="@NascentClouds" />
+
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "WebSite",
+				"name": "Danny Cisco's home on the web.",
+				"url": "https://dannycisco.com",
+				"description": "Danny Cisco is a maker and web designer from Melbourne. This is a place for all his hacky experiments.",
+				"image": "https://dannycisco.com/DannyCiscoLogoBlack.jpg",
+				"author": {
+					"@type": "Person",
+					"name": "Danny Cisco"
+				}
+			}
+		</script>
+
 		%sveltekit.head%
 	</head>
+
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
