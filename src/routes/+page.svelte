@@ -39,6 +39,16 @@
 		featuredProjects: {
 			cards: [
 				{
+					heading: 'Vibe Coded Metaverse',
+					paragraph: 'Come work in my vibe coded office space',
+					image: '/METAVERSE.png',
+					link: {
+						href: 'https://meta-workspace-gumballelectron.replit.app',
+						label: 'visit metaverse'
+					},
+					size: 'big'
+				},
+				{
 					heading: 'Understand Stuff',
 					paragraph: 'Tools Ive generated in order to understand stuff',
 					image: '/hsl-wheel.png',
