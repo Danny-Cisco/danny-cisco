@@ -39,6 +39,17 @@
 		featuredProjects: {
 			cards: [
 				{
+					heading: 'TypeTone',
+					paragraph:
+						'Typing practice with a difference. Build spacial awareness for the qwerty keyboard. ** Now with punctuation support! **',
+					image: '/typetone.png',
+					link: {
+						href: 'https://alphabet-trainer-gumballelectron.replit.app/',
+						label: 'visit typetone'
+					},
+					size: 'big'
+				},
+				{
 					heading: 'Vibe Coded Metaverse',
 					paragraph: 'Come work in my vibe coded office space',
 					image: '/METAVERSE.png',
